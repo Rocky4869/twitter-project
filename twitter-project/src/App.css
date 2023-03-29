@@ -1,3 +1,9 @@
+body {
+  --twitter-color: #6bc5fd;
+  --twitter-background: rgb(198, 239, 249);
+}
+
+/*
 .App {
   text-align: center;
 }
@@ -36,3 +42,4 @@
     transform: rotate(360deg);
   }
 }
+*/
