@@ -1,19 +1,23 @@
 //import logo from './logo.svg';
 import React from "react";
 import Sidebar from './Sidebar';
+import Feed from './Feed';
+import Widgets from "./Widgets";
 import './App.css';
 
 function App() {
   return (
     // BEM
     <div className="app">
-      <h1>Hey Clever Programmers... Let's build a Twitter Clone</h1>
       
       {/* Sidebar */}
       <Sidebar />
 
       {/* Feed */}
+      <Feed />
+
       {/* Widgets */}
+      <Widgets />
 
       {/*
       <header className="App-header">
