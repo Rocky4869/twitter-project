@@ -9,7 +9,7 @@ import PublishIcon from "@material-ui/icons/Publish";
 
 function Post(    
     {
-    dislayName,
+    displayName,
     username,
     verified,
     text,
@@ -25,18 +25,18 @@ function Post(
             <div className='post_header'>
                 <div className='post_headerText'>
                     <h3>
-                        Mun Ka Young {" "}
+                        {displayName} {" "}
                         <span className='post_headerSpecial'>
-                            <VerifiedIcon className="post_badge"></VerifiedIcon>
+                            {verified && <VerifiedIcon className="post_badge"></VerifiedIcon>}
                         </span>
-                        {" "} @munkayoung
+                        {" "} @{username}
                     </h3>                    
                 </div>
                 <div className="post_headerDescription">
-                        <p>짱!!!</p>
+                        <p>{text}</p>
                 </div>
             </div>
-            <img src="https://img.jjang0u.com/data4/docs/306/202101/06/2a/6ba1f929ead2a5d34df1b318f31c1cdd_139185.gif"
+            <img src={image}
                 alt='' />
             <div className='post_footer'>
                 <MapsUgcOutlinedIcon fontsize='small' />
