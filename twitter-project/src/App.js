@@ -1,9 +1,25 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
+import React from "react";
+import Sidebar from './Sidebar';
+import Feed from './Feed';
+import Widgets from "./Widgets";
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    // BEM
+    <div className="app">
+      
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Feed */}
+      <Feed />
+
+      {/* Widgets */}
+      <Widgets />
+
+      {/*
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -18,6 +34,7 @@ function App() {
           Learn React
         </a>
       </header>
+      */}
     </div>
   );
 }
