@@ -1,0 +1,52 @@
+import React from 'react'
+import "./Post.css";
+import { Avatar } from '@material-ui/core';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+import RepeatIcon from "@material-ui/icons/Repeat";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import PublishIcon from "@material-ui/icons/Publish";
+
+function Post(    
+    {
+    dislayName,
+    username,
+    verified,
+    text,
+    avatar,
+    image
+}) {
+  return (
+    <div className='post'>
+        <div className='post_avator'>
+            <Avatar style={{ height: '100px', width: '100px' }} src={avatar}></Avatar>
+        </div>
+        <div className="post_body">
+            <div className='post_header'>
+                <div className='post_headerText'>
+                    <h3>
+                        Mun Ka Young {" "}
+                        <span className='post_headerSpecial'>
+                            <VerifiedIcon className="post_badge"></VerifiedIcon>
+                        </span>
+                        {" "} @munkayoung
+                    </h3>                    
+                </div>
+                <div className="post_headerDescription">
+                        <p>짱!!!</p>
+                </div>
+            </div>
+            <img src="https://img.jjang0u.com/data4/docs/306/202101/06/2a/6ba1f929ead2a5d34df1b318f31c1cdd_139185.gif"
+                alt='' />
+            <div className='post_footer'>
+                <MapsUgcOutlinedIcon fontsize='small' />
+                <RepeatIcon fontSize="small" />
+                <FavoriteBorderIcon fontSize="small" />
+                <PublishIcon fontSize="small" />
+            </div>
+        </div>
+    </div>
+  )
+}
+
+export default Post
