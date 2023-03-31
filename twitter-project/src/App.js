@@ -1,3 +1,5 @@
+//npm start
+//npm run build
 import React from 'react';
 import './App.css';
 import Sidebar from './Sidebar';
@@ -16,7 +18,7 @@ function App() {
 
       {/* Widgets */}
       <Widgets />
-      
+
     </div>
   );
 }
