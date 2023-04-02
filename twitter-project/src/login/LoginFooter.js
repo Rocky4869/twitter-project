@@ -30,7 +30,7 @@ function LoginFooter() {
           <a
             className="no-underline text-white hover:underline"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             href={href}
             key={linkName}
           >

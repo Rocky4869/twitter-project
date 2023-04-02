@@ -5,7 +5,7 @@ import "../css/welcome.css";
 
 function LoginCard() {
   return (
-    <div className="bg-blue-900">
+    <div className="bg-blue-300">
       <div className="flex justify-center">
         <div
           className="bg-white my-36 flex justify-center"
@@ -61,15 +61,24 @@ function LoginCard() {
                 boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
                 width: "400px",
                 borderRadius: "30px",
+                padding: "10px",
               }}
             >
               Log in
             </Button>
-            <div className="flex flex-row justify-between mt-36 underline text-black">
-              <a className="mt-12 text-center text-xs">Forgot Password?</a>
-              <a className="mt-12 text-center text-xs">
+            <div className="flex flex-row justify-between mt-36">
+              <Link
+                className="mt-12 text-center text-xs no-underline hover:underline text-black"
+                to="/forget_password"
+              >
+                Forgot Password?
+              </Link>
+              <Link
+                className="mt-12 text-center text-xs no-underline hover:underline text-black"
+                to="/register"
+              >
                 Don't have an account?
-              </a>
+              </Link>
             </div>
           </div>
         </div>

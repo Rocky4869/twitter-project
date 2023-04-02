@@ -18,24 +18,29 @@ import "./css/tailwind.css";
 import "./css/tailwind-small.css";
 import ForgotPassword from "./login/ForgotPassword";
 import ResetPassword from "./login/ResetPassword";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="app">
-      {/* <LoginHeader /> */}
-      {/* <LoginCard /> */}
-      {/* <RegistrationTab /> */}
-      {/* <ForgotPassword /> */}
-      <ResetPassword />
-      {/* <LoginFooter /> */}
-      {/* Sidebar */}
-      {/* <Sidebar /> */}
+      <LoginHeader />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginCard />} />
+          <Route path="/register" element={<RegistrationTab />} />
+          <Route path="/forget_password" element={<ForgotPassword />} />
+          <Route path="/reset_password" element={<ResetPassword />} />
+          {/* Sidebar */}
+          {/* <Sidebar /> */}
 
-      {/* Feed */}
-      {/* <Feed /> */}
+          {/* Feed */}
+          {/* <Feed /> */}
 
-      {/* Widgets */}
-      {/* <Widgets /> */}
+          {/* Widgets */}
+          {/* <Widgets /> */}
+        </Routes>
+      </BrowserRouter>
+      <LoginFooter />
     </div>
   );
 }
