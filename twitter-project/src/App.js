@@ -13,7 +13,7 @@ import LoginHeader from "./login/LoginHeader";
 import LoginCard from "./login/LoginCard";
 import RegistrationTab from "./login/RegistrationTab";
 import LoginFooter from "./login/LoginFooter";
-// import "./App.css";
+import "./css/App.css";
 import "./css/tailwind.css";
 import "./css/tailwind-small.css";
 import ForgotPassword from "./login/ForgotPassword";
@@ -22,26 +22,30 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="app">
-      <LoginHeader />
+    <>
+      <div className="app">
+        <Sidebar />
+
+        <Feed />
+
+        <Widgets />
+      </div>
+
+      {/* <LoginHeader /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginCard />} />
           <Route path="/register" element={<RegistrationTab />} />
           <Route path="/forget_password" element={<ForgotPassword />} />
           <Route path="/reset_password" element={<ResetPassword />} />
-          {/* Sidebar */}
-          {/* <Sidebar /> */}
-
-          {/* Feed */}
-          {/* <Feed /> */}
-
-          {/* Widgets */}
-          {/* <Widgets /> */}
         </Routes>
       </BrowserRouter>
-      <LoginFooter />
-    </div>
+      {/* <LoginFooter /> */}
+
+
+
+
+    </>
   );
 }
 

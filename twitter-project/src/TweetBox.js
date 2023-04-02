@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./TweetBox.css";
+import "./css/TweetBox.css";
 import { Avatar, Button } from "@material-ui/core";
 import db from "./firebase";
 
