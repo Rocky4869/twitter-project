@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import "../css/welcome.css";
 
 function LoginCard() {
   return (
@@ -24,14 +25,8 @@ function LoginCard() {
                 className="w-80 h-80 my-36 animalShake"
               ></img>
             </div>
-            <div
-              style={{
-                color: "#506D84",
-                letterSpacing: "letter-spacing: -0.02em",
-              }}
-              className="text-center text-2xl font-bold"
-            >
-              Welcome Back
+            <div className="text-center text-2xl font-bold welcome">
+              Welcome
             </div>
             <div>
               <input
