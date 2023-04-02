@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 function LoginCard() {
   return (
-    <div>
+    <div className="bg-blue-900">
       <div className="flex justify-center">
         <div
           className="bg-white my-36 flex justify-center"
@@ -16,7 +18,11 @@ function LoginCard() {
         >
           <div>
             <div className="flex justify-center">
-              <img src="twitter.png" className="w-80 h-80 my-36"></img>
+              <img
+                src="twitter.png"
+                alt="twitter.png"
+                className="w-80 h-80 my-36 animalShake"
+              ></img>
             </div>
             <div
               style={{
@@ -27,36 +33,48 @@ function LoginCard() {
             >
               Welcome Back
             </div>
-            <div
-              className="border-2 rounded-sm mt-24 py-8 px-8"
+            <div>
+              <input
+                type="text"
+                placeholder="Email or username"
+                className="border-2 rounded-sm mt-24 p-8"
+                style={{
+                  border: "1px solid #C4C4C4",
+                  boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
+                  width: "400px",
+                }}
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Password"
+                className="border-2 rounded-sm my-24 p-8"
+                style={{
+                  border: "1px solid #C4C4C4",
+                  boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
+                  width: "400px",
+                }}
+              />
+            </div>
+
+            <Button
+              variant="contained"
+              color="primary"
               style={{
                 border: "1px solid #C4C4C4",
                 boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                color: "#C4C4C4",
                 width: "400px",
+                borderRadius: "30px",
               }}
             >
-              Email or username
-            </div>
-            <div
-              className="border-2 rounded-sm mt-12 py-8 px-8"
-              style={{
-                border: "1px solid #C4C4C4",
-                boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                color: "#C4C4C4",
-                width: "400px",
-              }}
-            >
-              Password
-            </div>
-            <div className="mt-24 border-2 bg-blue rounded-lg text-center px-8 py-8 font-bold text-xs">
               Log in
-            </div>
+            </Button>
             <div className="flex flex-row justify-between mt-36 underline text-black">
-              <div className="mt-12 text-center text-xs">Forgot Password?</div>
-              <div className="mt-12 text-center text-xs">
+              <a className="mt-12 text-center text-xs">Forgot Password?</a>
+              <a className="mt-12 text-center text-xs">
                 Don't have an account?
-              </div>
+              </a>
             </div>
           </div>
         </div>

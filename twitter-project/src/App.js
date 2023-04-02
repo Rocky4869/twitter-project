@@ -9,17 +9,21 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import Feed from "./Feed";
 import Widgets from "./Widgets";
-import LoginBar from "./login/LoginBar";
-import LoginCard from "./login/LoginCard";
+import LoginHeader from "./login/LoginHeader";
 // import "./App.css";
 import "./css/tailwind.css";
 import "./css/tailwind-small.css";
+import LoginCard from "./login/LoginCard";
+import RegistrationTab from "./login/RegistrationTab";
+import LoginFooter from "./login/LoginFooter";
 
 function App() {
   return (
     <div className="app">
-      <LoginBar />
+      <LoginHeader />
       <LoginCard />
+      {/* <RegistrationTab /> */}
+      <LoginFooter />
       {/* Sidebar */}
       {/* <Sidebar /> */}
 
