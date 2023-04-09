@@ -35,11 +35,9 @@ function RegistrationTab() {
             <div
               style={{
                 letterSpacing: "0.02em",
-              }}
-              className="text-center font-bold text-black"
-              style={{
                 fontSize: "30px",
               }}
+              className="text-center font-bold text-black"
             >
               Creat an account
             </div>

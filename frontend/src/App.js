@@ -7,8 +7,8 @@
 //- Network:  http://192.168.8.2:3000
 import React from "react";
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
-import { createRoot } from "react-dom/client";
+// import { BrowserRouter } from "react-router-dom";
+// import { createRoot } from "react-dom/client";
 import Sidebar from "./Sidebar";
 import Feed from "./Feed";
 import Widgets from "./Widgets";
@@ -21,17 +21,20 @@ import ResetPassword from "./login/ResetPassword";
 
 function App() {
   return (
-    <div>
-      <LoginHeader />
-      <ResetPassword />
-      <LoginFooter />
-    </div>
-    
-    // <div className="app">
-    //   <Sidebar />
-    //   <Feed />
-    //   <Widgets />
+    // <div>
+    //   <LoginHeader />
+    //   <LoginCard />
+    //   <RegistrationTab />
+    //   <ForgotPassword />
+    //   <ResetPassword />
+    //   <LoginFooter />
     // </div>
+
+    <div className="app">
+      <Sidebar />
+      <Feed />
+      <Widgets />
+    </div>
   );
 }
 

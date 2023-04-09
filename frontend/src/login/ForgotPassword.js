@@ -88,8 +88,7 @@ function ForgotPassword() {
             </div>
             <div className="flex justify-center">
               <Button
-                type="submit"
-                className="border-2 hover:bg-gray-800 rounded-16 text-center font-bold text-white no-underline"
+                className="border-2 text-center font-bold no-underline"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
@@ -97,8 +96,9 @@ function ForgotPassword() {
                   backgroundColor: "black",
                   padding: "10px",
                   marginTop: "40px",
+                  color: "white",
+                  borderRadius: "30px",
                 }}
-                // to="/login"
               >
                 Back
               </Button>
