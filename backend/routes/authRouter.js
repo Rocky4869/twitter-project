@@ -5,6 +5,7 @@ const { User } = require('../models/User.js');
 const authRouter = express.Router();
 
 authRouter.post("/signup", async(req, res) => {
+    // signup account with username, email, password
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
         return res.status(400).send({ 'success': false, 'message': 'Unsatisfied parameters'});
@@ -24,6 +25,7 @@ authRouter.post("/signup", async(req, res) => {
 })
 
 authRouter.post('/login', async(req, res) => {
+    // login in account by username and password
     const { username, email, password } = req.body;
     const user_info = await User.findOne({ 'username': username });
     if (!user_info) {

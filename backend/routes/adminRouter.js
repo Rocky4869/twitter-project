@@ -36,7 +36,7 @@ adminRouter.delete('/', async (req, res) => {
 });
 
 adminRouter.patch('/', async (req, res) => {
-    // update user info by
+    // update user info by username
     const { username, updatedUser } = req.body;
     const user = await User.findOne({ 'username': username });
     if (!user || !user.is_admin) {

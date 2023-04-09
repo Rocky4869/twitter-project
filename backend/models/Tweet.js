@@ -8,7 +8,7 @@ const tweetSchema = new Schema({
   images: [{ type: Types.ObjectId, ref: 'Image' }],
   videos: [{ type: Types.ObjectId, ref: 'Video' }],
   likes: [{ type: Types.ObjectId, ref: 'User'}],
-  distlikes: [{ type: Types.ObjectId, ref: 'User'}],
+  dislikes: [{ type: Types.ObjectId, ref: 'User'}],
   retweets: [{ type: Types.ObjectId, ref: 'User'}],
 });
 
