@@ -6,6 +6,7 @@ import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
+import SidebarOption from './SidebarOption';
 
 const Post = forwardRef( (   
     {
@@ -39,10 +40,21 @@ const Post = forwardRef( (
             <img src={image}
                 alt='' />
             <div className='post_footer'>
+                <SidebarOption Icon={MapsUgcOutlinedIcon} />
+                <SidebarOption Icon={RepeatIcon} />
+                <SidebarOption Icon={FavoriteBorderIcon} />
+                <SidebarOption Icon={PublishIcon} />
+
+
+                {/*
+
                 <MapsUgcOutlinedIcon fontsize='small' />
                 <RepeatIcon fontSize="small" />
                 <FavoriteBorderIcon fontSize="small" />
                 <PublishIcon fontSize="small" />
+
+                */}
+
             </div>
         </div>
     </div>
