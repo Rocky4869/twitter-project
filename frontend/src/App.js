@@ -11,31 +11,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Feed from "./Feed";
 import Widgets from "./Widgets";
-import LoginHeader from "./login/LoginHeader";
-import LoginCard from "./login/LoginCard";
-import LoginFooter from "./login/LoginFooter";
-import RegistrationTab from "./login/RegistrationTab";
-import ForgotPassword from "./login/ForgotPassword";
-import ResetPassword from "./login/ResetPassword";
+import LoginContainer from "./login/LoginContainer";
 
 function App() {
   return (
-    <div>
-      <LoginHeader />
-      <BrowserRouter>
-        <Routes>
-          {/* <Route path="/" element={<Layout />}> */}
-          <Route path="login" element={<LoginCard />} />
-          <Route path="register" element={<RegistrationTab />} />
-          <Route path="forget_password" element={<ForgotPassword />} />
-          <Route path="reset_password" element={<ResetPassword />} />
-          {/* <Route path="*" element={<NoPage />} /> */}
-          {/* </Route> */}
-        </Routes>
-      </BrowserRouter>
-      <LoginFooter />
-    </div>
-
+    <LoginContainer />
     // <div className="app">
     //   <Sidebar />
     //   <Feed />
