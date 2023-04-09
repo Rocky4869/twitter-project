@@ -1,81 +1,107 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+// import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import "../css/ForgotPassword.css";
 
 function ForgotPassword() {
   return (
     <div className="bg-blue-300">
       <div className="flex justify-center">
         <div
-          className="bg-white my-48 flex justify-center"
+          className="bg-white flex justify-center border-radius box-shadow"
           style={{
             width: "700px",
-            height: "839px",
+            height: "800px",
             border: "1px solid #000000",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);",
-            borderRadius: "30px",
+            marginTop: "80px",
+            marginBottom: "50px",
           }}
         >
-          <div className="mt-12">
+          <div>
             <div className="flex justify-center">
               <img
-                src="twitter.png"
-                alt="twitter.png"
-                className="w-36 h-36 my-12"
+                src="https://img.icons8.com/color/452/twitter--v1.png"
+                alt="twitter"
+                style={{
+                  marginTop: "40px",
+                  marginTop: "40px",
+                  marginBottom: "40px",
+                  width: "100px",
+                  height: "100px",
+                }}
               ></img>
             </div>
             <div
               style={{
-                letterSpacing: "letter-spacing: -0.02em",
+                fontSize: "30px",
               }}
-              className="text-center text-xl font-bold text-black"
+              className="text-center font-bold text-black border-radius-30"
             >
               Forgot password
             </div>
-            <div className="mt-36 flex flex-col justify-center text-center">
-              <div>Please enter your account email address and we will</div>
-              <div>send you a password reset link</div>
+            <div
+              className="flex justify-center text-center text-black"
+              style={{
+                marginTop: "50px",
+              }}
+            >
+              Please enter your account email address and we will
             </div>
-            <div className="flex justify-center mt-12">
+            <div
+              className="flex justify-center text-center text-black"
+              style={{
+                marginTop: "10px",
+              }}
+            >
+              send you a password reset link
+            </div>
+            <div className="flex justify-center">
               <input
                 type="text"
                 placeholder="Email"
-                className="border-2 rounded-sm mt-24 py-12 px-12"
+                className="border-2"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                  width: "600px",
+                  width: "400px",
+                  marginTop: "40px",
+                  padding: "16px",
+                  borderRadius: "10px",
                 }}
               />
             </div>
-            <div className="flex justify-center mt-64">
+            <div className="flex justify-center">
               <Button
                 variant="contained"
                 color="primary"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                  width: "400px",
+                  width: "300px",
                   borderRadius: "30px",
                   padding: "10px",
+                  marginTop: "100px",
                 }}
               >
                 Submit
               </Button>
             </div>
-            <div className="flex justify-center mt-36">
-              <Link
+            <div className="flex justify-center">
+              <Button
                 type="submit"
-                className="border-2 bg-black hover:bg-gray-800 rounded-16 text-center px-8 py-8 font-bold text-xs text-white no-underline"
+                className="border-2 hover:bg-gray-800 rounded-16 text-center font-bold text-white no-underline"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
                   width: "200px",
+                  backgroundColor: "black",
+                  padding: "10px",
+                  marginTop: "40px",
                 }}
-                to="/login"
+                // to="/login"
               >
                 Back
-              </Link>
+              </Button>
             </div>
           </div>
         </div>

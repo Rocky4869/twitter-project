@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../css/LoginFooter.css";
 const footerLinks = [
   ["About", "https://about.twitter.com"],
   ["Help Center", "https://help.twitter.com"],

@@ -1,0 +1,145 @@
+.bg-blue-300 {
+  background-color: #90cdf4;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+@keyframes shinetxt {
+  0% {
+    background-position: -500%;
+  }
+
+  10% {
+    background-position: -50%;
+  }
+
+  30%,
+  60% {
+    background-position: -25%;
+  }
+
+  85% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 500%;
+  }
+}
+
+.welcome {
+  background: linear-gradient(
+    90deg,
+    #90ee90,
+    rgb(68, 145, 184),
+    rgb(21, 49, 151)
+  );
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: shinetxt 5s infinite;
+  animation-delay: 1.5s;
+  background-position: -500%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+.animalShake {
+  animation-name: animalShake;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes animalShake {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-10deg);
+  }
+  20% {
+    transform: rotate(10deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.border-radius-30 {
+  border-radius: 30px;
+}
+
+.btn-primary {
+  background-color: #1da1f2;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #0d8bf0;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.box-shadow {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.hover\:underline:hover {
+  text-decoration: underline;
+}
+
+.text-black {
+  color: #000000;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+/* 
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 2rem;
+} */

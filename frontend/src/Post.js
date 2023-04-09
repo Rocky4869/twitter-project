@@ -1,5 +1,5 @@
 import React, {forwardRef} from 'react'
-import "./Post.css";
+import "./css/Post.css";
 import { Avatar } from '@material-ui/core';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';

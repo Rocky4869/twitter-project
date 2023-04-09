@@ -1,11 +1,11 @@
 import React from "react";
-import "../css/twitter.css";
+import "../css/LoginHeader.css";
 
 function LoginHeader() {
   return (
     <div>
       <div
-        className="text-white bg-blue w-screen px-16 py-4"
+        className="container"
         style={{
           fontStyle: "normal",
           fontWeight: "400",

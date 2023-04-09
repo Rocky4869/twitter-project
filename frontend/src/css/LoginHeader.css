@@ -1,0 +1,10 @@
+.container {
+  display: block;
+  color: white;
+  background-color: #1da1f2;
+  width: 100vw; /* This is equivalent to 'w-screen' in Tailwind CSS */
+  padding-left: 16px; /* This is equivalent to 'px-16' in Tailwind CSS */
+  padding-right: 16px; /* This is equivalent to 'px-16' in Tailwind CSS */
+  padding-top: 8px; /* This is equivalent to 'py-4' in Tailwind CSS */
+  padding-bottom: 16px; /* This is equivalent to 'py-4' in Tailwind CSS */
+}
