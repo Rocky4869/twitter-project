@@ -17,6 +17,9 @@ const Post = forwardRef( (
     avatar,
     image
     }, ref) => {
+
+
+        
   return (
     <div className='post' ref={ref}>
         <div className='post_avator'>
