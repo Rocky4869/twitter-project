@@ -39,7 +39,7 @@
 }
 
 .hover\:underline:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 .text-black {

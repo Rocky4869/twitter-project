@@ -1,7 +1,7 @@
 import React from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-// import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 function RegistrationTab() {
@@ -66,7 +66,7 @@ function RegistrationTab() {
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
                   width: "450px",
-                  marginTop: "40px",
+                  marginTop: "30px",
                   padding: "16px",
                   borderRadius: "10px",
                 }}
@@ -81,7 +81,7 @@ function RegistrationTab() {
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
                   width: "450px",
-                  marginTop: "40px",
+                  marginTop: "30px",
                   padding: "16px",
                   borderRadius: "10px",
                 }}
@@ -96,7 +96,7 @@ function RegistrationTab() {
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
                   width: "450px",
-                  marginTop: "40px",
+                  marginTop: "30px",
                   padding: "16px",
                   borderRadius: "10px",
                 }}
@@ -119,16 +119,16 @@ function RegistrationTab() {
               </Button>
             </div>
             <div>
-              <a
+              <Link
                 className="text-center text-black flex justify-center no-underline hover:underline"
-                // to="/login"
+                to="/login"
                 style={{
                   marginTop: "40px",
                   fontSize: "20px",
                 }}
               >
                 Already have an account? Log in
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import "../css/ResetPassword.css";
 
@@ -40,8 +40,15 @@ function ResetPassword() {
             >
               Reset your password
             </div>
-            <div className="flex flex-col justify-center text-center text-black">
-              <div>Please enter and confirm your new password</div>
+            <div className="flex justify-center text-center text-black">
+              <div
+                style={{
+                  fontSize: "15px",
+                  marginTop: "30px",
+                }}
+              >
+                Please enter and confirm your new password
+              </div>
             </div>
             <div className="flex justify-center">
               <input
@@ -51,7 +58,7 @@ function ResetPassword() {
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
                   width: "400px",
-                  marginTop: "40px",
+                  marginTop: "50px",
                   padding: "16px",
                   borderRadius: "10px",
                 }}
@@ -80,7 +87,7 @@ function ResetPassword() {
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                  width: "300px",
+                  width: "400px",
                   borderRadius: "30px",
                   padding: "10px",
                   marginTop: "100px",
@@ -90,21 +97,23 @@ function ResetPassword() {
               </Button>
             </div>
             <div className="flex justify-center">
-              <Button
-                className="border-2 text-center font-bold no-underline focus:bg-gray-800"
+              <Link
+                className="border-2 text-center font-bold no-underline gray"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
                   width: "200px",
                   backgroundColor: "black",
-                  padding: "10px",
+                  padding: "15px",
                   marginTop: "40px",
                   color: "white",
                   borderRadius: "30px",
+                  transition: "background-color 0.2s ease-in-out",
                 }}
+                to="/login"
               >
                 Back
-              </Button>
+              </Link>
             </div>
           </div>
         </div>

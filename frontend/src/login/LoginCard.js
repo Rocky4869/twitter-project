@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import "../css/LoginCard.css";
 
@@ -91,18 +91,24 @@ function LoginCard() {
                 marginTop: "50px",
               }}
             >
-              <a
+              <Link
                 className="no-underline hover:underline text-black"
-                // to="/forget_password"
+                to="/forget_password"
+                style={{
+                  fontSize: "20px",
+                }}
               >
                 Forgot Password?
-              </a>
-              <a
+              </Link>
+              <Link
                 className="no-underline hover:underline text-black"
-                // to="/register"
+                to="/register"
+                style={{
+                  fontSize: "20px",
+                }}
               >
                 Don't have an account?
-              </a>
+              </Link>
             </div>
           </div>
         </div>

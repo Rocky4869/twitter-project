@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import "../css/ForgotPassword.css";
 
@@ -36,7 +36,7 @@ function ForgotPassword() {
               style={{
                 fontSize: "30px",
               }}
-              className="text-center font-bold text-black border-radius-30"
+              className="text-center font-bold text-black"
             >
               Forgot password
             </div>
@@ -44,6 +44,7 @@ function ForgotPassword() {
               className="flex justify-center text-center text-black"
               style={{
                 marginTop: "50px",
+                fontSize: "15px",
               }}
             >
               Please enter your account email address and we will
@@ -52,6 +53,7 @@ function ForgotPassword() {
               className="flex justify-center text-center text-black"
               style={{
                 marginTop: "10px",
+                fontSize: "15px",
               }}
             >
               send you a password reset link
@@ -60,7 +62,6 @@ function ForgotPassword() {
               <input
                 type="text"
                 placeholder="Email"
-                className="border-2"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
@@ -79,7 +80,7 @@ function ForgotPassword() {
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                  width: "300px",
+                  width: "400px",
                   borderRadius: "30px",
                   padding: "10px",
                   marginTop: "100px",
@@ -89,21 +90,23 @@ function ForgotPassword() {
               </Button>
             </div>
             <div className="flex justify-center">
-              <Button
-                className="border-2 text-center font-bold no-underline"
+              <Link
+                className="text-center font-bold no-underline gray"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
                   width: "200px",
                   backgroundColor: "black",
-                  padding: "10px",
+                  padding: "15px",
                   marginTop: "40px",
                   color: "white",
                   borderRadius: "30px",
+                  transition: "background-color 0.2s ease-in-out",
                 }}
+                to="/login"
               >
                 Back
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
