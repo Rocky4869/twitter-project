@@ -29,7 +29,7 @@ const Post = forwardRef( (
         const sendComment = (e) => {
           e.preventDefault();
       
-          db.collection("posts").add({
+          db.collection("comments").add({
             displayName: "Cha Eun Woo",
             username: "eunwo.o_c",
             verified: true,
