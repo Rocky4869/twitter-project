@@ -11,7 +11,7 @@ import "./App.css";
 // import { createRoot } from "react-dom/client";
 import Sidebar from "./Sidebar";
 import Feed from "./Feed";
-import Widgets from "./Widgets";
+import Widgets from "./Widgets"; 
 import LoginHeader from "./login/LoginHeader";
 import LoginCard from "./login/LoginCard";
 import LoginFooter from "./login/LoginFooter";

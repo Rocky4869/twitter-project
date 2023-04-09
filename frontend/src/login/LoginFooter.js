@@ -24,15 +24,15 @@ const footerLinks = [
 
 function LoginFooter() {
   return (
-    <footer className="justify-center p-8 flex bg-blue-500">
-      <nav className="flex flex-wrap justify-center gap-8 gap-y-2">
+    <footer className="footer">
+      <nav className="nav">
         {footerLinks.map(([linkName, href]) => (
           <a
-            className="no-underline text-white hover:underline"
             target="_blank"
             rel="noopener noreferrer"
             href={href}
             key={linkName}
+            className="no-underline text-white"
           >
             {linkName}
           </a>

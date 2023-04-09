@@ -8,13 +8,14 @@ function ForgotPassword() {
     <div className="bg-blue-300">
       <div className="flex justify-center">
         <div
-          className="bg-white flex justify-center border-radius box-shadow"
+          className="bg-white flex justify-center border-radius"
           style={{
             width: "700px",
             height: "800px",
             border: "1px solid #000000",
             marginTop: "80px",
             marginBottom: "50px",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           }}
         >
           <div>
@@ -74,6 +75,7 @@ function ForgotPassword() {
               <Button
                 variant="contained"
                 color="primary"
+                className="text-center font-bold text-white"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",

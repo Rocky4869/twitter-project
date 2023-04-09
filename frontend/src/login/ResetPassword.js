@@ -1,22 +1,24 @@
 import React from "react";
 // import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import "../css/ResetPassword.css";
 
 function ResetPassword() {
   return (
     <div className="bg-blue-300">
       <div className="flex justify-center">
         <div
-          className="bg-white flex justify-center border-radius box-shadow"
+          className="bg-white flex justify-center border-radius"
           style={{
             width: "700px",
             height: "800px",
             border: "1px solid #000000",
             marginTop: "80px",
             marginBottom: "50px",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           }}
         >
-          <div className="mt-12">
+          <div>
             <div className="flex justify-center">
               <img
                 src="https://img.icons8.com/color/452/twitter--v1.png"
@@ -45,7 +47,6 @@ function ResetPassword() {
               <input
                 type="text"
                 placeholder="New Password"
-                className="border-2 rounded-sm py-12 px-12"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
@@ -75,7 +76,7 @@ function ResetPassword() {
               <Button
                 variant="contained"
                 color="primary"
-                className="border-2 bg-blue focus:bg-blue-900 text-center font-bold text-white"
+                className="focus:bg-blue-900 text-center font-bold text-white"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
@@ -90,7 +91,7 @@ function ResetPassword() {
             </div>
             <div className="flex justify-center">
               <Button
-                className="border-2 text-center font-bold no-underline"
+                className="border-2 text-center font-bold no-underline focus:bg-gray-800"
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",

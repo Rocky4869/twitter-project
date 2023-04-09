@@ -1,35 +1,33 @@
-footer {
+.footer {
   display: flex;
   justify-content: center;
-  padding-top: 8px; /* This is equivalent to 'p-8' in Tailwind CSS */
-  padding-right: 8px; /* This is equivalent to 'p-8' in Tailwind CSS */
-  padding-bottom: 8px; /* This is equivalent to 'p-8' in Tailwind CSS */
-  padding-left: 8px; /* This is equivalent to 'p-8' in Tailwind CSS */
-  flex-direction: row; /* This is the default value for flex-direction in Tailwind CSS */
-  align-items: center; /* This is the default value for align-items in Tailwind CSS */
-  background-color: #1da1f2; /* This is equivalent to 'bg-blue-500' in Tailwind CSS */
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  flex-direction: row;
+  align-items: center;
+  background-color: #1da1f2;
 }
 
-nav {
+.nav {
   display: flex;
-  flex-wrap: wrap; /* This is equivalent to 'flex-wrap' in Tailwind CSS */
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 8px; /* This is equivalent to 'gap-8' in Tailwind CSS */
-  column-gap: 8px; /* This is equivalent to 'gap-8' in Tailwind CSS */
-  row-gap: 8px; /* This is equivalent to 'gap-8' in Tailwind CSS */
-  margin-top: 2px; /* This is equivalent to 'gap-y-2' in Tailwind CSS */
-  margin-bottom: 2px; /* This is equivalent to 'gap-y-2' in Tailwind CSS */
+  gap: 8px;
+  column-gap: 8px;
+  row-gap: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
-
-a {
-  text-decoration: none; /* This is equivalent to 'no-underline' in Tailwind CSS */
-  color: white;
-}
-
 a:hover {
-  text-decoration: underline; /* This is equivalent to 'hover:underline' in Tailwind CSS */
+  text-decoration: underline;
 }
 
-div {
+.text-white {
   color: white;
+}
+
+.no-underline {
+  text-decoration: none;
 }
