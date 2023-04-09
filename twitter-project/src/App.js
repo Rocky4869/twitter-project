@@ -29,7 +29,7 @@ function App() {
         <Widgets />
       </div>
 
-      <LoginHeader />
+      {/* <LoginHeader />
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginCard />} />
@@ -38,7 +38,7 @@ function App() {
           <Route path="/reset_password" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
-      <LoginFooter />
+      <LoginFooter /> */}
     </>
   );
 }
