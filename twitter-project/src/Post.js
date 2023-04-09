@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import "./Post.css";
-import { Avatar } from '@material-ui/core';
+import { Avatar, Button } from '@material-ui/core';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import RepeatIcon from "@material-ui/icons/Repeat";
@@ -23,12 +23,13 @@ const Post = forwardRef( (
     comment_text,
     comment_account
     }, ref) => {
+
         const [tweetMessage, setTweetMessage] = useState("");
       
-        const sendTweet = (e) => {
+        const sendComment = (e) => {
           e.preventDefault();
       
-          db.collection("comments").add({
+          db.collection("posts").add({
             displayName: "Cha Eun Woo",
             username: "eunwo.o_c",
             verified: true,
@@ -73,7 +74,7 @@ const Post = forwardRef( (
             </div>
 
             <br></br>
-            
+
             <div className='user_comment'>
                 <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
                 <input
@@ -85,12 +86,18 @@ const Post = forwardRef( (
 
             
             <div className='post_footer'>
-                <SidebarOption Icon={MapsUgcOutlinedIcon} onclick={sendTweet}/>
+                <SidebarOption Icon={MapsUgcOutlinedIcon} onClick={sendComment}/>
                 <SidebarOption Icon={RepeatIcon} />
-                <SidebarOption Icon={FavoriteBorderIcon} text={likes}/>
+                <SidebarOption Icon={FavoriteBorderIcon} text={likes} />
                 <SidebarOption Icon={PublishIcon} />
 
                 {/*
+
+                <Button 
+                onclick={sendTweet} 
+                type="submit">
+                    Comment
+                </Button>
 
                 <button onclick={handleClick}>Open Popup</button>
                 <MapsUgcOutlinedIcon fontsize='small' />
