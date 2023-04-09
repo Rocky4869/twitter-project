@@ -7,6 +7,9 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import SidebarOption from './SidebarOption';
+import Popup from './Popup';
+import { useState } from 'react';
+import { Button } from "@material-ui/core";
 
 const Post = forwardRef( (   
     {
@@ -17,9 +20,17 @@ const Post = forwardRef( (
     avatar,
     image
     }, ref) => {
+        const [tweetMessage, setTweetMessage] = useState("");
 
+        const [buttonPopup, setButtonPopup] = useState(false);
 
-        
+        const handleClick = (e) => {
+            e.preventDefault();
+            setButtonPopup(true);
+            buttonPopup(true);
+            alert('ok');
+        };
+
   return (
     <div className='post' ref={ref}>
         <div className='post_avator'>
@@ -42,23 +53,38 @@ const Post = forwardRef( (
             </div>
             <img src={image}
                 alt='' />
+
+            <br></br>
+            
+            <div className='post_comment'>
+            <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
+            <input
+                onChange={(e) => setTweetMessage(e.target.value)}
+                value={tweetMessage}
+                placeholder="Your response?"
+                type="text"/>
+            </div>
+
+            
             <div className='post_footer'>
-                <SidebarOption Icon={MapsUgcOutlinedIcon} />
+                <SidebarOption Icon={MapsUgcOutlinedIcon} onclick={handleClick}/>
                 <SidebarOption Icon={RepeatIcon} />
                 <SidebarOption Icon={FavoriteBorderIcon} />
                 <SidebarOption Icon={PublishIcon} />
 
-
                 {/*
 
+                <button onclick={handleClick}>Open Popup</button>
                 <MapsUgcOutlinedIcon fontsize='small' />
                 <RepeatIcon fontSize="small" />
                 <FavoriteBorderIcon fontSize="small" />
                 <PublishIcon fontSize="small" />
 
                 */}
-
             </div>
+            <Popup trigger={buttonPopup}>
+                    <h6>My popup</h6>
+            </Popup>
         </div>
     </div>
   );

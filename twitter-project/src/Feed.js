@@ -38,18 +38,22 @@ function Feed() {
                 image={post.image}
                 />
                 ))}
-            </Flipmove>
+            </Flipmove>             
             
             {/*
+
             <Post 
-            displayName="Mun Ka Young"
-            username="munkayoung"
+            displayName="JISOO♥️"
+            username="sooyaaa__"
             verified={true}
-            text="짱!!!"
-            avatar='https://image.kpopmap.com/2021/01/moon-gayoung-lens-cover-true-beauty.jpg'
-            image="https://img.jjang0u.com/data4/docs/306/202101/06/2a/6ba1f929ead2a5d34df1b318f31c1cdd_139185.gif"
+            text="꽃 🌹 인기가요 첫 무대!"
+            avatar='https://i.redd.it/nl98jug3oxqa1.jpg'
+            image="https://64.media.tumblr.com/e1b0e6e81095dd1f1c9ee0e6be38e5ff/9706687db94b09e6-c1/s640x960/d9c3374e7ee85e15fb21604981dacda96a9d1aec.gif"
             />
+
             */}
+
+            
 
         </div>
     )
