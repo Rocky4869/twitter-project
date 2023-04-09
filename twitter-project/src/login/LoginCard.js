@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import "../css/welcome.css";
@@ -13,7 +13,7 @@ function LoginCard() {
             width: "620px",
             height: "739px",
             border: "1px solid #000000",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             borderRadius: "30px",
           }}
         >

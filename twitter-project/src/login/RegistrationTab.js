@@ -82,42 +82,6 @@ function RegistrationTab() {
                 }}
               />
             </div>
-            {/* <div className="mt-12 font-bold">Date of Birth</div>
-          <div className="flex flex-row">
-            <div className="mx-4">
-              <input
-                type="text"
-                placeholder="Day"
-                className="border-2 rounded-sm mt-12 py-12 px-12"
-                style={{
-                  border: "1px solid #C4C4C4",
-                  boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                }}
-              />
-            </div>
-            <div className="mx-4">
-              <input
-                type="text"
-                placeholder="Month"
-                className="border-2 rounded-sm mt-12 py-12 px-12"
-                style={{
-                  border: "1px solid #C4C4C4",
-                  boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                }}
-              />
-            </div>
-            <div className="mx-4">
-              <input
-                type="text"
-                placeholder="Year"
-                className="border-2 rounded-sm mt-12 py-12 px-12"
-                style={{
-                  border: "1px solid #C4C4C4",
-                  boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                }}
-              />
-            </div>
-          </div> */}
             <div className="flex justify-center mt-48">
               <Button
                 variant="contained"
