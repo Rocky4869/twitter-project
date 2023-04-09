@@ -8,7 +8,6 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import SidebarOption from './SidebarOption';
 import { useState } from 'react';
-import { Button } from "@material-ui/core";
 import db from "./firebase";
 
 const Post = forwardRef( (   
@@ -19,7 +18,10 @@ const Post = forwardRef( (
     text,
     avatar,
     image,
-    likes
+    likes,
+    comment_avatar,
+    comment_text,
+    comment_account
     }, ref) => {
         const [tweetMessage, setTweetMessage] = useState("");
       
@@ -64,8 +66,17 @@ const Post = forwardRef( (
             <br></br>
 
             <div className='post_comment'>
-            <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
-            <input
+                <Avatar style={{ height: '50px', width: '50px' }} src={comment_avatar} />
+                <div className='post_comment_text'>
+                    <p>@{comment_account} has commented: {comment_text}</p>
+                </div>
+            </div>
+
+            <br></br>
+            
+            <div className='user_comment'>
+                <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
+                <input
                 onChange={(e) => setTweetMessage(e.target.value)}
                 value={tweetMessage}
                 placeholder="Your response?"

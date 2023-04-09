@@ -57,14 +57,14 @@ img{
     display: flex;
 }
 
-.post_comment {
+.user_comment {
     display: flex;
     padding: 20px;
     background-color: rgb(215, 245, 250);
     border-radius: 10px;
 }
 
-.post_comment > input {
+.user_comment > input {
     flex: 1;
     width:80%;
     font-size: 15px;
@@ -74,7 +74,7 @@ img{
     margin-left: 10px;  
 }
 
-.post_comment > Avatar {
+.user_comment > Avatar {
     display: flex;
     padding: 10px;
 }
@@ -83,4 +83,21 @@ img{
     font-weight: 800;
     font-size: 15px !important;
     margin-right: 20px;
+}
+
+.post_comment {
+    display: flex;
+    padding: 20px;
+    background-color: rgb(239, 251, 253);
+    border-radius: 10px;    
+}
+
+.post_comment > .post_comment_text {
+    flex: 1;
+    width:80%;
+    font-size: 15px;
+    border: none;
+    display: flex;
+    padding: 10px;
+    margin-left: 10px;  
 }
