@@ -78,3 +78,9 @@ img{
     display: flex;
     padding: 10px;
 }
+
+.post_footer .sidebarOption > h2 {
+    font-weight: 800;
+    font-size: 15px !important;
+    margin-right: 20px;
+}

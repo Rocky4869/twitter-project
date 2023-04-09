@@ -7,9 +7,9 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import SidebarOption from './SidebarOption';
-import Popup from './Popup';
 import { useState } from 'react';
 import { Button } from "@material-ui/core";
+import db from "./firebase";
 
 const Post = forwardRef( (   
     {
@@ -18,17 +18,24 @@ const Post = forwardRef( (
     verified,
     text,
     avatar,
-    image
+    image,
+    likes
     }, ref) => {
         const [tweetMessage, setTweetMessage] = useState("");
-
-        const [buttonPopup, setButtonPopup] = useState(false);
-
-        const handleClick = (e) => {
-            e.preventDefault();
-            setButtonPopup(true);
-            buttonPopup(true);
-            alert('ok');
+      
+        const sendTweet = (e) => {
+          e.preventDefault();
+      
+          db.collection("comments").add({
+            displayName: "Cha Eun Woo",
+            username: "eunwo.o_c",
+            verified: true,
+            text: tweetMessage,
+            avatar:
+              "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+          });
+      
+          setTweetMessage("");
         };
 
   return (
@@ -55,7 +62,7 @@ const Post = forwardRef( (
                 alt='' />
 
             <br></br>
-            
+
             <div className='post_comment'>
             <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
             <input
@@ -67,9 +74,9 @@ const Post = forwardRef( (
 
             
             <div className='post_footer'>
-                <SidebarOption Icon={MapsUgcOutlinedIcon} onclick={handleClick}/>
+                <SidebarOption Icon={MapsUgcOutlinedIcon} onclick={sendTweet}/>
                 <SidebarOption Icon={RepeatIcon} />
-                <SidebarOption Icon={FavoriteBorderIcon} />
+                <SidebarOption Icon={FavoriteBorderIcon} text={likes}/>
                 <SidebarOption Icon={PublishIcon} />
 
                 {/*
@@ -82,9 +89,6 @@ const Post = forwardRef( (
 
                 */}
             </div>
-            <Popup trigger={buttonPopup}>
-                    <h6>My popup</h6>
-            </Popup>
         </div>
     </div>
   );
