@@ -12,12 +12,12 @@ import "./App.css";
 import Sidebar from "./Sidebar";
 import Feed from "./Feed";
 import Widgets from "./Widgets";
-import LoginHeader from "./login/LoginHeader";
-import LoginCard from "./login/LoginCard";
-import LoginFooter from "./login/LoginFooter";
-import RegistrationTab from "./login/RegistrationTab";
-import ForgotPassword from "./login/ForgotPassword";
-import ResetPassword from "./login/ResetPassword";
+// import LoginHeader from "./login/LoginHeader";
+// import LoginCard from "./login/LoginCard";
+// import LoginFooter from "./login/LoginFooter";
+// import RegistrationTab from "./login/RegistrationTab";
+// import ForgotPassword from "./login/ForgotPassword";
+// import ResetPassword from "./login/ResetPassword";
 
 function App() {
   return (
