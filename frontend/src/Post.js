@@ -1,52 +1,184 @@
-import React, {forwardRef} from 'react'
+import React, { forwardRef, useEffect, useState } from "react";
 import "./css/Post.css";
-import { Avatar } from '@material-ui/core';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+import { Avatar, Button } from "@material-ui/core";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
+import SidebarOption from "./SidebarOption";
+import db from "./firebase";
+import Comment from "./Comment";
 
-const Post = forwardRef( (   
-    {
-    displayName,
-    username,
-    verified,
-    text,
-    avatar,
-    image
-    }, ref) => {
-  return (
-    <div className='post' ref={ref}>
-        <div className='post_avator'>
-            <Avatar style={{ height: '100px', width: '100px' }} src={avatar}></Avatar>
+const Post = forwardRef(
+  (
+    { id, displayName, username, verified, text, avatar, image, likes },
+    ref
+  ) => {
+    const [tweetMessage, setTweetMessage] = useState("");
+    const [tweetImage, setTweetImage] = useState("");
+
+    const sendTweet = (e) => {
+      e.preventDefault();
+
+      db.collection("posts").doc(id).collection("comments").add({
+        displayName: "Cha Eun Woo",
+        username: "eunwo.o_c",
+        verified: true,
+        text: tweetMessage,
+        image: tweetImage,
+        avatar:
+          "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+      });
+
+      setTweetMessage("");
+      setTweetImage("");
+    };
+
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+      db.collection("posts")
+        .doc(id)
+        .collection("comments")
+        .onSnapshot((snapshot) =>
+          setComments(
+            snapshot.docs.map((doc_comment) => ({
+              id: doc_comment.id,
+              ...doc_comment.data(),
+            }))
+          )
+        );
+    }, []);
+
+    return (
+      <div className="post" ref={ref}>
+        <div className="post_avator">
+          <Avatar
+            style={{ height: "100px", width: "100px" }}
+            src={avatar}
+          ></Avatar>
         </div>
         <div className="post_body">
-            <div className='post_header'>
-                <div className='post_headerText'>
-                    <h3>
-                        {displayName} {" "}
-                        <span className='post_headerSpecial'>
-                            {verified && <VerifiedIcon className="post_badge"></VerifiedIcon>}
-                        </span>
-                        {" "} @{username}
-                    </h3>                    
-                </div>
-                <div className="post_headerDescription">
-                        <p>{text}</p>
-                </div>
+          <div className="post_header">
+            <div className="post_headerText">
+              <h3>
+                {displayName}{" "}
+                <span className="post_headerSpecial">
+                  {verified && (
+                    <VerifiedIcon className="post_badge"></VerifiedIcon>
+                  )}
+                </span>{" "}
+                @{username}
+              </h3>
             </div>
-            <img src={image}
-                alt='' />
-            <div className='post_footer'>
-                <MapsUgcOutlinedIcon fontSize='small' />
+            <div className="post_headerDescription">
+              <p>{text}</p>
+            </div>
+          </div>
+          <img src={image} alt="" />
+
+          <br></br>
+
+          {/*
+                <Comment 
+                comment_avatar={comment_avatar}
+                comment_text={comment_text}
+                comment_account={comment_account}/>
+            */}
+
+          {comments.map((comment) => (
+            <Comment
+              avatar={comment.avatar}
+              displayName={comment.displayName}
+              image={comment.image}
+              text={comment.text}
+              username={comment.username}
+              verified={comment.verified}
+            />
+          ))}
+
+          {/*
+            {comment_account ? 
+                <div className='post_comment'>
+                    <Avatar style={{ height: '50px', width: '50px' }} src={comment_avatar} />
+                    <div className='post_comment_text'>
+                        <p>@{comment_account} has commented: {comment_text}</p>
+                    </div>
+                    <br></br>
+                </div> : ''}
+            */}
+
+          <div className="post_footer">
+            <SidebarOption active Icon={MapsUgcOutlinedIcon} />
+            <SidebarOption Icon={RepeatIcon} />
+            <SidebarOption Icon={FavoriteBorderIcon} text={likes} />
+            <SidebarOption Icon={PublishIcon} />
+
+            {/*
+
+            <div className='user_comment'>
+                <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
+                <input
+                onChange={(e) => setTweetComment(e.target.value)}
+                value={tweetComment}
+                placeholder="Your response?"
+                type="text"/>
+            </div>
+
+                <Button 
+                onclick={sendComment} 
+                type="submit">Comment 
+                </Button>
+
+                <button onclick={handleClick}>Open Popup</button>
+                <MapsUgcOutlinedIcon fontsize='small' />
                 <RepeatIcon fontSize="small" />
                 <FavoriteBorderIcon fontSize="small" />
                 <PublishIcon fontSize="small" />
-            </div>
-        </div>
-    </div>
-  );
-} );
 
-export default Post
+                */}
+          </div>
+
+          <form className="comment_form">
+            <div className="tweetBox_input">
+              <Avatar
+                style={{ height: "50px", width: "50px" }}
+                src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
+              />
+              <input
+                onChange={(e) => setTweetMessage(e.target.value)}
+                value={tweetMessage}
+                placeholder="Your response?"
+                type="text"
+              />
+            </div>
+
+            <div className="tweetBox_additional">
+              <input
+                value={tweetImage}
+                onChange={(e) => setTweetImage(e.target.value)}
+                className="tweetBox_imageInput"
+                placeholder="Optional: Enter image URL"
+                type="text"
+              />
+
+              <Button
+                onClick={sendTweet}
+                type="submit"
+                className="tweetBox_tweetButton"
+              >
+                Reply
+              </Button>
+            </div>
+          </form>
+          <div className="post_id">
+            <h6>Post ID: {id}</h6>
+          </div>
+        </div>
+      </div>
+    );
+  }
+);
+
+export default Post;
