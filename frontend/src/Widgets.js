@@ -15,7 +15,7 @@ function Widgets() {
     const [searchResults, setSearchResults] = useState([]);
     const [dropdownVisible, setDropdownVisible] = useState(true);
     const dropDownRef = useRef(null);
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
     useEffect(() => {
         if (searchInput.trim() === '') {
             setSearchResults([]);
@@ -107,7 +107,7 @@ function Widgets() {
         setDropdownVisible(false);
         setSearchInput('');
         // alert("selected item: " + userid);
-        navigate(`/${userid}`);
+        // navigate(`/${userid}`);
       };
 
     return(
