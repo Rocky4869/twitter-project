@@ -16,14 +16,14 @@ import SideBarContainer from "./sidebar/SideBarContainer";
 
 function App() {
   return (
-    // <LoginContainer />
-    <div className="app">
-      <SideBarContainer />
+    <div>
+      {/* <LoginContainer /> */}
 
-
-
-      <Feed />
-      <Widgets /> 
+      <div className="app">
+        <SideBarContainer />
+        <Feed />
+        <Widgets />
+      </div>
     </div>
   );
 }

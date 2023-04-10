@@ -9,17 +9,33 @@ import {
   Typography,
   Box,
   Grid,
+  IconButton,
 } from "@mui/material";
+import { Close, InsertEmoticon, Image } from "@material-ui/icons";
 
-function Logout({ open, onClose, history }) {
+function LogoutDialog({ open, onClose, history }) {
   const handeleLogout = () => {
     onClose();
-    // history.push("/login"); // This is not working, redirect to login page
+    history.push("/login"); // This is not working, redirect to login page
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="xs">
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="sm"
+      PaperProps={{ style: { borderRadius: 20 } }}
+    >
       <Box p={2} m={2}>
+        <div
+          style={{
+            display: "flex",
+          }}
+        >
+          <IconButton onClick={onClose}>
+            <Close />
+          </IconButton>
+        </div>
         <div className="flex justify-center">
           <img
             src="https://img.icons8.com/color/452/twitter--v1.png"
@@ -89,4 +105,4 @@ function Logout({ open, onClose, history }) {
   );
 }
 
-export default Logout;
+export default LogoutDialog;

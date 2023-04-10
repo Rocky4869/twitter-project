@@ -2,37 +2,45 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import CreateTweetDialog from "./CreateTweetDialog";
-import Logout from "./Logout";
+import LogoutDialog from "./LogoutDialog";
 
 function SideBarContainer() {
-  const [open, setOpen] = useState(false);
+  const [openTweet, setOpenTweet] = useState(false);
+  const [openLogout, setOpenLogout] = useState(false);
 
   const handleOpenTweet = () => {
-    setOpen(true);
+    setOpenTweet(true);
   };
 
   const handleOpenLogout = () => {
-    setOpen(true);
+    setOpenLogout(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseTweet = () => {
+    setOpenTweet(false);
+  };
+
+  const handleCloseLogout = () => {
+    setOpenLogout(false);
   };
 
   const handleTweet = (tweetText) => {
     console.log(`Tweeting: ${tweetText}`);
-    setOpen(false);
+    setOpenTweet(false);
   };
 
   return (
     <div>
-      <Sidebar onClick={handleOpenTweet} />
+      <Sidebar
+        onTweetButtonClick={handleOpenTweet}
+        onLogoutButtonClick={handleOpenLogout}
+      />
       <CreateTweetDialog
-        open={open}
-        onClose={handleClose}
+        open={openTweet}
+        onClose={handleCloseTweet}
         onTweet={handleTweet}
       />
-      {/* <Logout open={open} onClose={handleClose} /> */}
+      <LogoutDialog open={openLogout} onClose={handleCloseLogout} />
     </div>
   );
 }

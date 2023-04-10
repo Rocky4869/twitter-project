@@ -12,7 +12,7 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Button } from "@material-ui/core";
 
-function Sidebar({ onClick }) {
+function Sidebar({ onTweetButtonClick, onLogoutButtonClick }) {
   return (
     <div className="sidebar">
       {/* Twitter icon */}
@@ -33,7 +33,7 @@ function Sidebar({ onClick }) {
         variant="outlined"
         className="sidebar__tweet"
         fullWidth
-        onClick={onClick}
+        onClick={onTweetButtonClick}
       >
         Tweet
       </Button>
@@ -44,7 +44,7 @@ function Sidebar({ onClick }) {
         fullWidth
         style={{
           padding: "15px",
-          marginTop: "80px",
+          marginTop: "40px",
           color: "white",
           borderRadius: "30px",
           transition: "background-color 0.2s ease-in-out",
@@ -52,7 +52,7 @@ function Sidebar({ onClick }) {
           backgroundColor: "black",
           textTransform: "none",
         }}
-        onClick={onClick}
+        onClick={onLogoutButtonClick}
       >
         Logout
       </Button>
