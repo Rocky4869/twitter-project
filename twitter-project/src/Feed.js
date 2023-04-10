@@ -21,6 +21,17 @@ function Feed() {
         ))
     }, [])
 
+    /*
+    const [Comments, setComments] = useState([]);
+
+    useEffect(() => {
+        db.collection('posts').doc(id).collection("comments").onSnapshot( snapshot => (  
+            setComments(snapshot.docs.map((doc_comment) => ({ id: doc_comment.id, ...doc_comment.data() })))
+        ))
+    }, [])
+    
+    */
+
     return(
         <div className='feed'>
             {/* Header */}     

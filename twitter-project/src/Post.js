@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react'
+import React, {forwardRef, useEffect, useState} from 'react'
 import "./Post.css";
 import { Avatar, Button } from '@material-ui/core';
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -7,8 +7,8 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import SidebarOption from './SidebarOption';
-import { useState } from 'react';
 import db from "./firebase";
+import Comment from './Comment';
 
 const Post = forwardRef( (   
     {
@@ -50,6 +50,14 @@ const Post = forwardRef( (
           setTweetImage("");
         };
 
+        const [comments, setComments] = useState([]);
+
+        useEffect(() => {
+            db.collection('posts').doc(id).collection("comments").onSnapshot( snapshot => (  
+                setComments(snapshot.docs.map((doc_comment) => ({ id: doc_comment.id, ...doc_comment.data() })))
+            ))
+        }, [])
+
   return (
     <div className='post' ref={ref}>
         <div className='post_avator'>
@@ -74,6 +82,24 @@ const Post = forwardRef( (
                 alt='' />
 
             <br></br>
+
+            {/*
+                <Comment 
+                comment_avatar={comment_avatar}
+                comment_text={comment_text}
+                comment_account={comment_account}/>
+            */}
+
+            {comments.map(comment => (
+                <Comment
+                avatar={comment.avatar}
+                displayName={comment.displayName}
+                image={comment.image}
+                text={comment.text}
+                username={comment.username}
+                verified={comment.verified}
+                />
+            ))} 
 
             {comment_account ? 
                 <div className='post_comment'>
