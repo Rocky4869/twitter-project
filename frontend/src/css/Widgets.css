@@ -1,60 +1,77 @@
 .widgets {
-    flex: 0.3;
+  flex: 0.3;
 }
 
 .widgets_input {
-    display: flex;
-    align-items: center;
-    background-color: var(--twitter-background);
-    padding: 10px;
-    border-radius: 20px;
-    margin-top: 10px;
-    margin-left: 20px;
+  display: flex;
+  align-items: center;
+  background-color: #e8f5fe;
+  padding: 10px;
+  border-radius: 50px;
+  margin-top: 10px;
+  margin-left: 20px;
 }
-  
+
 .widgets_input > input {
-    border: none;
-    background-color: var(--twitter-background);
+  border: none;
+  background-color: var(--twitter-background);
 }
-  
+
 .widgets_searchIcon {
-    color: gray;
+  /* color: gray; */
+  color: #1da1f2;
+  margin-right: 10px;
 }
-  
+
 .widgets_widgetContainer {
-    margin-top: 15px;
-    margin-left: 20px;
-    padding: 20px;
-    background-color: #d9edfa;
-    border-radius: 20px;
+  margin-top: 15px;
+  margin-left: 20px;
+  padding: 20px;
+  background-color: #d9edfa;
+  border-radius: 20px;
 }
-  
+
 .widgets_widgetContainer > h2 {
-    font-size: 18px;
-    font-weight: 800;
+  font-size: 18px;
+  font-weight: 800;
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    max-height: 200px;
-    overflow: auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    background-color: white;
-    z-index: 1;
-  }
-  
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  z-index: 1;
+}
+
 .dropdown-item {
-    padding: 8px 16px;
-    cursor: pointer;
+  padding: 8px 16px;
+  cursor: pointer;
 }
-  
+
 .dropdown-item:hover {
-    background-color:var(--twitter-background);
+  background-color: var(--twitter-background);
 }
-.cancelBtn{
-    margin-left: auto;
+
+.cancelBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #e8f5fe;
+}
+
+.cancelBtn:hover {
+  background-color: #d4eaf7;
+}
+.widgets_input:hover {
+  border: 2px solid #90cdf4;
 }
