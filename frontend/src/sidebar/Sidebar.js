@@ -11,6 +11,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 function Sidebar({ onTweetButtonClick, onLogoutButtonClick }) {
   return (
@@ -19,13 +20,23 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick }) {
       <TwitterIcon className="sidebar_twitterIcon" />
 
       {/* SidebarOption */}
+      {/* <Link to="/"> */}
       <SidebarOption active Icon={HomeIcon} text="Home" />
+      {/* </Link> */}
       {/* <SidebarOption Icon={SearchIcon} text="Explore" /> */}
       {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
+      {/* <Link to="/following"> */}
       <SidebarOption Icon={BookmarkBorderIcon} text="Following" />
+      {/* </Link> */}
+      {/* <Link to="/messages"> */}
       <SidebarOption Icon={MailOutlineIcon} text="Messages" />
+      {/* </Link> */}
+      {/* <Link to="/profile"> */}
       <SidebarOption Icon={PermIdentityIcon} text="Profile" />
+      {/* </Link> */}
+      {/* <Link to="/setting"> */}
       <SidebarOption Icon={MoreHorizIcon} text="Setting" />
+      {/* </Link> */}
       {/* <SidebarOption Icon={ListAltIcon} text="Admin" /> */}
 
       {/* Button -> Tweet */}

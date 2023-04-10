@@ -4,13 +4,15 @@ import Widgets from "./Widgets";
 import "./App.css";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import Sidebar from "./sidebar/Sidebar";
+import Setting from "./Setting";
 
 function Home() {
   return (
     <div className="app">
       <SideBarContainer />
-      <Feed />
-      <Widgets />
+      <Setting />
+      {/* <Feed /> */}
+      {/* <Widgets /> */}
     </div>
   );
 }

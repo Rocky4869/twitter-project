@@ -3,10 +3,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import CreateTweetDialog from "./CreateTweetDialog";
 import LogoutDialog from "./LogoutDialog";
+import Setting from "../Setting";
 
 function SideBarContainer() {
   const [openTweet, setOpenTweet] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
+  const [openSetting, setOpenSetting] = useState(false);
 
   const handleOpenTweet = () => {
     setOpenTweet(true);
@@ -16,6 +18,10 @@ function SideBarContainer() {
     setOpenLogout(true);
   };
 
+  // const handleOpenSetting = () => {
+  //   setOpenSetting(true);
+  // };
+
   const handleCloseTweet = () => {
     setOpenTweet(false);
   };
@@ -23,6 +29,10 @@ function SideBarContainer() {
   const handleCloseLogout = () => {
     setOpenLogout(false);
   };
+
+  // const handleCloseSetting = () => {
+  //   setOpenSetting(false);
+  // };
 
   const handleTweet = (tweetText) => {
     console.log(`Tweeting: ${tweetText}`);
@@ -41,6 +51,8 @@ function SideBarContainer() {
         onTweet={handleTweet}
       />
       <LogoutDialog open={openLogout} onClose={handleCloseLogout} />
+
+      {/* <Setting open={openSetting} onClose={handleCloseSetting} /> */}
     </div>
   );
 }
