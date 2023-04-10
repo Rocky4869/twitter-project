@@ -8,7 +8,7 @@ import Sidebar from "./sidebar/Sidebar";
 function Home() {
   return (
     <div className="app">
-      <Sidebar />
+      <SideBarContainer />
       <Feed />
       <Widgets />
     </div>
