@@ -39,27 +39,11 @@ const Post = forwardRef( (
             image: tweetImage,
             avatar:
               "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+            reply_to: {username}
           });
       
           setTweetMessage("");
           setTweetImage("");
-        };
-
-        const [tweetComment, setTweetComment] = useState("");
-      
-        const sendComment = (e) => {
-          e.preventDefault();
-      
-          db.collection("comments").add({
-            displayName: "Cha Eun Woo",
-            username: "eunwo.o_c",
-            verified: true,
-            text: tweetComment,
-            avatar:
-              "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
-          });
-      
-          setTweetComment("");
         };
 
   return (
@@ -146,17 +130,13 @@ const Post = forwardRef( (
                     className="tweetBox_imageInput"
                     placeholder="Optional: Enter image URL"
                     type="text"/>
-                    
+
                     <Button
                     onClick={sendTweet}
                     type="submit"
                     className="tweetBox_tweetButton">Reply
                     </Button>
                 </div>
-
-
- 
-
             </form>
         </div>
     </div>
