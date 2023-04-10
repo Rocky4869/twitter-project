@@ -19,10 +19,7 @@ const Post = forwardRef( (
     text,
     avatar,
     image,
-    likes,
-    comment_avatar,
-    comment_text,
-    comment_account
+    likes
     }, ref) => {
 
         const [tweetMessage, setTweetMessage] = useState("");
@@ -41,9 +38,6 @@ const Post = forwardRef( (
             image: tweetImage,
             avatar:
               "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
-            reply_to: {username},
-            reply_to_text: {text},
-            reply_to_img: {image}
           });
       
           setTweetMessage("");
@@ -101,6 +95,7 @@ const Post = forwardRef( (
                 />
             ))} 
 
+            {/*
             {comment_account ? 
                 <div className='post_comment'>
                     <Avatar style={{ height: '50px', width: '50px' }} src={comment_avatar} />
@@ -109,6 +104,7 @@ const Post = forwardRef( (
                     </div>
                     <br></br>
                 </div> : ''}
+            */}
 
             <div className='post_footer'>
                 <SidebarOption active Icon={MapsUgcOutlinedIcon} />
