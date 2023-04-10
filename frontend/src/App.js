@@ -12,29 +12,29 @@ import "./App.css";
 import Sidebar from "./Sidebar";
 import Feed from "./Feed";
 import Widgets from "./Widgets";
-// import LoginHeader from "./login/LoginHeader";
-// import LoginCard from "./login/LoginCard";
-// import LoginFooter from "./login/LoginFooter";
-// import RegistrationTab from "./login/RegistrationTab";
-// import ForgotPassword from "./login/ForgotPassword";
-// import ResetPassword from "./login/ResetPassword";
+import Home from "./Home";
+import Profile from "./Profile";
+import NoMatch from "./NoMatch";
+import LoginCard from "./login/LoginCard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    // <div>
-    //   <LoginHeader />
-    //   <LoginCard />
-    //   <RegistrationTab />
-    //   <ForgotPassword />
-    //   <ResetPassword />
-    //   <LoginFooter />
-    // </div>
+    <>
+    <BrowserRouter>
 
-    <div className="app">
-      <Sidebar />
-      <Feed />
-      <Widgets />
-    </div>
+    <Routes>
+        <Route path="/" element={<LoginCard />} />
+        <Route path="/home" element={<Home />} />
+        {/* <Route path="/register" element={<RegistrationTab />} /> */}
+        {/* <Route path="/forget_password" element={<ForgotPassword />} /> */}
+        {/* <Route path="/reset_password" element={<ResetPassword />} /> */}
+        <Route path="/:userid" element={<Profile/>}/>
+        <Route path="*" element={<NoMatch/>}/>
+      </Routes>
+
+    </BrowserRouter>
+    </>
   );
 }
 

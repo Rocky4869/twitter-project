@@ -8,12 +8,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import db from "./firebase";
 import { useEffect, useState, useRef  } from "react";
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useNavigate} from "react-router-dom";
 
 function Widgets() {
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [dropdownVisible, setDropdownVisible] = useState(true);
     const dropDownRef = useRef(null);
+    let navigate = useNavigate();
     useEffect(() => {
         if (searchInput.trim() === '') {
             setSearchResults([]);
@@ -101,6 +103,13 @@ function Widgets() {
     setSearchInput('');
     };
 
+    const handleItemClick = (userid) => {
+        setDropdownVisible(false);
+        setSearchInput('');
+        // alert("selected item: " + userid);
+        navigate(`/${userid}`);
+      };
+
     return(
         <div className='widgets'>
             <div className='widgets_input'>
@@ -114,19 +123,18 @@ function Widgets() {
                 <div className='cancelBtn'>
                 {searchInput && (
                     <CancelIcon onClick={handleClearButton}/>
-
                 )}
                 </div>
             </div>
             {dropdownVisible && (
-            <div className="dropdown">
-                {searchResults.map((doc) => (
-                    <div className='dropdown-item' ref={dropDownRef} key={doc.id}>
-                        <p>User Name: {doc.data.name}</p>
-                        <h3>User ID: {doc.data.id}</h3>
-                    </div>
-                ))}
-            </div>)}
+                <div className="dropdown" ref={dropDownRef}>
+                    {searchResults.map((doc) => (
+                        <div className='dropdown-item' key={doc.id} onClick={() => handleItemClick(doc.data.id)}>
+                            <p>User Name: {doc.data.name}</p>
+                            <p>User ID: {doc.data.id}</p>
+                        </div>
+                    ))}
+                </div>)}
             <div className='widgets_widgetContainer'>
                 <h2>What's happening</h2>
                 <TwitterTweetEmbed tweetId={'1639974872406446084'}/>
