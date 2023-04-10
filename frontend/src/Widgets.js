@@ -6,12 +6,13 @@ import {
   } from "react-twitter-embed";
 import SearchIcon from "@material-ui/icons/Search";
 import db from "./firebase";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef  } from "react";
 
 function Widgets() {
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-
+    const [dropdownVisible, setDropdownVisible] = useState(true);
+    const dropdownRef = useRef(null);
     useEffect(() => {
         if (searchInput.trim() === '') {
             setSearchResults([]);
@@ -82,12 +83,19 @@ function Widgets() {
         });
     }, [searchInput]);   
 
-    // const handleKeyDown = (e) => {
-    // if (e.key === 'Enter') {
-    //     // alert("press enter");
-    //     handleSearch(e);
-    //     }   
-    // };
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setDropdownVisible(false);
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, []);
+
     return(
         <div className='widgets'>
             <div className='widgets_input'>
@@ -96,17 +104,18 @@ function Widgets() {
                     type="text" 
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
+                    onFocus={() => setDropdownVisible(true)}
                 />
             </div>
-
+            {dropdownVisible && (
             <div className="dropdown">
                 {searchResults.map((doc) => (
-                    <div className='dropdown-item' key={doc.id}>
-                        <p>Name: {doc.data.name}</p>
-                        <h3>Document ID: {doc.data.id}</h3>
+                    <div className='dropdown-item' ref={dropdownRef} key={doc.id}>
+                        <p>User Name: {doc.data.name}</p>
+                        <h3>User ID: {doc.data.id}</h3>
                     </div>
                 ))}
-            </div>
+            </div>)}
             <div className='widgets_widgetContainer'>
                 <h2>What's happening</h2>
                 <TwitterTweetEmbed tweetId={'1639974872406446084'}/>
