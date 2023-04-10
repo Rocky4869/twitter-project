@@ -8,7 +8,7 @@ function ForgotPassword() {
     <div className="bg-blue-300">
       <div className="flex justify-center">
         <div
-          className="bg-white flex justify-center border-radius"
+          className="bg-white flex justify-center"
           style={{
             width: "700px",
             height: "800px",
@@ -16,6 +16,7 @@ function ForgotPassword() {
             marginTop: "80px",
             marginBottom: "50px",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            borderRadius: "30px",
           }}
         >
           <div>
