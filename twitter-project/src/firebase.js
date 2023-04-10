@@ -1,7 +1,10 @@
-import firebase from "firebase";
-//import firebase from 'firebase/compat/app';
+//import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
+
+//import firebase from 'firebase/app';
 //import 'firebase/compat/auth';
-//import 'firebase/compat/firestore';
+//import 'firebase/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -14,12 +17,27 @@ const firebaseConfig = {
     measurementId: "G-G8K816BN21"
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-const db = firebaseApp.firestore();
+
+// Initialize Cloud Firestore and get a reference to the service
+const db = firebase.firestore();
+
+//const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+//const db = firebaseApp.firestore();
 
 export default db;
 
+//export const app = initializeApp(firebaseConfig);
+
+//const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+//const db = getFirestore();
+//const storage = getStorage();
+
+//export default app;
+//export { db, storage };
 
 {/*
 // Use this to initialize the firebase App

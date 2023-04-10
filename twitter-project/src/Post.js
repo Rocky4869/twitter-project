@@ -21,10 +21,31 @@ const Post = forwardRef( (
     likes,
     comment_avatar,
     comment_text,
-    comment_account
+    comment_account,
+    created_at
     }, ref) => {
 
         const [tweetMessage, setTweetMessage] = useState("");
+        const [tweetImage, setTweetImage] = useState("");
+      
+        const sendTweet = (e) => {
+          e.preventDefault();
+      
+          db.collection("comments").add({
+            displayName: "Cha Eun Woo",
+            username: "eunwo.o_c",
+            verified: true,
+            text: tweetMessage,
+            image: tweetImage,
+            avatar:
+              "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+          });
+      
+          setTweetMessage("");
+          setTweetImage("");
+        };
+
+        const [tweetComment, setTweetComment] = useState("");
       
         const sendComment = (e) => {
           e.preventDefault();
@@ -33,12 +54,12 @@ const Post = forwardRef( (
             displayName: "Cha Eun Woo",
             username: "eunwo.o_c",
             verified: true,
-            text: tweetMessage,
+            text: tweetComment,
             avatar:
               "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
           });
       
-          setTweetMessage("");
+          setTweetComment("");
         };
 
   return (
@@ -54,7 +75,7 @@ const Post = forwardRef( (
                         <span className='post_headerSpecial'>
                             {verified && <VerifiedIcon className="post_badge"></VerifiedIcon>}
                         </span>
-                        {" "} @{username}
+                        {" "} @{username} <p>{created_at}</p>
                     </h3>                    
                 </div>
                 <div className="post_headerDescription">
@@ -66,37 +87,35 @@ const Post = forwardRef( (
 
             <br></br>
 
-            <div className='post_comment'>
-                <Avatar style={{ height: '50px', width: '50px' }} src={comment_avatar} />
-                <div className='post_comment_text'>
-                    <p>@{comment_account} has commented: {comment_text}</p>
-                </div>
-            </div>
+            {comment_account ? 
+                <div className='post_comment'>
+                    <Avatar style={{ height: '50px', width: '50px' }} src={comment_avatar} />
+                    <div className='post_comment_text'>
+                        <p>@{comment_account} has commented: {comment_text}</p>
+                    </div>
+                    <br></br>
+                </div> : ''}
 
-            <br></br>
-
-            <div className='user_comment'>
-                <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
-                <input
-                onChange={(e) => setTweetMessage(e.target.value)}
-                value={tweetMessage}
-                placeholder="Your response?"
-                type="text"/>
-            </div>
-
-            
             <div className='post_footer'>
-                <SidebarOption Icon={MapsUgcOutlinedIcon} onClick={sendComment}/>
+                <SidebarOption active Icon={MapsUgcOutlinedIcon} />
                 <SidebarOption Icon={RepeatIcon} />
                 <SidebarOption Icon={FavoriteBorderIcon} text={likes} />
                 <SidebarOption Icon={PublishIcon} />
 
                 {/*
 
+            <div className='user_comment'>
+                <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
+                <input
+                onChange={(e) => setTweetComment(e.target.value)}
+                value={tweetComment}
+                placeholder="Your response?"
+                type="text"/>
+            </div>
+
                 <Button 
-                onclick={sendTweet} 
-                type="submit">
-                    Comment
+                onclick={sendComment} 
+                type="submit">Comment 
                 </Button>
 
                 <button onclick={handleClick}>Open Popup</button>
@@ -106,7 +125,39 @@ const Post = forwardRef( (
                 <PublishIcon fontSize="small" />
 
                 */}
+                
             </div>
+
+            <form>
+                <div className="tweetBox_input">
+                <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
+                <input
+                onChange={(e) => setTweetMessage(e.target.value)}
+                value={tweetMessage}
+                placeholder="Your response?"
+                type="text"
+                />
+                </div>
+
+                <div className='tweetBox_additional'>
+                    <input
+                    value={tweetImage}
+                    onChange={(e) => setTweetImage(e.target.value)}
+                    className="tweetBox_imageInput"
+                    placeholder="Optional: Enter image URL"
+                    type="text"/>
+                    
+                    <Button
+                    onClick={sendTweet}
+                    type="submit"
+                    className="tweetBox_tweetButton">Reply
+                    </Button>
+                </div>
+
+
+ 
+
+            </form>
         </div>
     </div>
   );

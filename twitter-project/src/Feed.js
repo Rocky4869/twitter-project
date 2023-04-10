@@ -40,6 +40,7 @@ function Feed() {
                 comment_avatar={post.comment_avatar}
                 comment_text={post.comment_text}
                 comment_account={post.comment_account}
+                //created_at={post.created_at}
                 />
                 ))}
             </Flipmove>             
