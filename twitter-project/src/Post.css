@@ -57,14 +57,14 @@ img{
     display: flex;
 }
 
-.tweetBox_input {
+.comment_form .tweetBox_input {
     display: flex;
     padding: 20px;
     background-color: rgb(215, 245, 250);
     border-radius: 10px;
 }
 
-.tweetBox_input > input {
+.comment_form .tweetBox_input > input {
     flex: 1;
     font-size: 15px;
     border: none;
@@ -73,7 +73,7 @@ img{
     margin-left: 10px;  
 }
 
-.tweetBox_input > Avatar {
+.comment_form .tweetBox_input > Avatar {
     display: flex;
     padding: 10px;
 }
@@ -101,14 +101,14 @@ img{
     margin-left: 10px;  
 }
 
-.tweetBox_additional {
+.comment_form .tweetBox_additional {
     display: flex;
     padding: 20px;
     background-color: rgb(247, 254, 255);
     border-radius: 10px;
 }
 
-.tweetBox_additional > input {
+.comment_form .tweetBox_additional > input {
     flex: 1;
     font-size: 15px;
     border: none;
@@ -117,7 +117,12 @@ img{
     margin-right: 10px;  
 }
 
-.tweetBox_input > .tweetBox_tweetButton {
+.comment_form .tweetBox_input > .tweetBox_tweetButton {
     display: flex;
     padding: 10px;
+}
+
+.post_id {
+    display: flex;
+    float: right;
 }

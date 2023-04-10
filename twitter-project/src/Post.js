@@ -12,6 +12,7 @@ import db from "./firebase";
 
 const Post = forwardRef( (   
     {
+    id,
     displayName,
     username,
     verified,
@@ -21,8 +22,7 @@ const Post = forwardRef( (
     likes,
     comment_avatar,
     comment_text,
-    comment_account,
-    created_at
+    comment_account
     }, ref) => {
 
         const [tweetMessage, setTweetMessage] = useState("");
@@ -31,7 +31,9 @@ const Post = forwardRef( (
         const sendTweet = (e) => {
           e.preventDefault();
       
-          db.collection("comments").add({
+          db.collection("posts")
+          .doc(id)
+          .collection("comments").add({
             displayName: "Cha Eun Woo",
             username: "eunwo.o_c",
             verified: true,
@@ -39,7 +41,9 @@ const Post = forwardRef( (
             image: tweetImage,
             avatar:
               "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
-            reply_to: {username}
+            reply_to: {username},
+            reply_to_text: {text},
+            reply_to_img: {image}
           });
       
           setTweetMessage("");
@@ -57,13 +61,13 @@ const Post = forwardRef( (
                     <h3>
                         {displayName} {" "}
                         <span className='post_headerSpecial'>
-                            {verified && <VerifiedIcon className="post_badge"></VerifiedIcon>}
+                            {verified && <VerifiedIcon className="post_badge"></VerifiedIcon>} 
                         </span>
-                        {" "} @{username} <p>{created_at}</p>
+                        {" "} @{username}
                     </h3>                    
                 </div>
                 <div className="post_headerDescription">
-                        <p>{text}</p>
+                        <p>{text}</p> 
                 </div>
             </div>
             <img src={image}
@@ -112,7 +116,7 @@ const Post = forwardRef( (
                 
             </div>
 
-            <form>
+            <form className='comment_form'>
                 <div className="tweetBox_input">
                 <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
                 <input
@@ -138,6 +142,9 @@ const Post = forwardRef( (
                     </Button>
                 </div>
             </form>
+            <div className='post_id'>
+                <h6>Post ID: {id}</h6>
+            </div>
         </div>
     </div>
   );

@@ -8,9 +8,16 @@ import Flipmove from 'react-flip-move'
 function Feed() {
     const [posts, setPosts] = useState([]);
 
+    // https://firebase.google.com/docs/firestore/query-data/get-data
+    //const querySnapshot = await db.collection("posts").get();
+
+    // https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot?authuser=0#docs
+    //querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
     useEffect(() => {
-        db.collection('posts').onSnapshot( snapshot => (
-            setPosts(snapshot.docs.map(doc => doc.data()))
+        db.collection('posts').onSnapshot( snapshot => (  
+            //setPosts(snapshot.docs.map(doc => doc.data()))
+            setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
         ))
     }, [])
 
@@ -29,7 +36,7 @@ function Feed() {
             <Flipmove>
                 {posts.map(post => (
                 <Post
-                key={post.text}
+                id={post.id}
                 displayName={post.displayName}
                 username={post.username}
                 verified={post.verified}
@@ -40,7 +47,6 @@ function Feed() {
                 comment_avatar={post.comment_avatar}
                 comment_text={post.comment_text}
                 comment_account={post.comment_account}
-                //created_at={post.created_at}
                 />
                 ))}
             </Flipmove>             
