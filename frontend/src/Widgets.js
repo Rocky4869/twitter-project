@@ -7,12 +7,13 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import db from "./firebase";
 import { useEffect, useState, useRef  } from "react";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function Widgets() {
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [dropdownVisible, setDropdownVisible] = useState(true);
-    const dropdownRef = useRef(null);
+    const dropDownRef = useRef(null);
     useEffect(() => {
         if (searchInput.trim() === '') {
             setSearchResults([]);
@@ -85,7 +86,7 @@ function Widgets() {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+          if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
             setDropdownVisible(false);
           }
         };
@@ -95,6 +96,10 @@ function Widgets() {
           document.removeEventListener('mousedown', handleClickOutside);
         };
       }, []);
+
+    const handleClearButton = () => {
+    setSearchInput('');
+    };
 
     return(
         <div className='widgets'>
@@ -106,11 +111,17 @@ function Widgets() {
                     onChange={(e) => setSearchInput(e.target.value)}
                     onFocus={() => setDropdownVisible(true)}
                 />
+                <div className='cancelBtn'>
+                {searchInput && (
+                    <CancelIcon onClick={handleClearButton}/>
+
+                )}
+                </div>
             </div>
             {dropdownVisible && (
             <div className="dropdown">
                 {searchResults.map((doc) => (
-                    <div className='dropdown-item' ref={dropdownRef} key={doc.id}>
+                    <div className='dropdown-item' ref={dropDownRef} key={doc.id}>
                         <p>User Name: {doc.data.name}</p>
                         <h3>User ID: {doc.data.id}</h3>
                     </div>

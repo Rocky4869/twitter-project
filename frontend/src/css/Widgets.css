@@ -47,11 +47,14 @@
     z-index: 1;
   }
   
-  .dropdown-item {
+.dropdown-item {
     padding: 8px 16px;
     cursor: pointer;
-  }
+}
   
-  .dropdown-item:hover {
+.dropdown-item:hover {
     background-color:var(--twitter-background);
-  }
+}
+.cancelBtn{
+    margin-left: auto;
+}
