@@ -47,6 +47,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   background-color: white;
   z-index: 1;
+  background-color: #f8f8f8;
 }
 
 .dropdown-item {
@@ -55,7 +56,7 @@
 }
 
 .dropdown-item:hover {
-  background-color: var(--twitter-background);
+  background-color: #e0e0e0;
 }
 
 .cancelBtn {
@@ -69,9 +70,6 @@
   background-color: #e8f5fe;
 }
 
-.cancelBtn:hover {
-  background-color: #d4eaf7;
-}
 .widgets_input:hover {
   border: 2px solid #90cdf4;
 }

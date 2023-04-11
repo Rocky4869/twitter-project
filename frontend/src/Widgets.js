@@ -3,12 +3,13 @@ import "./css/Widgets.css";
 import { TwitterTimelineEmbed, TwitterTweetEmbed } from "react-twitter-embed";
 import SearchIcon from "@material-ui/icons/Search";
 import db from "./firebase";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, forwardRef } from "react";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 
-function Widgets() {
+const Widgets = forwardRef(({ avatar }, ref) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(true);
@@ -146,12 +147,23 @@ function Widgets() {
         >
           {searchResults.map((doc) => (
             <div
-              className="dropdown-item"
+              className="dropdown-item flex"
               key={doc.id}
               onClick={() => handleItemClick(doc.data.id)}
             >
-              <p>Username: {doc.data.name}</p>
-              <p>ID: {doc.data.id}</p>
+              <Avatar
+                style={{
+                  height: "50px",
+                  width: "50px",
+                  margin: "10px 25px 10px 10px",
+                }}
+                src={avatar}
+                ref={ref}
+              ></Avatar>
+              <div className="flex flex-col" style={{ marginTop: "15px" }}>
+                <div className="font-bold">{doc.data.name}</div>
+                <div style={{ color: "gray" }}>@{doc.data.id}</div>
+              </div>
             </div>
           ))}
         </div>
@@ -167,6 +179,6 @@ function Widgets() {
       </div>
     </div>
   );
-}
+});
 
 export default Widgets;
