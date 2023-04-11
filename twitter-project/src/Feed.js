@@ -3,10 +3,12 @@ import TweetBox from './TweetBox';
 import Post from './Post';
 import './Feed.css';
 import db from "./firebase";
-import Flipmove from 'react-flip-move'
+import Flipmove from 'react-flip-move';
+import Retweet from './Retweet';
 
 function Feed() {
     const [posts, setPosts] = useState([]);
+    const [retweets, setRetweets] = useState([]);
 
     // https://firebase.google.com/docs/firestore/query-data/get-data
     //const querySnapshot = await db.collection("posts").get();
@@ -18,6 +20,12 @@ function Feed() {
         db.collection('posts').onSnapshot( snapshot => (  
             //setPosts(snapshot.docs.map(doc => doc.data()))
             setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+        ))       
+    }, [])
+
+    useEffect(() => {
+        db.collection('retweets').onSnapshot( snapshot => (  
+            setRetweets(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
         ))
     }, [])
 
@@ -30,6 +38,14 @@ function Feed() {
         ))
     }, [])
     
+    const [retweets, setRetweets] = useState([]);
+
+    useEffect(() => {
+        db.collection('retweets').onSnapshot( snapshot => (  
+            setRetweets(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+        ))
+    }, [])
+
     */
 
     return(
@@ -42,8 +58,53 @@ function Feed() {
             {/* Tweetbox */}
             <TweetBox />
 
-            {/* Post */}
+            {/* Retweet */}
+            <Flipmove>
+            {retweets.map(retweet => (
+            <Retweet
+                id={retweet.id}                
+                displayName={retweet.displayName}
+                username={retweet.username}
+                verified={retweet.verified}
+                avatar={retweet.avatar}
+                retweet_id={retweet.retweet_id}
+                retweet_displayName={retweet.retweet_displayName}
+                retweet_username={retweet.retweet_username}
+                retweet_verified={retweet.retweet_verified}
+                retweet_text={retweet.retweet_text}
+                retweet_avatar={retweet.retweet_avatar}
+                retweet_image={retweet.retweet_image}
+                retweet_likes={retweet.retweet_likes}
+                />
+                ))}
+            </Flipmove>
 
+            {/*
+            <Retweet />
+
+            <Flipmove>
+            {retweets.map(retweet => (
+            <Retweet
+                id={retweet.id}                
+                displayName={retweet.displayName}
+                username={retweet.username}
+                verified={retweet.verified}
+                avatar={retweet.avatar}
+                retweet_id={retweet.retweet_id}
+                retweet_displayName={retweet.retweet_displayName}
+                retweet_username={retweet.retweet_username}
+                retweet_verified={retweet.retweet_verified}
+                retweet_text={retweet.retweet_text}
+                retweet_avatar={retweet.retweet_avatar}
+                retweet_image={retweet.retweet_image}
+                retweet_likes={retweet.retweet_likes}
+                />
+                ))}
+            </Flipmove>
+            */}
+
+
+            {/* Post */}
             <Flipmove>
                 {posts.map(post => (
                 <Post
@@ -55,13 +116,15 @@ function Feed() {
                 avatar={post.avatar}
                 image={post.image}
                 likes={post.likes}
-                comment_avatar={post.comment_avatar}
-                comment_text={post.comment_text}
-                comment_account={post.comment_account}
+                //comment_avatar={post.comment_avatar}
+                //comment_text={post.comment_text}
+                //comment_account={post.comment_account}
                 />
                 ))}
             </Flipmove>             
             
+
+
             {/*
 
             <Post 

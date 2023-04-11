@@ -52,15 +52,35 @@ const Post = forwardRef( (
             ))
         }, [])
 
+        const sendRetweet = (e) => {
+            e.preventDefault();
+            alert('Retweet');
+
+            db.collection("retweets").add({
+                displayName: "Cha Eun Woo",
+                username: "eunwo.o_c",
+                verified: true,
+                avatar: "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+                retweet_id: id,
+                retweet_displayName: displayName,
+                retweet_username: username,
+                retweet_verified: verified,
+                retweet_text: text,
+                retweet_avatar: avatar,
+                retweet_image: image,
+                retweet_likes: likes
+            });
+        };
+
         /*
 
-  const [tweetMessage, setTweetMessage] = useState("");
-  const [tweetImage, setTweetImage] = useState("");
+  const [retweetMessage, setRetweetMessage] = useState("");
+  const [retweetImage, setRetweetImage] = useState("");
 
-  const sendTweet = (e) => {
+  const sendRetweet = (e) => {
     e.preventDefault();
 
-    db.collection("posts").add({
+    db.collection("retweets").add({
       displayName: "Cha Eun Woo",
       username: "eunwo.o_c",
       verified: true,
@@ -70,8 +90,8 @@ const Post = forwardRef( (
         "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
     });
 
-    setTweetMessage("");
-    setTweetImage("");
+    setRetweetMessage("");
+    setRetweetImage("");
   };        
   
         */
@@ -139,7 +159,7 @@ const Post = forwardRef( (
                 </Button>
 
                 <Button 
-                onClick={()=>{alert('Retweet');}}
+                onClick={sendRetweet}
                 type="submit"><SidebarOption Icon={RepeatIcon} /> 
                 </Button>
 

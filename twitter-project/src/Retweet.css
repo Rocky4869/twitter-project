@@ -1,0 +1,73 @@
+.retweet {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--twitter-background);
+    padding-bottom: 10px;
+}
+  
+.retweet_body {
+    flex: 1;
+    padding: 10px;
+    background-color: rgb(252, 232, 232);
+    border-radius: 30px;
+}
+  
+.retweet_body > img {
+    border-radius: 20px;
+}
+  
+.retweet_footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+  
+.retweet_headerDescription {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.retweet_avator {
+    padding: 10px;
+    display: flex;
+}
+
+.retweet_headerText > h3 {
+    margin-left: 10px;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+  
+.retweet_badge {
+    font-size: 14px !important;
+    color: var(--twitter-color);
+}
+  
+.retweet_headerSpecial {
+    font-weight: 600;
+    font-size: 12px;
+    color: gray;
+}
+  
+.retweet_avatar {
+    padding: 20px;
+    display: flex;
+}
+
+img{
+    width:100%;
+    max-width:600px;
+    display: flex;
+}
+
+.retweet_footer .sidebarOption > h2 {
+    font-weight: 800;
+    font-size: 15px !important;
+    margin-right: 20px;
+}
+
+.retweet_id {
+    display: flex;
+    float: right;
+}
