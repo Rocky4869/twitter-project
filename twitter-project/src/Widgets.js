@@ -1,9 +1,7 @@
 import React from 'react';
 import "./Widgets.css";
-import {
-    TwitterTimelineEmbed,
-    TwitterTweetEmbed,
-  } from "react-twitter-embed";
+//import { TwitterTimelineEmbed, TwitterTweetEmbed } from "react-twitter-embed";
+import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 import SearchIcon from "@material-ui/icons/Search";
 
 function Widgets() {
@@ -13,12 +11,21 @@ function Widgets() {
                 <SearchIcon className="widgets_searchIcon" />
                 <input placeholder='Search Twitter' type="text" />
             </div>
+            <div className='widgets_widgetContainer_follow'>
+                <h2>You may also like</h2>
+                <TwitterFollowButton
+                    screenName={'IVEstarship'}/>
+                <TwitterFollowButton
+                    screenName={'BLACKPINK'}/>
+                <TwitterFollowButton
+                    screenName={'le_sserafim'}/>
+            </div>
             <div className='widgets_widgetContainer'>
                 <h2>What's happening</h2>
-                <TwitterTweetEmbed tweetId={'1639974872406446084'}/>
+                <TwitterTweetEmbed tweetId={'1645351004358029312'}/>
                 <TwitterTimelineEmbed 
                     sourceType="profile"
-                    screenName="offclASTRO"
+                    screenName="IVEstarship"
                     options={{ height: 400 }}
                 />
             </div>

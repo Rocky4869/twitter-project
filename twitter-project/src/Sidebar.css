@@ -1,9 +1,11 @@
 .sidebar {
-    border-right: 1px solid var(--twitter-background);
+    border-right: 1px solid var(--twitter-background);   
     flex: 0.3;
+    /*
+    padding-left: 10px;
+    */
     min-width: 250px;
     margin-top: 20px;
-    padding-left: 20px;
     padding-right: 20px;
 }
 

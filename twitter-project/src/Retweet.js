@@ -41,7 +41,7 @@ const Retweet = forwardRef((
                 </h3>                    
             </div>
             <div className="retweet_headerDescription">
-                <p><b>@{username}</b> has <b>Retweeted</b></p>
+                <p><RepeatIcon /> <b>@{username}</b> has <b>Retweeted</b></p>
             </div>
             <div className='retweet_body'>
                 <div className='retweet_avator'>
