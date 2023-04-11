@@ -9,6 +9,7 @@ import SideBarContainer from "./sidebar/SideBarContainer";
 import TweetBox from "./TweetBox";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Avatar, Button, TextField } from "@material-ui/core";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 function Profile() {
   let { userid } = useParams();
@@ -52,18 +53,55 @@ function Profile() {
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
                   >
-                    {userid}
+                    Oscar
                   </div>
                 </div>
               </div>
-              <div className="tweetBox">
-                <div className="tweetBox_input flex flex-col">
+              <div
+                style={{
+                  paddingBottom: "250px",
+                  borderBottom: "1px solid var(--twitter-background)",
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: "#FFEBCD",
+                    height: "100px",
+                    position: "relative",
+                  }}
+                ></div>
+                <div
+                  className="flex flex-col"
+                  style={{
+                    padding: "20px",
+                    position: "absolute",
+                    top: "100px",
+                  }}
+                >
                   <Avatar
                     style={{ height: "90px", width: "90px" }}
                     src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
                   />
-                  <div className="font-bold" style={{ marginTop: "10px" }}>
-                    Rocky
+                  <div className="flex flex-row">
+                    <div className="font-bold" style={{ marginTop: "10px" }}>
+                      Oscar
+                    </div>
+                    <Button
+                      variant="outlined"
+                      style={{
+                        padding: "5px",
+                        color: "white",
+                        borderRadius: "30px",
+                        fontWeight: "bold",
+                        backgroundColor: "black",
+                        textTransform: "none",
+                        width: "150px",
+                        marginLeft: "500px",
+                      }}
+                    >
+                      Edit Profile
+                      {/* show profile if is user himself */}
+                    </Button>
                   </div>
                   <div
                     style={{
@@ -79,7 +117,7 @@ function Profile() {
                     className="flex flex-row"
                   >
                     <div>
-                      Hey, this is Rocky here! This is my introduction section.
+                      Hey, this is Oscar here! This is my introduction section.
                     </div>
                     <Button
                       variant="outlined"
@@ -87,26 +125,44 @@ function Profile() {
                         padding: "5px",
                         color: "white",
                         borderRadius: "30px",
-                        transition: "background-color 0.2s ease-in-out",
                         fontWeight: "bold",
                         backgroundColor: "black",
                         textTransform: "none",
                         width: "100px",
                         marginLeft: "200px",
                       }}
+
                     >
                       Follow
+                      {/* show follow if is not user himself */}
                     </Button>
                   </div>
                   <div
                     style={{
-                      marginTop: "50px",
+                      marginTop: "20px",
+                    }}
+                    className="flex flex-row"
+                  >
+                    <CalendarMonthIcon
+                      style={{
+                        marginRight: "5px",
+                      }}
+                    ></CalendarMonthIcon>
+                    <span
+                      style={{
+                        marginTop: "5px",
+                      }}
+                    >
+                      Joined April 2023
+                    </span>
+                  </div>
+                  <div
+                    className="flex flex-row font-bold"
+                    style={{
+                      marginTop: "20px",
                     }}
                   >
-                    Joined April 2023
-                  </div>
-                  <div className="flex flex-row font-bold">
-                    <div style={{ marginRight: "10px" }}>Following 0</div>
+                    <div style={{ marginRight: "10px" }}>9 Following</div>
                     <div style={{ marginLeft: "10px" }}> 200 Followers </div>
                   </div>
                 </div>
