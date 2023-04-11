@@ -16,6 +16,7 @@ const Retweet = forwardRef((
     username,
     verified,
     avatar,
+    new_likes,
     retweet_id,
     retweet_displayName,
     retweet_username,
@@ -84,8 +85,8 @@ const Retweet = forwardRef((
                 </Button>
 
                 <Button 
-                onClick={()=>{alert('Like');}}
-                type="submit"><SidebarOption Icon={FavoriteBorderIcon} />
+                onClick={()=>{alert('Like');}} 
+                type="submit"><SidebarOption Icon={FavoriteBorderIcon} text={new_likes} />
                 </Button>
 
                 <Button 

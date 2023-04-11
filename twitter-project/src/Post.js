@@ -61,6 +61,7 @@ const Post = forwardRef( (
                 username: "eunwo.o_c",
                 verified: true,
                 avatar: "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+                new_likes: 0,
                 retweet_id: id,
                 retweet_displayName: displayName,
                 retweet_username: username,
@@ -70,6 +71,14 @@ const Post = forwardRef( (
                 retweet_image: image,
                 retweet_likes: likes
             });
+        };
+
+        const likePost = (e) => {
+            e.preventDefault();
+        
+            db.collection("posts").doc(id).update({
+                likes: likes+1
+              });
         };
 
         /*
@@ -88,6 +97,16 @@ const Post = forwardRef( (
       image: tweetImage,
       avatar:
         "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+    });
+
+    setRetweetMessage("");
+    setRetweetImage("");
+
+  const like = (e) => {
+    e.preventDefault();
+
+    db.collection("retweets").update({
+        like: like+1
     });
 
     setRetweetMessage("");
@@ -164,7 +183,7 @@ const Post = forwardRef( (
                 </Button>
 
                 <Button 
-                onClick={()=>{alert('Like');}}
+                onClick={likePost}
                 type="submit"><SidebarOption Icon={FavoriteBorderIcon} text={likes} />
                 </Button>
 
@@ -175,6 +194,8 @@ const Post = forwardRef( (
                 
 
                 {/*
+
+                ()=>{alert('Like');}
 
                 <SidebarOption active Icon={MapsUgcOutlinedIcon} />
                 <SidebarOption Icon={RepeatIcon} />
