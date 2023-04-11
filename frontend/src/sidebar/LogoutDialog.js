@@ -16,7 +16,8 @@ import { Close, InsertEmoticon, Image } from "@material-ui/icons";
 function LogoutDialog({ open, onClose, history }) {
   const handeleLogout = () => {
     onClose();
-    history.push("/login"); // This is not working, redirect to login page
+    // history.push("/login"); // This is not working, redirect to login page
+    window.open("login", "_self") // not standard react way to redirect 
   };
 
   return (

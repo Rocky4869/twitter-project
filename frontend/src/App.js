@@ -17,6 +17,7 @@ import NoMatch from "./NoMatch";
 import LoginCard from "./login/LoginCard";
 import LoginContainer from "./login/LoginContainer";
 import SideBarContainer from "./sidebar/SideBarContainer";
+import AdminTable from "./AdminTable";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         {/* <Route path="/forget_password" element={<ForgotPassword />} /> */}
         {/* <Route path="/reset_password" element={<ResetPassword />} /> */}
         <Route path="/:userid" element={<Profile />} />
+        <Route path="/adminTable" element={<AdminTable />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>
