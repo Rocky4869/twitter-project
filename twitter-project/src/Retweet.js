@@ -8,6 +8,7 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import SidebarOption from './SidebarOption';
+import db from "./firebase";
 
 const Retweet = forwardRef((
     {
@@ -26,6 +27,15 @@ const Retweet = forwardRef((
     retweet_image,
     retweet_likes
     }, ref) => {
+
+    const likePost = (e) => {
+        e.preventDefault();
+        
+        db.collection("retweets").doc(id).update({
+            new_likes: new_likes+1
+        });
+    };
+
   return (
     <div className='retweet' ref={ref}>
         <div className='retweet_avator'>
@@ -56,7 +66,7 @@ const Retweet = forwardRef((
                             <span className='retweet_headerSpecial'>
                                 {retweet_verified && <VerifiedIcon className="retweet_badge"></VerifiedIcon>} 
                             </span>
-                            {" "} @{retweet_username} has Tweeted
+                            {" "} @{retweet_username} has Tweeted 
                         </h3> 
                     </div>
                 </div>
@@ -85,7 +95,7 @@ const Retweet = forwardRef((
                 </Button>
 
                 <Button 
-                onClick={()=>{alert('Like');}} 
+                onClick={likePost} 
                 type="submit"><SidebarOption Icon={FavoriteBorderIcon} text={new_likes} />
                 </Button>
 

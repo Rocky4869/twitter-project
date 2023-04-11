@@ -67,6 +67,7 @@ function Feed() {
                 username={retweet.username}
                 verified={retweet.verified}
                 avatar={retweet.avatar}
+                new_likes={retweet.new_likes}
                 retweet_id={retweet.retweet_id}
                 retweet_displayName={retweet.retweet_displayName}
                 retweet_username={retweet.retweet_username}
