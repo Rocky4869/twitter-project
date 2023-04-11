@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useState} from 'react'
+import React, {forwardRef, useEffect, useState, setState} from 'react'
 import "./Post.css";
 import { Avatar, Button } from '@material-ui/core';
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -73,12 +73,21 @@ const Post = forwardRef( (
             });
         };
 
+        const [isLiked, setIsLiked] = useState(false);
+        let like_button_status;
+        if (isLiked) {
+            like_button_status = <SidebarOption active Icon={FavoriteBorderIcon} text={likes} />;
+        }
+        else {like_button_status = <SidebarOption Icon={FavoriteBorderIcon} text={likes} />;};
+
         const likePost = (e) => {
             e.preventDefault();
         
             db.collection("posts").doc(id).update({
                 likes: likes+1
               });
+            
+            setIsLiked(false);
         };
 
         /*
@@ -184,7 +193,8 @@ const Post = forwardRef( (
 
                 <Button 
                 onClick={likePost}
-                type="submit"><SidebarOption Icon={FavoriteBorderIcon} text={likes} />
+                type="submit">
+                    {like_button_status}                 
                 </Button>
 
                 <Button 
