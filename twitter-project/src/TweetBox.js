@@ -18,6 +18,7 @@ function TweetBox() {
       image: tweetImage,
       avatar:
         "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+      likes: 0
     });
 
     setTweetMessage("");
@@ -40,7 +41,7 @@ function TweetBox() {
           value={tweetImage}
           onChange={(e) => setTweetImage(e.target.value)}
           className="tweetBox_imageInput"
-          placeholder="Optional: Enter image URL"
+          placeholder="Mandatory : Enter image URL"
           type="text"
         />
 

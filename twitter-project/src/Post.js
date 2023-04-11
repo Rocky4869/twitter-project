@@ -222,7 +222,7 @@ const Post = forwardRef( (
                     value={tweetImage}
                     onChange={(e) => setTweetImage(e.target.value)}
                     className="tweetBox_imageInput"
-                    placeholder="Optional: Enter image URL"
+                    placeholder="Mandatory: Enter image URL"
                     type="text"/>
 
                     <Button
