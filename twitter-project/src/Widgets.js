@@ -14,11 +14,11 @@ const Widgets = () => {
             <div className='widgets_widgetContainer_follow'>
                 <h2>You may also like</h2>
                 <TwitterFollowButton
-                    screenName={'ivestarship'}/>
+                    screenName={'ivestarship'} />
                 <TwitterFollowButton
-                    screenName={'blackpink'}/>
+                    screenName={'blackpink'} />
                 <TwitterFollowButton
-                    screenName={'le_sserafim'}/>
+                    screenName={'le_sserafim'} />
             </div>
             <div className='widgets_widgetContainer'>
                 <h2>What's happening</h2>

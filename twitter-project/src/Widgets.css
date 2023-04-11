@@ -1,5 +1,8 @@
 .widgets {
+    /*
     flex: 0.3;
+    */
+    margin-right: 10px;
 }
 
 .widgets_input {
