@@ -4,7 +4,7 @@ import "./Widgets.css";
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 import SearchIcon from "@material-ui/icons/Search";
 
-function Widgets() {
+const Widgets = () => {
     return(
         <div className='widgets'>
             <div className='widgets_input'>
@@ -14,9 +14,9 @@ function Widgets() {
             <div className='widgets_widgetContainer_follow'>
                 <h2>You may also like</h2>
                 <TwitterFollowButton
-                    screenName={'IVEstarship'}/>
+                    screenName={'ivestarship'}/>
                 <TwitterFollowButton
-                    screenName={'BLACKPINK'}/>
+                    screenName={'blackpink'}/>
                 <TwitterFollowButton
                     screenName={'le_sserafim'}/>
             </div>
