@@ -131,7 +131,6 @@ function Profile() {
                         width: "100px",
                         marginLeft: "200px",
                       }}
-
                     >
                       Follow
                       {/* show follow if is not user himself */}
