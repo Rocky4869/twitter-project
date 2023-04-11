@@ -77,7 +77,7 @@ function Setting() {
               alignItems: "center",
             }}
           >
-            Show your tweets to public?
+            Set your tweets to private?
           </div>
           <div
             style={{

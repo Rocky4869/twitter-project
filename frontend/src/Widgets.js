@@ -14,7 +14,7 @@ const Widgets = forwardRef(({ avatar }, ref) => {
   const [searchResults, setSearchResults] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(true);
   const dropDownRef = useRef(null);
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   useEffect(() => {
     if (searchInput.trim() === "") {
       setSearchResults([]);
@@ -112,7 +112,7 @@ const Widgets = forwardRef(({ avatar }, ref) => {
     setDropdownVisible(false);
     setSearchInput("");
     // alert("selected item: " + userid);
-    // navigate(`/${userid}`);
+    navigate(`/${userid}`);
   };
 
   return (

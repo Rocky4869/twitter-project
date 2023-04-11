@@ -20,19 +20,19 @@ import SideBarContainer from "./sidebar/SideBarContainer";
 
 function App() {
   return (
-    <Home />
+    // <Home />
 
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<LoginCard />} />
-    //     <Route path="/home" element={<Home />} />
-    //     <Route path="/register" element={<RegistrationTab />} />
-    //   <Route path="/forget_password" element={<ForgotPassword />} />
-    //  <Route path="/reset_password" element={<ResetPassword />} />
-    //     <Route path="/:userid" element={<Profile />} />
-    //     <Route path="*" element={<NoMatch />} />
-    //   </Routes>
-    // </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginCard />} />
+        <Route path="/home" element={<Home />} />
+        {/* <Route path="/register" element={<RegistrationTab />} /> */}
+        {/* <Route path="/forget_password" element={<ForgotPassword />} /> */}
+        {/* <Route path="/reset_password" element={<ResetPassword />} /> */}
+        <Route path="/:userid" element={<Profile />} />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
