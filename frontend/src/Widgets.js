@@ -137,7 +137,13 @@ function Widgets() {
         </div>
       </div>
       {dropdownVisible && (
-        <div className="dropdown" ref={dropDownRef}>
+        <div
+          className="dropdown"
+          ref={dropDownRef}
+          style={{
+            marginLeft: "10px",
+          }}
+        >
           {searchResults.map((doc) => (
             <div
               className="dropdown-item"

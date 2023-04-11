@@ -14,6 +14,9 @@ import {
 import { Close, InsertEmoticon, Image } from "@material-ui/icons";
 
 function Setting() {
+  const [checked, setChecked] = useState(false);
+  // show tweet if public, hide tweet if private
+
   return (
     <div className="feed">
       <div className="feed_header">
@@ -34,7 +37,7 @@ function Setting() {
         </div>
         <div
           style={{
-            fontSize: "30px",
+            fontSize: "25px",
           }}
           className="text-center font-bold text-black"
         >
@@ -45,9 +48,25 @@ function Setting() {
         className="flex flex-row justify-center"
         style={{ marginTop: "50px" }}
       >
-        <div className="font-bold">Show your tweets to public?</div>
-        <div style={{ marginLeft: "20px" }}>
-          <Switch></Switch>
+        <div
+          className="font-bold"
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          Show your tweets to public?
+        </div>
+        <div
+          style={{
+            marginLeft: "30px",
+          }}
+        >
+          <Switch
+            checked={checked}
+            onChange={() => setChecked(!checked)}
+            color={checked ? "primary" : "default"}
+          ></Switch>
         </div>
       </div>
     </div>

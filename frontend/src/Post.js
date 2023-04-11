@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import "./css/Post.css";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button, TextField } from "@material-ui/core";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
 import RepeatIcon from "@material-ui/icons/Repeat";
@@ -146,21 +146,34 @@ const Post = forwardRef(
                 style={{ height: "50px", width: "50px" }}
                 src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
               />
-              <input
+              <TextField
                 onChange={(e) => setTweetMessage(e.target.value)}
                 value={tweetMessage}
                 placeholder="Your response?"
                 type="text"
+                fullWidth
+                InputProps={{
+                  disableUnderline: !tweetMessage,
+                }}
+                style={{
+                  marginLeft: "10px",
+                  marginTop: "10px",
+                }}
               />
             </div>
 
             <div className="tweetBox_additional">
-              <input
+              <TextField
                 value={tweetImage}
                 onChange={(e) => setTweetImage(e.target.value)}
                 className="tweetBox_imageInput"
                 placeholder="Optional: Enter image URL"
                 type="text"
+                fullWidth
+                InputProps={{ disableUnderline: !tweetImage }}
+                style={{
+                  marginTop: "30px",
+                }}
               />
 
               <Button
