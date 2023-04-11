@@ -8,7 +8,6 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import SidebarOption from './SidebarOption';
-import db from "./firebase";
 
 const Retweet = forwardRef((
     {
@@ -47,7 +46,8 @@ const Retweet = forwardRef((
             <div className='retweet_body'>
                 <div className='retweet_avator'>
                     <Avatar style={{ height: '100px', width: '100px' }} src={retweet_avatar}></Avatar>
-                </div>
+                </div>        
+
                 <div className='retweet_header'>
                     <div className='retweet_headerText'>
                         <h3>
@@ -55,13 +55,50 @@ const Retweet = forwardRef((
                             <span className='retweet_headerSpecial'>
                                 {retweet_verified && <VerifiedIcon className="retweet_badge"></VerifiedIcon>} 
                             </span>
-                            {" "} @{retweet_username}
+                            {" "} @{retweet_username} has Tweeted
                         </h3> 
                     </div>
                 </div>
+
+                <div className="retweet_headerDescription">
+                    <p>{retweet_text}</p> 
+                </div>
+
+                <img src={retweet_image}
+                alt='' />
+
             </div>
+            <br></br>
+
+            <form>
+            <div className='retweet_footer'>
+                
+                <Button 
+                onClick={()=>{alert('Comment');}}>
+                <SidebarOption active Icon={MapsUgcOutlinedIcon} />
+                </Button>
+
+                <Button 
+                onClick={() => {alert('Retweeted')}}
+                type="submit"><SidebarOption active Icon={RepeatIcon} /> 
+                </Button>
+
+                <Button 
+                onClick={()=>{alert('Like');}}
+                type="submit"><SidebarOption Icon={FavoriteBorderIcon} />
+                </Button>
+
+                <Button 
+                onClick={()=>{alert('Share');}}
+                type="submit"><SidebarOption Icon={PublishIcon} />
+                </Button>
+                
             </div>
-        
+            </form>
+            <div className='retweet_id'>
+                <h6>Post ID: {id}</h6>
+            </div>
+        </div>
     </div>    
   )
 });

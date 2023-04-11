@@ -8,12 +8,16 @@
 .retweet_body {
     flex: 1;
     padding: 10px;
-    background-color: rgb(252, 232, 232);
+    background-color: rgb(247, 230, 255);
     border-radius: 30px;
+    width: 100%;
 }
   
-.retweet_body > img {
-    border-radius: 20px;
+.retweet_body img {
+    border-radius: 30px;
+    padding: 20px;
+    width: 600px ;
+    display: flex ;
 }
   
 .retweet_footer {
@@ -33,10 +37,19 @@
     display: flex;
 }
 
+.retweet_inner .retweet_avator {
+    padding: 10px;
+    display: flex;
+}
+
 .retweet_headerText > h3 {
     margin-left: 10px;
     font-size: 15px;
     margin-bottom: 5px;
+}
+
+.retweet_inner .retweet_headerText {
+    display: flex;
 }
   
 .retweet_badge {
@@ -52,12 +65,6 @@
   
 .retweet_avatar {
     padding: 20px;
-    display: flex;
-}
-
-img{
-    width:100%;
-    max-width:600px;
     display: flex;
 }
 
