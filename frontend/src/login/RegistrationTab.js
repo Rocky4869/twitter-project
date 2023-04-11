@@ -1,10 +1,56 @@
-import React from "react";
+import React, {useState} from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@material-ui/core";
-
+import db from "../firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 function RegistrationTab() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatpassword, setRepeatPassword] = useState("");
+  const [username, setUsername] = useState("");
+  let navigate = useNavigate();
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(password !== repeatpassword){
+      alert("Incorrect password!");
+      setPassword("");
+      setRepeatPassword("");
+      return;
+    }
+    if (password.length < 6) {
+      alert("Error signing up: Password should be at least 6 characters");
+      // Display an error message to the user
+      return;
+    }
+    if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))){ //regrex checking, if invalid
+      // document.querySelector("#new-email").classList.add("is-invalid");
+      alert("Wrong format of Email!");
+      return;
+    }
+      try {
+        const userCredential = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // Save the username to Firestore
+        await db.collection("users").doc(user.uid).set({ email, username });
+
+        // console.log("User signed up:", user);
+        alert("You have successfully signed up!");
+        navigate("/login");
+      } catch (error) {
+        alert("Error signing up:", error);
+      }
+    
+
+  };
+
   return (
     <div className="bg-blue-300">
       <div className="flex justify-center">
@@ -47,6 +93,8 @@ function RegistrationTab() {
                 type="text"
                 placeholder="Username"
                 className="border-2"
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
@@ -62,6 +110,9 @@ function RegistrationTab() {
                 type="text"
                 placeholder="Email"
                 className="border-2"
+                id="new-email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
@@ -77,6 +128,8 @@ function RegistrationTab() {
                 type="password"
                 placeholder="Password"
                 className="border-2"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
@@ -91,6 +144,8 @@ function RegistrationTab() {
               <input
                 type="password"
                 placeholder="Confirm Password"
+                onChange={(e) => setRepeatPassword(e.target.value)}
+                value={repeatpassword}
                 className="border-2"
                 style={{
                   border: "1px solid #C4C4C4",
@@ -106,6 +161,7 @@ function RegistrationTab() {
               <Button
                 variant="contained"
                 color="primary"
+                onClick={handleSubmit}
                 style={{
                   border: "1px solid #C4C4C4",
                   boxShadow: "2px solid rgba(0, 0, 0, 0.2)",

@@ -16,6 +16,7 @@ import Profile from "./Profile";
 import NoMatch from "./NoMatch";
 import LoginCard from "./login/LoginCard";
 import LoginContainer from "./login/LoginContainer";
+import RegistrationTab from "./login/RegistrationTab";
 import SideBarContainer from "./sidebar/SideBarContainer";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginCard />} />
         <Route path="/home" element={<Home />} />
-        {/* <Route path="/register" element={<RegistrationTab />} /> */}
+        <Route path="/register" element={<RegistrationTab />} />
         {/* <Route path="/forget_password" element={<ForgotPassword />} /> */}
         {/* <Route path="/reset_password" element={<ResetPassword />} /> */}
         <Route path="/:userid" element={<Profile />} />
