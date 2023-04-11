@@ -32,22 +32,22 @@ function RegistrationTab() {
       alert("Wrong format of Email!");
       return;
     }
-      try {
-        const userCredential = await firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password);
-        const user = userCredential.user;
+    try {
+      const userCredential = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
 
-        // Save the username to Firestore
-        await db.collection("users").doc(user.uid).set({ email, username });
+      // Save the username to Firestore
+      await db.collection("users").doc(user.uid).set({ email, username });
 
-        // console.log("User signed up:", user);
-        alert("You have successfully signed up!");
-        navigate("/login");
-      } catch (error) {
-        alert("Error signing up:", error);
-      }
-    
+      // console.log("User signed up:", user);
+      alert("You have successfully signed up!");
+      navigate("/login");
+    } catch (error) {
+      alert("Error signing up:", error);
+    }
+  
 
   };
 
@@ -177,7 +177,7 @@ function RegistrationTab() {
             <div>
               <Link
                 className="text-center text-black flex justify-center no-underline hover:underline"
-                to="/login"
+                to="/"
                 style={{
                   marginTop: "40px",
                   fontSize: "20px",
