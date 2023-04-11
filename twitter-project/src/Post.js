@@ -52,6 +52,30 @@ const Post = forwardRef( (
             ))
         }, [])
 
+        /*
+
+  const [tweetMessage, setTweetMessage] = useState("");
+  const [tweetImage, setTweetImage] = useState("");
+
+  const sendTweet = (e) => {
+    e.preventDefault();
+
+    db.collection("posts").add({
+      displayName: "Cha Eun Woo",
+      username: "eunwo.o_c",
+      verified: true,
+      text: tweetMessage,
+      image: tweetImage,
+      avatar:
+        "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+    });
+
+    setTweetMessage("");
+    setTweetImage("");
+  };        
+  
+        */
+
   return (
     <div className='post' ref={ref}>
         <div className='post_avator'>
@@ -106,13 +130,36 @@ const Post = forwardRef( (
                 </div> : ''}
             */}
 
+            <form>
             <div className='post_footer'>
+                
+                <Button 
+                onClick={()=>{alert('Comment');}}>
+                <SidebarOption active Icon={MapsUgcOutlinedIcon} />
+                </Button>
+
+                <Button 
+                onClick={()=>{alert('Retweet');}}
+                type="submit"><SidebarOption Icon={RepeatIcon} /> 
+                </Button>
+
+                <Button 
+                onClick={()=>{alert('Like');}}
+                type="submit"><SidebarOption Icon={FavoriteBorderIcon} text={likes} />
+                </Button>
+
+                <Button 
+                onClick={()=>{alert('Share');}}
+                type="submit"><SidebarOption Icon={PublishIcon} />
+                </Button>
+                
+
+                {/*
+
                 <SidebarOption active Icon={MapsUgcOutlinedIcon} />
                 <SidebarOption Icon={RepeatIcon} />
                 <SidebarOption Icon={FavoriteBorderIcon} text={likes} />
                 <SidebarOption Icon={PublishIcon} />
-
-                {/*
 
             <div className='user_comment'>
                 <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
@@ -137,6 +184,7 @@ const Post = forwardRef( (
                 */}
                 
             </div>
+            </form>
 
             <form className='comment_form'>
                 <div className="tweetBox_input">
