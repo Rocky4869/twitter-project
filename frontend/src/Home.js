@@ -10,8 +10,8 @@ function Home() {
   return (
     <div className="app">
       <SideBarContainer />
-      <Setting />
-      {/* <Feed /> */}
+      {/* <Setting /> */}
+      <Feed />
       <Widgets />
     </div>
   );

@@ -55,7 +55,7 @@ const Post = forwardRef(
       <div className="post" ref={ref}>
         <div className="post_avator">
           <Avatar
-            style={{ height: "100px", width: "100px" }}
+            style={{ height: "70px", width: "70px" }}
             src={avatar}
           ></Avatar>
         </div>

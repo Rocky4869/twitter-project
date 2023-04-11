@@ -1,27 +1,27 @@
-import React, {useEffect, useState} from 'react';
-import TweetBox from './TweetBox';
-import Post from './Post';
-import './css/Feed.css';
+import React, { useEffect, useState } from "react";
+import TweetBox from "./TweetBox";
+import Post from "./Post";
+import "./css/Feed.css";
 import db from "./firebase";
-import Flipmove from 'react-flip-move'
+import Flipmove from "react-flip-move";
 
 function Feed() {
-    const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-    // https://firebase.google.com/docs/firestore/query-data/get-data
-    //const querySnapshot = await db.collection("posts").get();
+  // https://firebase.google.com/docs/firestore/query-data/get-data
+  //const querySnapshot = await db.collection("posts").get();
 
-    // https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot?authuser=0#docs
-    //querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  // https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot?authuser=0#docs
+  //querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-    useEffect(() => {
-        db.collection('posts').onSnapshot( snapshot => (  
-            //setPosts(snapshot.docs.map(doc => doc.data()))
-            setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
-        ))
-    }, [])
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) =>
+      //setPosts(snapshot.docs.map(doc => doc.data()))
+      setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+    );
+  }, []);
 
-    /*
+  /*
     const [Comments, setComments] = useState([]);
 
     useEffect(() => {
@@ -32,37 +32,37 @@ function Feed() {
     
     */
 
-    return(
-        <div className='feed'>
-            {/* Header */}     
-            <div className='feed_header'>
-                <h2>Simplified Twitter</h2>
-            </div>
-            
-            {/* Tweetbox */}
-            <TweetBox />
+  return (
+    <div className="feed">
+      {/* Header */}
+      <div className="feed_header">
+        <h2>Simplified Twitter</h2>
+      </div>
 
-            {/* Post */}
+      {/* Tweetbox */}
+      <TweetBox />
 
-            <Flipmove>
-                {posts.map(post => (
-                <Post
-                id={post.id}
-                displayName={post.displayName}
-                username={post.username}
-                verified={post.verified}
-                text={post.text}
-                avatar={post.avatar}
-                image={post.image}
-                likes={post.likes}
-                comment_avatar={post.comment_avatar}
-                comment_text={post.comment_text}
-                comment_account={post.comment_account}
-                />
-                ))}
-            </Flipmove>             
-            
-            {/*
+      {/* Post */}
+
+      <Flipmove>
+        {posts.map((post) => (
+          <Post
+            id={post.id}
+            displayName={post.displayName}
+            username={post.username}
+            verified={post.verified}
+            text={post.text}
+            avatar={post.avatar}
+            image={post.image}
+            likes={post.likes}
+            comment_avatar={post.comment_avatar}
+            comment_text={post.comment_text}
+            comment_account={post.comment_account}
+          />
+        ))}
+      </Flipmove>
+
+      {/*
 
             <Post 
             displayName="JISOO♥️"
@@ -74,11 +74,8 @@ function Feed() {
             />
 
             */}
-
-            
-
-        </div>
-    )
+    </div>
+  );
 }
 
-export default Feed
+export default Feed;

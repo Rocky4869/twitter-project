@@ -57,7 +57,7 @@ function TweetBox() {
       <form>
         <div className="tweetBox_input">
           <Avatar
-            style={{ height: "140px", width: "140px" }}
+            style={{ height: "90px", width: "90px" }}
             src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
           />
           <TextField
