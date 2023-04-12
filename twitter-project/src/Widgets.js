@@ -3,9 +3,11 @@ import "./Widgets.css";
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 import SearchIcon from "@material-ui/icons/Search";
 import db from "./firebase";
-import TwitterFollow from './TwitterFollow'
+import TwitterFollow from './TwitterFollow';
+import TwitterTrending from './TwitterTrending';
 
 const Widgets = () => {
+
     const [widgetsFollow, setWidgetsFollow] = useState([]);
     useEffect(() => {
         db.collection('posts').onSnapshot( snapshot => (  
@@ -13,7 +15,12 @@ const Widgets = () => {
         ))       
     }, [])
 
-
+    const [widgetsTrending, setWidgetsTrending] = useState([]);
+    useEffect(() => {
+        db.collection('posts').onSnapshot( snapshot => (  
+            setWidgetsTrending(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+        ))       
+    }, [])
 
     return(
         <div className='widgets'>
@@ -50,12 +57,28 @@ const Widgets = () => {
             </div>
             <div className='widgets_widgetContainer'>
                 <h2>What's happening</h2>
-                <TwitterTweetEmbed tweetId={'1645351004358029312'}/>
+
+                {widgetsTrending.slice(0, 3).map(widgetTrending => (
+                <TwitterTrending
+                id={widgetTrending.id}
+                displayName={widgetTrending.displayName}
+                username={widgetTrending.username}
+                verified={widgetTrending.verified}
+                text={widgetTrending.text}
+                avatar={widgetTrending.avatar}
+                image={widgetTrending.image}
+                likes={widgetTrending.likes}
+                />
+                ))}
+                
+                {/*
                 <TwitterTimelineEmbed 
                     sourceType="profile"
                     screenName="IVEstarship"
                     options={{ height: 400 }}
                 />
+                */}
+
             </div>
         </div>
     )
