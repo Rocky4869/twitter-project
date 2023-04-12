@@ -79,7 +79,7 @@ function MyProfile() {
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
                   >
-                   {userData.name}
+                   {userData.username}
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@ function MyProfile() {
                   />
                   <div className="flex flex-row">
                     <div className="font-bold" style={{ marginTop: "10px" }}>
-                      Oscar
+                    {userData.username}
                     </div>
                     <Button
                       variant="outlined"
