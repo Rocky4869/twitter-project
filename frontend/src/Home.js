@@ -5,6 +5,7 @@ import "./App.css";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import firebase from "firebase/app";
 import { useEffect, useState } from "react";
+import db from "./firebase";
 
 function Home() {
   const [uid, setUid] = useState(null);
@@ -32,7 +33,7 @@ function Home() {
         <div className="app">
           <SideBarContainer uid={uid} />
           <Feed uid={uid} />
-          <Widgets />
+          <Widgets uid={uid} />
         </div>
       ) : (
         <div>{/* Nothing to show  */}</div>

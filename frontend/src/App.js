@@ -24,11 +24,13 @@ import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<LoginCard />} />
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<RegistrationTab />} />
         <Route path="/profile" element={<MyProfile />} />
+        <Route path="/:userid" element={<Profile />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>

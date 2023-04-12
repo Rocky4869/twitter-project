@@ -24,7 +24,7 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
       if (!docSnapshot.empty) {
         const userData = docSnapshot.data();
         setUserData(userData);
-        console.debug("User data:", userData);
+        // console.debug(userData);
       } else {
         console.log("User not found");
       }
@@ -34,7 +34,7 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
   };
   useEffect(() => {
     fetchUserData();
-  });
+  }, []);
 
   return (
     <div className="sidebar">

@@ -9,12 +9,33 @@ import { useNavigate } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
 
-const Widgets = forwardRef(({ avatar }, ref) => {
+const Widgets = forwardRef(({ avatar, uid }, ref) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(true);
   const dropDownRef = useRef(null);
+  const [userData, setUserData] = useState(null);
   let navigate = useNavigate();
+
+  const fetchUserData = async () => {
+    try {
+      const docRef = db.collection("users").doc(uid);
+      const docSnapshot = await docRef.get();
+      if (!docSnapshot.empty) {
+        const userData = docSnapshot.data();
+        setUserData(userData);
+        // console.debug(userData);
+      } else {
+        console.log("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   useEffect(() => {
     if (searchInput.trim() === "") {
       setSearchResults([]);
@@ -112,7 +133,10 @@ const Widgets = forwardRef(({ avatar }, ref) => {
     setDropdownVisible(false);
     setSearchInput("");
     // alert("selected item: " + userid);
-    navigate(`/${userid}`);
+    if (userid === userData.id) {
+      // Bug: if userid == userData.id
+      navigate(`/profile`);
+    } else navigate(`/${userid}`);
   };
 
   return (

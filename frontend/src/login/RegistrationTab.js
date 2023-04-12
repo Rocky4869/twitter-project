@@ -55,6 +55,7 @@ function RegistrationTab() {
       //regrex checking, if invalid
       // document.querySelector("#new-email").classList.add("is-invalid");
       toast.error("Wrong format of Email!");
+      console.debug(123)
       return;
     }
     try {
