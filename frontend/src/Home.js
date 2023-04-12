@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 function Home() {
   const [uid, setUid] = useState(null);
-
+  let navigate = useNavigate();
   //get uid function
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -19,6 +19,7 @@ function Home() {
         setUid(user.uid);
       } else {
         setUid(null);
+        navigate("/");
       }
     });
 
@@ -28,12 +29,15 @@ function Home() {
   }, []);
 
   return (
-    <div className="app">
-      
-      <SideBarContainer />
-      <Feed />
-      <Widgets />
-    </div>
+    <>
+      {uid ? (
+        <div className="app">
+          <SideBarContainer />
+          <Feed />
+          <Widgets />
+        </div>
+      ):(<p>Please log in</p>)}
+    </>
   );
 }
 

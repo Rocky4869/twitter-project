@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, withRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route, withRouter, useNavigate } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import {
   Dialog,
@@ -12,11 +12,21 @@ import {
   IconButton,
 } from "@mui/material";
 import { Close, InsertEmoticon, Image } from "@material-ui/icons";
+import firebase from "firebase/app";
 
 function LogoutDialog({ open, onClose, history }) {
-  const handeleLogout = () => {
+  let navigate = useNavigate();
+
+  const handeleLogout = async () => {
     onClose();
-    history.push("/login"); // This is not working, redirect to login page
+    try {
+      await firebase.auth().signOut();
+      console.log("User signed out");
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    } 
+    // history.push("/login"); // This is not working, redirect to login page
   };
 
   return (

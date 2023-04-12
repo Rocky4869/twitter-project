@@ -16,6 +16,24 @@ function RegistrationTab() {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (username.includes('@') || username.includes(' ')) {
+      alert("Username cannot contain '@' or whitespace.");
+      return;
+    }
+    try {   //check if username already used
+      const usernameSnapshot = await db
+        .collection("users")
+        .where("username", "==", username)
+        .get();
+  
+      if (!usernameSnapshot.empty) {
+        alert("Username already exists. Please choose another one.");
+        return;
+      }
+    } catch (error) {
+      console.error("Error checking for existing username:", error);
+      return;
+    }
     if(password !== repeatpassword){
       alert("Incorrect password!");
       setPassword("");
@@ -37,15 +55,41 @@ function RegistrationTab() {
         .auth()
         .createUserWithEmailAndPassword(email, password);
       const user = userCredential.user;
+      const querySnapshot = await db.collection("users").get();
+      const userCount = querySnapshot.size;
+      // console.log(userCount);
+      // assign unique default id
+      let defaultUserId;
+      let isUnique = false;
+      while (!isUnique) {
+        defaultUserId = "user" + (userCount + 1);
+  
+        const existingUserSnapshot = await db
+          .collection("users")
+          .where("userid", "==", defaultUserId)
+          .get();
+  
+        if (existingUserSnapshot.empty) {
+          isUnique = true;
+        } else {
+          userCount++;
+        }
+      }
 
+
+      // console.log(defaultUserId);
       // Save the username to Firestore
-      await db.collection("users").doc(user.uid).set({ email, username });
+      await db.collection("users").doc(user.uid).set({ email, username , id:defaultUserId, Followers:[], Following:[]});
 
       // console.log("User signed up:", user);
       alert("You have successfully signed up!");
-      navigate("/login");
+      navigate("/");
     } catch (error) {
-      alert("Error signing up:", error);
+      if (error.code === 'auth/email-already-in-use') {
+        alert("The email address is already in use by another account.");
+      } else {
+        alert("Error signing up:", error);
+      }
     }
   
 

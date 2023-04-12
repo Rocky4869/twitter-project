@@ -46,8 +46,8 @@ const Widgets = forwardRef(({ avatar }, ref) => {
     //   });
     const collectionRef = db.collection("users");
     const queryByName = collectionRef
-      .where("name", ">=", searchInput)
-      .where("name", "<", searchInputNext)
+      .where("username", ">=", searchInput)
+      .where("username", "<", searchInputNext)
       .get();
     const queryById = collectionRef
       .where("id", ">=", searchInput)
@@ -77,7 +77,7 @@ const Widgets = forwardRef(({ avatar }, ref) => {
         docs.forEach((doc) => {
           const id = doc.id;
           const data = doc.data;
-          const name = doc.data.name;
+          const name = doc.data.username;
           console.log(`Document ID: ${id}`);
           console.log("Document data:", data);
           console.log(`userID: ${data.id}`);
@@ -161,7 +161,7 @@ const Widgets = forwardRef(({ avatar }, ref) => {
                 ref={ref}
               ></Avatar>
               <div className="flex flex-col" style={{ marginTop: "15px" }}>
-                <div className="font-bold">{doc.data.name}</div>
+                <div className="font-bold">{doc.data.username}</div>
                 <div style={{ color: "gray" }}>@{doc.data.id}</div>
               </div>
             </div>
