@@ -28,12 +28,55 @@ const Retweet = forwardRef((
     retweet_likes
     }, ref) => {
 
+    /*    
     const likePost = (e) => {
         e.preventDefault();
         
         db.collection("retweets").doc(id).update({
             new_likes: new_likes+1
         });
+    };
+    */
+
+    const [isLiked, setIsLiked] = useState(false);
+
+    const likeRetweet = (e) => {
+        e.preventDefault();
+    
+        db.collection("retweets").doc(id).update({
+            new_likes: new_likes+1
+          });         
+        setIsLiked(value => !value);
+    };
+
+    const unlikeRetweet = (e) => {
+        e.preventDefault();
+    
+        db.collection("retweets").doc(id).update({
+            new_likes: new_likes-1
+          });         
+        setIsLiked(value => !value);
+    };        
+
+    let like_button_status;
+
+    if (isLiked) 
+    {
+        like_button_status =
+        <Button 
+            onClick={unlikeRetweet}
+            type="submit">
+            <SidebarOption active Icon={FavoriteBorderIcon} text={new_likes} />                
+        </Button>;
+    }
+    else 
+    {
+        like_button_status =
+        <Button 
+            onClick={likeRetweet}
+            type="submit">
+            <SidebarOption Icon={FavoriteBorderIcon} text={new_likes} />                
+        </Button>; 
     };
 
   return (
@@ -94,10 +137,14 @@ const Retweet = forwardRef((
                 type="submit"><SidebarOption active Icon={RepeatIcon} /> 
                 </Button>
 
+                {like_button_status}
+
+                {/*
                 <Button 
                 onClick={likePost} 
                 type="submit"><SidebarOption Icon={FavoriteBorderIcon} text={new_likes} />
-                </Button>
+                </Button>                
+                */}
 
                 <Button 
                 onClick={()=>{alert('Share');}}

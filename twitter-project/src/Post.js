@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useState, setState} from 'react'
+import React, {forwardRef, useEffect, useState} from 'react'
 import "./Post.css";
 import { Avatar, Button } from '@material-ui/core';
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -74,21 +74,46 @@ const Post = forwardRef( (
         };
 
         const [isLiked, setIsLiked] = useState(false);
-        let like_button_status;
-        if (isLiked) {
-            like_button_status = <SidebarOption active Icon={FavoriteBorderIcon} text={likes} />;
-        }
-        else {like_button_status = <SidebarOption Icon={FavoriteBorderIcon} text={likes} />;};
 
         const likePost = (e) => {
             e.preventDefault();
         
             db.collection("posts").doc(id).update({
                 likes: likes+1
-              });
-            
-            setIsLiked(false);
+              });         
+            setIsLiked(value => !value);
         };
+
+        const unlikePost = (e) => {
+            e.preventDefault();
+        
+            db.collection("posts").doc(id).update({
+                likes: likes-1
+              });         
+            setIsLiked(value => !value);
+        };        
+
+        let like_button_status;
+
+        if (isLiked) 
+        {
+            like_button_status =
+            <Button 
+                onClick={unlikePost}
+                type="submit">
+                <SidebarOption active Icon={FavoriteBorderIcon} text={likes} />                
+            </Button>;
+        }
+        else 
+        {
+            like_button_status =
+            <Button 
+                onClick={likePost}
+                type="submit">
+                <SidebarOption Icon={FavoriteBorderIcon} text={likes} />                
+            </Button>; 
+        };
+
 
         /*
 
@@ -191,11 +216,7 @@ const Post = forwardRef( (
                 type="submit"><SidebarOption Icon={RepeatIcon} /> 
                 </Button>
 
-                <Button 
-                onClick={likePost}
-                type="submit">
-                    {like_button_status}                 
-                </Button>
+                {like_button_status} 
 
                 <Button 
                 onClick={()=>{alert('Share');}}
@@ -204,6 +225,13 @@ const Post = forwardRef( (
                 
 
                 {/*
+
+                <Button 
+                onClick={likePost}
+                type="submit">
+                    <SidebarOption Icon={FavoriteBorderIcon} text={likes} />
+                    {like_button_status}                 
+                </Button>
 
                 ()=>{alert('Like');}
 
