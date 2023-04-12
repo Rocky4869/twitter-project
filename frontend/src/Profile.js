@@ -21,7 +21,7 @@ function Profile() {
   const fetchUserData = async () => {
     const collectionRef = db.collection("users");
     try {
-      const querySnapshot = await collectionRef.where("id", ">=", userid).get();
+      const querySnapshot = await collectionRef.where("id", "==", userid).get();
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
         setUserData(doc.data());

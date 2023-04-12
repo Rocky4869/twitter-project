@@ -5,7 +5,7 @@ import "./css/Feed.css";
 import db from "./firebase";
 import Flipmove from "react-flip-move";
 
-function Feed() {
+function Feed({ uid }) {
   const [posts, setPosts] = useState([]);
 
   // https://firebase.google.com/docs/firestore/query-data/get-data
@@ -14,12 +14,12 @@ function Feed() {
   // https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot?authuser=0#docs
   //querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-  useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) =>
-      //setPosts(snapshot.docs.map(doc => doc.data()))
-      setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
-    );
-  }, []);
+  // useEffect(() => {
+  //   db.collection("posts").onSnapshot((snapshot) =>
+  //     //setPosts(snapshot.docs.map(doc => doc.data()))
+  //     setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+  //   );
+  // }, []);
 
   /*
     const [Comments, setComments] = useState([]);
@@ -31,6 +31,29 @@ function Feed() {
     }, [])
     
     */
+    const fetchPosts = async () => {
+      try {
+        const querySnapshot = await db
+          .collection('posts')
+          .where('userId', '==', uid)
+          .orderBy("created_at", "desc")
+          .get();
+
+        const userPosts = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }));
+
+        setPosts(userPosts);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+    useEffect(() => {
+      if (uid) {
+        fetchPosts();
+      }
+    }, [uid]);
 
   return (
     <div className="feed">
@@ -40,11 +63,29 @@ function Feed() {
       </div>
 
       {/* Tweetbox */}
-      <TweetBox />
+      <TweetBox uid={uid} onPostSubmit={fetchPosts}/>
 
       {/* Post */}
 
       <Flipmove>
+        {posts.map((post) => (
+          <Post
+            id={post.data.id}
+            displayName={post.data.displayName}
+            username={post.data.displayId}
+            verified={post.data.verified}
+            text={post.data.text}
+            avatar={post.data.avatar}
+            image={post.data.image}
+            likes={post.data.likes}
+            comment_avatar={post.data.comment_avatar}
+            comment_text={post.data.comment_text}
+            comment_account={post.data.comment_account}
+          />
+        ))}
+      </Flipmove>
+      {/* old version */}
+      {/* <Flipmove>
         {posts.map((post) => (
           <Post
             id={post.id}
@@ -60,7 +101,7 @@ function Feed() {
             comment_account={post.comment_account}
           />
         ))}
-      </Flipmove>
+      </Flipmove> */}
 
       {/*
 

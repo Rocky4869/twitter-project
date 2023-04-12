@@ -17,7 +17,19 @@ const Post = forwardRef(
   ) => {
     const [tweetMessage, setTweetMessage] = useState("");
     const [tweetImage, setTweetImage] = useState("");
-
+    const getFileExtension = (url) => {
+      const splitUrl = url.split('?')[0];
+      return "." + splitUrl.substring(splitUrl.lastIndexOf('.') + 1);
+    };
+    const isImage = (url) => {
+      const ext = getFileExtension(url);
+      // alert(ext);
+      return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(ext);
+    };
+    const isVideo = (url) => {
+      const ext = getFileExtension(url);
+      return /\.(mp4|webm|ogg|mov|avi|wmv|flv|3gp)$/i.test(ext);
+    };
     const sendTweet = (e) => {
       e.preventDefault();
 
@@ -74,9 +86,14 @@ const Post = forwardRef(
             </div>
             <div className="post_headerDescription">
               <p>{text}</p>
+              {/* <p>{image}</p> */}
+              <div  style={{ width: "640px", height: "360px", overflow: "hidden" }}>
+            {isImage(image) && <img src={image} style={{ width: "100%", height: "100%", objectFit: "contain" }} alt="image" />}
+            {isVideo(image) && <video src={image} style={{ width: "100%", height: "100%", objectFit: "contain" }} controls />}
+          </div>
             </div>
           </div>
-          <img src={image} alt="" />
+          {/* <img src={image} alt="" /> */}
 
           <br></br>
 

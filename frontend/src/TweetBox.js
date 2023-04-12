@@ -1,30 +1,103 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/TweetBox.css";
 import { Avatar, Button, TextField } from "@material-ui/core";
 import db from "./firebase";
 import { IconButton } from "@mui/material";
 import { InsertEmoticon, Image } from "@material-ui/icons";
 import Picker from "emoji-picker-react";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/storage";
 
-function TweetBox() {
+function TweetBox({ uid , onPostSubmit }) {
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [userData, setUserData] = useState(null);
 
-  const sendTweet = (e) => {
+  const fetchUserData = async () => {
+    
+    try {
+      const docRef = db.collection("users").doc(uid);
+      const docSnapshot = await docRef.get();
+      if (!docSnapshot.empty) {
+        const userData = docSnapshot.data();
+        setUserData(userData);
+      } else {
+        console.log("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+  // useEffect(() => {
+  //   if (userData) {
+  //     alert("User data: " + userData.username);
+  //   }
+  // }, [userData]);
+  const isImage = (file) => {
+    return file && /^image\/(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(file.type);
+  };
+  
+  const isVideo = (file) => {
+    return file && /^video\/(mp4|webm|ogg|mov|avi|wmv|flv|3gp)$/i.test(file.type);
+  };
+
+  const sendTweet = async (e) => {
+
     e.preventDefault();
+    const storageRef = firebase.storage().ref();
+    let fileURL = "";
+    if(selectedImage){
+      const uploadTask = storageRef.child(`images/${selectedImage.name}`).put(selectedImage);
+      // alert(selectedImage.name);
+      await  new Promise((resolve, reject) => { 
+      uploadTask.on(
+        "state_changed",
+        null,
+        (error) => {
+          console.error("Upload error:", error);
+          reject(error);
+        },
+        async () => {
+          const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+            console.log("File available at", downloadURL);
+            fileURL = downloadURL;
+            resolve();
+          }
+        );
+      });
+    }
 
-    db.collection("posts").add({
-      displayName: "Cha Eun Woo",
-      username: "eunwo.o_c",
-      verified: true,
+    const timestamp = firebase.firestore.Timestamp.now(); 
+    await db.collection("posts").add({
+      // displayName: "Cha Eun Woo",
+      // username: "eunwo.o_c",
+      // verified: true,
+      // text: tweetMessage,
+      // image: tweetImage,
+      // avatar:
+      //   "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+      displayName: userData.username,
+      displayId: userData.id,
+      userId: uid,
+      // verified: true,
+      likes: 0,
       text: tweetMessage,
-      image: tweetImage,
+      image: fileURL,
+      created_at: timestamp,
+      //use it self user avatar instead
       avatar:
         "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
     });
-
+    if (onPostSubmit) {
+      onPostSubmit();
+    }
+    setSelectedImage("");
     setTweetMessage("");
     setTweetImage("");
   };
@@ -45,7 +118,8 @@ function TweetBox() {
   const handleImageSelect = (event) => {
     const file = event.target.files[0];
     setSelectedImage(file);
-    setTweetMessage(tweetMessage + file);
+    // alert(URL.createObjectURL(file));
+    // setTweetMessage(tweetMessage + file);
   };
 
   const closePreview = () => {
@@ -87,7 +161,7 @@ function TweetBox() {
                     <input
                       id="image-input"
                       type="file"
-                      accept="image/*"
+                      accept="image/*,video/*"
                       style={{ display: "none" }}
                       onChange={handleImageSelect}
                     />
@@ -122,7 +196,7 @@ function TweetBox() {
                   alignItems: "center",
                 }}
               >
-                Image Preview:
+                File Preview:
               </div>
               <Button
                 variant="contained"
@@ -141,13 +215,24 @@ function TweetBox() {
                 Close Preview
               </Button>
             </div>
-            <img
-              src={URL.createObjectURL(selectedImage)}
-              alt="Selected image"
-              style={{
-                maxWidth: "50%",
-              }}
-            />
+            {isImage(selectedImage) && (
+                <img
+                  src={URL.createObjectURL(selectedImage)}
+                  alt="Selected image"
+                  style={{
+                    maxWidth: "50%",
+                  }}
+                />
+              )}
+              {isVideo(selectedImage) && (
+                <video
+                  src={URL.createObjectURL(selectedImage)}
+                  controls
+                  style={{
+                    maxWidth: "50%",
+                  }}
+                />
+              )}
           </div>
         )}
         <Button
