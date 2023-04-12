@@ -17,8 +17,6 @@ import db from "../firebase";
 function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
   const [userData, setUserData] = useState(null);
 
-  let navigate = useNavigate();
-
   const fetchUserData = async () => {
     try {
       const docRef = db.collection("users").doc(uid);
@@ -47,23 +45,18 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
       <Link to="/home" className="link">
         <SidebarOption active Icon={HomeIcon} text="Home" />
       </Link>
-      {/* <SidebarOption Icon={SearchIcon} text="Explore" /> */}
-      {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
-      {/* <Link to="/following" className="link"> */}
-      <SidebarOption Icon={BookmarkBorderIcon} text="Following" />
-      {/* </Link> */}
-      {/* <Link to="/messages" className="link"> */}
-      <SidebarOption Icon={MailOutlineIcon} text="Messages" />
-      {/* </Link> */}
 
-      <Link to={"/profile"} className="link"> 
-        <SidebarOption Icon={PermIdentityIcon} text="Profile"/>
+      <SidebarOption Icon={BookmarkBorderIcon} text="Following" />
+
+      <SidebarOption Icon={MailOutlineIcon} text="Messages" />
+
+      <Link to={"/profile"} className="link">
+        <SidebarOption Icon={PermIdentityIcon} text="Profile" />
       </Link>
 
-      {/* <Link to="/setting"> */}
-      <SidebarOption Icon={MoreHorizIcon} text="Setting" />
-      {/* </Link> */}
-      {/* <SidebarOption Icon={ListAltIcon} text="Admin" /> */}
+      <Link to="/setting" className="link">
+        <SidebarOption Icon={MoreHorizIcon} text="Setting" />
+      </Link>
 
       {/* Button -> Tweet */}
       <Button
