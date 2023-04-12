@@ -20,6 +20,8 @@ import LoginContainer from "./login/LoginContainer";
 import RegistrationTab from "./login/RegistrationTab";
 import Setting from "./Setting";
 import { ToastContainer } from "react-toastify";
+import SideBarContainer from "./sidebar/SideBarContainer";
+import AdminTable from "./AdminTable";
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/:userid" element={<Profile />} />
         <Route path="/setting" element={<Setting />} />
+        <Route path="/adminTable" element={<AdminTable />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>
