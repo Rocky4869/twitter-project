@@ -61,7 +61,7 @@ const CreateTweetDialog = forwardRef(({ open, onClose, avatar }, ref) => {
   };
 
   const onEmojiClick = (emojiObject) => {
-    setReply(reply + emojiObject.emoji); // not sure if can be seen in database
+    setReply(reply + emojiObject.emoji); 
   };
 
   const handleOpenImage = () => {
@@ -72,7 +72,7 @@ const CreateTweetDialog = forwardRef(({ open, onClose, avatar }, ref) => {
   const handleImageSelect = (event) => {
     const file = event.target.files[0];
     setSelectedImage(file);
-    setReply(reply + file); // not sure if can be seen in database
+    setReply(reply + file); 
   };
 
   const closePreview = () => {
