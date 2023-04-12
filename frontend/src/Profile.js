@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "./sidebar/Sidebar";
 import Feed from "./Feed";
 import Widgets from "./Widgets";
@@ -10,10 +10,13 @@ import TweetBox from "./TweetBox";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Avatar, Button, TextField } from "@material-ui/core";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import firebase from "firebase/app";
 
 function Profile() {
   let { userid } = useParams();
   const [userData, setUserData] = useState(null);
+  const [uid, setUid] = useState(null);
+  let navigate = useNavigate();
 
   const fetchUserData = async () => {
     const collectionRef = db.collection("users");
@@ -32,11 +35,22 @@ function Profile() {
 
   useEffect(() => {
     fetchUserData();
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUid(user.uid);
+      } else {
+        setUid(null);
+        navigate("/");
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
     <div>
-      {userData ? (
+      {uid && userData ? (
         <div className="app">
           <SideBarContainer />
           <div>
