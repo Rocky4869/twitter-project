@@ -9,7 +9,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 
-function TweetBox({ uid , onPostSubmit }) {
+function TweetBox({ uid, onPostSubmit }) {
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -17,7 +17,6 @@ function TweetBox({ uid , onPostSubmit }) {
   const [userData, setUserData] = useState(null);
 
   const fetchUserData = async () => {
-    
     try {
       const docRef = db.collection("users").doc(uid);
       const docSnapshot = await docRef.get();
@@ -42,29 +41,32 @@ function TweetBox({ uid , onPostSubmit }) {
   const isImage = (file) => {
     return file && /^image\/(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(file.type);
   };
-  
+
   const isVideo = (file) => {
-    return file && /^video\/(mp4|webm|ogg|mov|avi|wmv|flv|3gp)$/i.test(file.type);
+    return (
+      file && /^video\/(mp4|webm|ogg|mov|avi|wmv|flv|3gp)$/i.test(file.type)
+    );
   };
 
   const sendTweet = async (e) => {
-
     e.preventDefault();
     const storageRef = firebase.storage().ref();
     let fileURL = "";
-    if(selectedImage){
-      const uploadTask = storageRef.child(`images/${selectedImage.name}`).put(selectedImage);
+    if (selectedImage) {
+      const uploadTask = storageRef
+        .child(`images/${selectedImage.name}`)
+        .put(selectedImage);
       // alert(selectedImage.name);
-      await  new Promise((resolve, reject) => { 
-      uploadTask.on(
-        "state_changed",
-        null,
-        (error) => {
-          console.error("Upload error:", error);
-          reject(error);
-        },
-        async () => {
-          const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+      await new Promise((resolve, reject) => {
+        uploadTask.on(
+          "state_changed",
+          null,
+          (error) => {
+            console.error("Upload error:", error);
+            reject(error);
+          },
+          async () => {
+            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
             console.log("File available at", downloadURL);
             fileURL = downloadURL;
             resolve();
@@ -73,7 +75,7 @@ function TweetBox({ uid , onPostSubmit }) {
       });
     }
 
-    const timestamp = firebase.firestore.Timestamp.now(); 
+    const timestamp = firebase.firestore.Timestamp.now();
     await db.collection("posts").add({
       // displayName: "Cha Eun Woo",
       // username: "eunwo.o_c",
@@ -141,7 +143,8 @@ function TweetBox({ uid , onPostSubmit }) {
             type="text"
             fullWidth
             multiline
-            rows={6}
+            minRows={6}
+            maxRows={8}
             value={tweetMessage}
             onChange={(e) => setTweetMessage(e.target.value)}
             style={{
@@ -194,6 +197,7 @@ function TweetBox({ uid , onPostSubmit }) {
                 style={{
                   marginBottom: "10px",
                   alignItems: "center",
+                  marginLeft: "30px",
                 }}
               >
                 File Preview:
@@ -216,23 +220,25 @@ function TweetBox({ uid , onPostSubmit }) {
               </Button>
             </div>
             {isImage(selectedImage) && (
-                <img
-                  src={URL.createObjectURL(selectedImage)}
-                  alt="Selected image"
-                  style={{
-                    maxWidth: "50%",
-                  }}
-                />
-              )}
-              {isVideo(selectedImage) && (
-                <video
-                  src={URL.createObjectURL(selectedImage)}
-                  controls
-                  style={{
-                    maxWidth: "50%",
-                  }}
-                />
-              )}
+              <img
+                src={URL.createObjectURL(selectedImage)}
+                alt="Selected image"
+                style={{
+                  maxWidth: "50%",
+                  marginLeft: "30px",
+                }}
+              />
+            )}
+            {isVideo(selectedImage) && (
+              <video
+                src={URL.createObjectURL(selectedImage)}
+                controls
+                style={{
+                  maxWidth: "50%",
+                  marginLeft: "30px",
+                }}
+              />
+            )}
           </div>
         )}
         <Button

@@ -17,7 +17,7 @@ import NoMatch from "./NoMatch";
 import LoginCard from "./login/LoginCard";
 import LoginContainer from "./login/LoginContainer";
 import RegistrationTab from "./login/RegistrationTab";
-import SideBarContainer from "./sidebar/SideBarContainer";
+import Setting from "./Setting";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -33,6 +33,7 @@ function App() {
           {/* <Route path="/forget_password" element={<ForgotPassword />} /> */}
           {/* <Route path="/reset_password" element={<ResetPassword />} /> */}
           <Route path="/:userid" element={<Profile />} />
+          <Route path="/setting" element={<Setting />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </BrowserRouter>

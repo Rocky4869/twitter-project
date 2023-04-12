@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 function Home() {
   const [uid, setUid] = useState(null);
+
   let navigate = useNavigate();
   //get uid function
   useEffect(() => {
@@ -29,7 +30,7 @@ function Home() {
     <>
       {uid ? (
         <div className="app">
-          <SideBarContainer />
+          <SideBarContainer uid={uid} />
           <Feed uid={uid} />
           <Widgets />
         </div>
