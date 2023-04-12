@@ -121,7 +121,7 @@ function MyProfile() {
                         fontWeight: "bold",
                         backgroundColor: "black",
                         textTransform: "none",
-                        width: "150px",
+                        width: "125px",
                         marginLeft: "500px",
                       }}
                     >
@@ -145,7 +145,7 @@ function MyProfile() {
                     <div>
                       Hey, this is Oscar here! This is my introduction section.
                     </div>
-                    <Button
+                    {/* <Button
                       variant="outlined"
                       style={{
                         padding: "5px",
@@ -160,7 +160,7 @@ function MyProfile() {
                     >
                       Follow
                       {/* show follow if is not user himself */}
-                    </Button>
+                    {/* </Button> */}
                   </div>
                   <div
                     style={{
@@ -187,8 +187,8 @@ function MyProfile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>9 Following</div>
-                    <div style={{ marginLeft: "10px" }}> 200 Followers </div>
+                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
+                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers</div>
                   </div>
                 </div>
               </div>
