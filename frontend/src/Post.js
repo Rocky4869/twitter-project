@@ -12,7 +12,7 @@ import Comment from "./Comment";
 
 const Post = forwardRef(
   (
-    { id, displayName, username, verified, text, avatar, image, likes },
+    { id, displayName, username, verified, text, avatar, image, likes, createdAt },
     ref
   ) => {
     const [tweetMessage, setTweetMessage] = useState("");
@@ -203,7 +203,8 @@ const Post = forwardRef(
             </div>
           </form>
           <div className="post_id">
-            <h6>Post ID: {id}</h6>
+            {/* <h6>Post ID: {id}</h6> */}
+            <h6>Created at: {createdAt.toDate().toLocaleString()}</h6>
           </div>
         </div>
       </div>

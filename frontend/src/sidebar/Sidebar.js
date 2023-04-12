@@ -44,26 +44,25 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
       <TwitterIcon className="sidebar_twitterIcon" />
 
       {/* SidebarOption */}
-      <SidebarOption
-        active
-        Icon={HomeIcon}
-        text="Home"
-        onClick={() => navigate("/home")}
-      />
+      <Link to="/home" className="link">
+        <SidebarOption active Icon={HomeIcon} text="Home" />
+      </Link>
+      {/* <SidebarOption Icon={SearchIcon} text="Explore" /> */}
+      {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
+      {/* <Link to="/following" className="link"> */}
       <SidebarOption Icon={BookmarkBorderIcon} text="Following" />
+      {/* </Link> */}
+      {/* <Link to="/messages" className="link"> */}
       <SidebarOption Icon={MailOutlineIcon} text="Messages" />
+      {/* </Link> */}
 
-      <SidebarOption
-        Icon={PermIdentityIcon}
-        text="Profile"
-        onClick={() => navigate(`/${userData.id}`)}
-      />
-      <SidebarOption
-        Icon={MoreHorizIcon}
-        text="Setting"
-        onClick={() => navigate("/setting")}
-      />
+      <Link to={"/profile"} className="link"> 
+        <SidebarOption Icon={PermIdentityIcon} text="Profile"/>
+      </Link>
 
+      {/* <Link to="/setting"> */}
+      <SidebarOption Icon={MoreHorizIcon} text="Setting" />
+      {/* </Link> */}
       {/* <SidebarOption Icon={ListAltIcon} text="Admin" /> */}
 
       {/* Button -> Tweet */}
