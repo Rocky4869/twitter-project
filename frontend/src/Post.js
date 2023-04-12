@@ -87,10 +87,10 @@ const Post = forwardRef(
             <div className="post_headerDescription">
               <p>{text}</p>
               {/* <p>{image}</p> */}
-              <div  style={{ width: "640px", height: "360px", overflow: "hidden" }}>
+            {(isImage(image) || isVideo(image)) && <div style={{ width: "640px", height: "360px", overflow: "hidden" }}>
             {isImage(image) && <img src={image} style={{ width: "100%", height: "100%", objectFit: "contain" }} alt="image" />}
             {isVideo(image) && <video src={image} style={{ width: "100%", height: "100%", objectFit: "contain" }} controls />}
-          </div>
+            </div>}
             </div>
           </div>
           {/* <img src={image} alt="" /> */}

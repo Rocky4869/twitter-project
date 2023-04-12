@@ -78,9 +78,9 @@ function Feed({ uid }) {
             avatar={post.data.avatar}
             image={post.data.image}
             likes={post.data.likes}
-            comment_avatar={post.data.comment_avatar}
-            comment_text={post.data.comment_text}
-            comment_account={post.data.comment_account}
+            // comment_avatar={post.data.comment_avatar}
+            // comment_text={post.data.comment_text}
+            // comment_account={post.data.comment_account}
           />
         ))}
       </Flipmove>
