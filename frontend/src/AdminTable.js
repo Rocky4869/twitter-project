@@ -153,13 +153,10 @@ function AdminTable() {
 
     const handleDelete = () => {
 		// if (window.confirm("Do you confirm delete?")) {
-            deleteUser();
-			setUpdatedata(!updatedata);
-            setOpen(false);
-		// } else {
-        //     setUpdatedata(!updatedata);
-        //     setOpen(false);
-        // }
+        deleteUser();
+        setUpdatedata(!updatedata);
+        setOpen(false);
+
 	};
 
     const handleUpdate = () =>{
