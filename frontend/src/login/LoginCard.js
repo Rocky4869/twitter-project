@@ -43,7 +43,7 @@ function LoginCard() {
       // console.log("User logged in:", user.email);
       // console.log("User logged in:", user.displayName);
       // alert("User logged in:", user.uid);
-      localStorage.setItem("uid", user.uid);
+      // localStorage.setItem("uid", user.uid);
       navigate("/home")
     } catch (error) {
       // console.error("Error logging in:", error);
