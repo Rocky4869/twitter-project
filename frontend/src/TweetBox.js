@@ -141,7 +141,7 @@ function TweetBox({ uid , onPostSubmit }) {
             type="text"
             fullWidth
             multiline
-            rows={6}
+            minRows ={6}
             value={tweetMessage}
             onChange={(e) => setTweetMessage(e.target.value)}
             style={{
