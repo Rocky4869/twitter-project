@@ -23,3 +23,8 @@
   height: 50px !important;
   margin-top: 80px !important;
 }
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

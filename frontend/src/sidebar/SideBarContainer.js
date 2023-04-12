@@ -5,7 +5,7 @@ import CreateTweetDialog from "./CreateTweetDialog";
 import LogoutDialog from "./LogoutDialog";
 import Setting from "../Setting";
 
-function SideBarContainer() {
+function SideBarContainer( {uid }) {
   const [openTweet, setOpenTweet] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
   const [openSetting, setOpenSetting] = useState(false);
@@ -44,6 +44,7 @@ function SideBarContainer() {
       <Sidebar
         onTweetButtonClick={handleOpenTweet}
         onLogoutButtonClick={handleOpenLogout}
+        uid={ uid }
       />
       <CreateTweetDialog
         open={openTweet}

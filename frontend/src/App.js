@@ -13,6 +13,7 @@ import Feed from "./Feed";
 import Widgets from "./Widgets";
 import Home from "./Home";
 import Profile from "./Profile";
+import MyProfile from "./MyProfile";
 import NoMatch from "./NoMatch";
 import LoginCard from "./login/LoginCard";
 import LoginContainer from "./login/LoginContainer";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/register" element={<RegistrationTab />} />
         {/* <Route path="/forget_password" element={<ForgotPassword />} /> */}
         {/* <Route path="/reset_password" element={<ResetPassword />} /> */}
+        <Route path="/profile" element={<MyProfile />} />
         <Route path="/:userid" element={<Profile />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>

@@ -17,7 +17,6 @@ function TweetBox({ uid , onPostSubmit }) {
   const [userData, setUserData] = useState(null);
 
   const fetchUserData = async () => {
-    
     try {
       const docRef = db.collection("users").doc(uid);
       const docSnapshot = await docRef.get();

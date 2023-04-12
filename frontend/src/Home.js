@@ -32,7 +32,7 @@ function Home() {
     <>
       {uid ? (
         <div className="app">
-          <SideBarContainer />
+          <SideBarContainer uid={uid}/>
           <Feed uid={uid}/>
           <Widgets />
         </div>
