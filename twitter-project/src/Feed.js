@@ -117,9 +117,6 @@ function Feed() {
                 avatar={post.avatar}
                 image={post.image}
                 likes={post.likes}
-                //comment_avatar={post.comment_avatar}
-                //comment_text={post.comment_text}
-                //comment_account={post.comment_account}
                 />
                 ))}
             </Flipmove>             
