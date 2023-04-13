@@ -3,6 +3,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
+//import for getting image from the storage
+import Add from "../public/addAvatar"
+
+
 
 function RegistrationTab() {
   return (
@@ -82,6 +86,17 @@ function RegistrationTab() {
                 }}
               />
             </div>
+
+            <div style="display: flex; align-items: center; margin-bottom: 24px;">
+              <label for="avatar-upload" style="display: flex; align-items: center;">
+                <span style="margin-right: 5px;">Add an avatar</span>
+                <button type="button" style="border: none; background: none;">
+                  <img src="addAvatar.png" alt="Add Avatar" style="width: 24px; height: 24px;" />
+                </button>
+              </label>
+              <input id="avatar-upload" type="file" accept="image/*" style="display: none;" />
+            </div>
+
             <div className="flex justify-center mt-48">
               <Button
                 variant="contained"

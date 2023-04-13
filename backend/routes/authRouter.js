@@ -6,7 +6,9 @@ const authRouter = express.Router();
 
 authRouter.post("/signup", async(req, res) => {
     // signup account with username, email, password
-    const { username, email, password } = req.body;
+    //signup account with image if needed
+    const { username, email, password, user_photo } = req.body;
+    const {file} = req.body;
     if (!username || !email || !password) {
         return res.status(400).send({ 'success': false, 'message': 'Unsatisfied parameters'});
     }
@@ -14,11 +16,23 @@ authRouter.post("/signup", async(req, res) => {
     if (user) {
         return res.status(404).send({ 'success': false, 'message': 'Username or email already existed'});
     };
+    //pick image by clicking the button
+    const avatarButton = document.getElementById("avatar-button");
+    const avatarUpload = document.getElementById("avatar-upload");
+
+    avatarButton.addEventListener("click", () => {
+    avatarUpload.click();
+    });
+    if (!user_photo) {
+        return res.status(400).send({ 'success': false, 'message': 'No photo provided' });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
         username: username,
         email: email,
-        password: hashedPassword
+        password: hashedPassword,
+        user_photo: user_photo
     });
     await newUser.save();
     res.status(404).send({ 'success': true, 'message': 'Sign up successfully'});

@@ -12,6 +12,7 @@ const userSchema = new Schema({
     retweeted_tweets: [{ type: Types.ObjectId, ref: 'Tweet' }],
     following: [{ type: Types.ObjectId, ref: 'User' }],
     followers: [{ type: Types.ObjectId, ref: 'User' }],
+    user_photo: { type: file }
 })
 
 const User = model('User', userSchema);
