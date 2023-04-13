@@ -10,7 +10,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import SideBarContainer from './sidebar/SideBarContainer';
+import Widgets from "./Widgets";
 
 // defining table 
 let rows = [
@@ -179,8 +180,10 @@ function AdminTable() {
 
   return (
 
-    <div style={{ height: (pageSize === 5) ? 300 : (pageSize === 10) ? 670 : 940 }}>
+
+    <div style={{ height: (pageSize === 5) ? 300 : (pageSize === 10) ? 670 : 940 }}>    
             <DataGrid 
+            
                 rows={users} 
                 columns={columns}
                 getRowId={row=>row.id}
@@ -279,7 +282,6 @@ function AdminTable() {
 					<Button variant="outlined" onClick={handleUpdate}>Update</Button>
 				</DialogActions>
 			</Dialog>
-           
     </div>
 
   )
