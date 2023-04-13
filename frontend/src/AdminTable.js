@@ -160,25 +160,26 @@ function AdminTable() {
     setOpen(false);
   };
 
-  const handleUpdate = () => {
-    let newaddname = document.querySelector("#newUsername").value.trim();
+  // update user function not mentioned in requirement
+  // const handleUpdate = () => {
+  //   let newaddname = document.querySelector("#newUsername").value.trim();
 
-    if (!newaddname) {
-      alert("Must fill all fields");
-    } else if (window.confirm("Do You confirm update user info?")) {
-      // find doc with given id and do update
-      db.collection("users")
-        .doc(rowId)
-        .update({
-          // fields to be udpated
-          username: username,
-        })
-        .then(() => console.log("Document successfully updated!"));
-    }
+  //   if (!newaddname) {
+  //     alert("Must fill all fields");
+  //   } else if (window.confirm("Do You confirm update user info?")) {
+  //     // find doc with given id and do update
+  //     db.collection("users")
+  //       .doc(rowId)
+  //       .update({
+  //         // fields to be udpated
+  //         username: username,
+  //       })
+  //       .then(() => console.log("Document successfully updated!"));
+  //   }
 
-    setUpdatedata(!updatedata);
-    setOpen(false);
-  };
+  //   setUpdatedata(!updatedata);
+  //   setOpen(false);
+  // };
 
   return (
     <div className="app">
@@ -266,14 +267,14 @@ function AdminTable() {
 
         {/* forms for update or delete */}
         <Dialog open={open} onClose={handleClickClose}>
-          <DialogTitle>Update User {username}</DialogTitle>
+          <DialogTitle>Manage User [{username}]</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Please change information bewlow to update user with id: {rowId}.
+              Are you going to modify user with id: {rowId}.
               <br />
             </DialogContentText>
             <br />
-            <TextField
+            {/* <TextField
               margin="dense"
               id="newUsername"
               label="New User Name"
@@ -281,7 +282,7 @@ function AdminTable() {
               fullWidth
               variant="standard"
               defaultValue={username}
-            />
+            /> */}
             {/* <TextField
 						margin="dense"
 						id="newUsername"
@@ -295,9 +296,10 @@ function AdminTable() {
             <Button variant="outlined" color="error" onClick={handleDelete}>
               Delete User
             </Button>
-            <Button variant="outlined" onClick={handleUpdate}>
+
+            {/* <Button variant="outlined" onClick={handleUpdate}>
               Update
-            </Button>
+            </Button> */}
             <Button variant="outlined" onClick={handleClickClose}>
               Cancel
             </Button>

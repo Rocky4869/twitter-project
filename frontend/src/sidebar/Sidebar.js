@@ -17,6 +17,7 @@ import db from "../firebase";
 
 function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
   const [userData, setUserData] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const location = useLocation();
   const activePage = location.pathname;
@@ -28,7 +29,7 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
       if (!docSnapshot.empty) {
         const userData = docSnapshot.data();
         setUserData(userData);
-        // console.debug(userData);
+        console.debug(userData);
       } else {
         console.log("User not found");
       }
@@ -36,8 +37,29 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
       console.error("Error fetching user data:", error);
     }
   };
+
+  const checkAdmin = async () => {
+    let role = "";
+    try {
+      const userSnapshot = await db
+        .collection("users")
+        .doc(uid)
+        .get()
+        .then((doc) => {
+          console.log(role = doc.data().role);
+      })
+      if (role === "admin") {
+        setIsAdmin(true)
+      }
+
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  }
+
   useEffect(() => {
     fetchUserData();
+    checkAdmin();
   }, []);
 
   return (
@@ -77,15 +99,17 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
           text="Setting"
         />
       </Link>
-
-      <Link to="/admin" className="link">
-        <SidebarOption
-          active={activePage === "/admin"}
-          Icon={AdminPanelSettingsIcon}
-          text="Admin"
-        />
-      </Link>
-
+      
+      {
+        isAdmin && <Link to="/admin" className="link">
+          <SidebarOption
+            active={activePage === "/admin"}
+            Icon={AdminPanelSettingsIcon}
+            text="Admin"
+          />
+        </Link>
+      }
+      
       {/* Button -> Tweet */}
       <Button
         variant="outlined"
