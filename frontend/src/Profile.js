@@ -46,7 +46,7 @@ function Profile() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [userid]);
 
   return (
     <div>
@@ -67,7 +67,7 @@ function Profile() {
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
                   >
-                    Oscar
+                    {userData.username}
                   </div>
                 </div>
               </div>
@@ -98,7 +98,7 @@ function Profile() {
                   />
                   <div className="flex flex-row">
                     <div className="font-bold" style={{ marginTop: "10px" }}>
-                      Oscar
+                    {userData.username}
                     </div>
                     <Button
                       variant="outlined"
@@ -122,7 +122,7 @@ function Profile() {
                       color: "gray",
                     }}
                   >
-                    @{userid}
+                    @{userData.id}
                   </div>
                   <div
                     style={{
@@ -175,8 +175,8 @@ function Profile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>9 Following</div>
-                    <div style={{ marginLeft: "10px" }}> 200 Followers </div>
+                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
+                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers </div>
                   </div>
                 </div>
               </div>
