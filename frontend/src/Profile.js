@@ -163,8 +163,13 @@ function Profile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
-                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers </div>
+                    <div style={{ marginRight: "10px" }}>
+                      {userData.Following.length} Following
+                    </div>
+                    <div style={{ marginLeft: "10px" }}>
+                      {" "}
+                      {userData.Followers.length} Followers{" "}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -173,7 +178,8 @@ function Profile() {
           <Widgets />
         </div>
       ) : (
-        <p>Loading...</p>
+        // <p>Loading...</p>
+        <div></div>
       )}
     </div>
   );

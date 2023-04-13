@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
 
-const Widgets = forwardRef(({ avatar, uid }, ref) => {
+const Widgets = forwardRef(({ avatar, uid, myid }, ref) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(true);
@@ -24,7 +24,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
       if (!docSnapshot.empty) {
         const userData = docSnapshot.data();
         setUserData(userData);
-        // console.debug(userData);
+        console.debug(userData.id);
       } else {
         console.log("User not found");
       }
@@ -133,8 +133,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
     setDropdownVisible(false);
     setSearchInput("");
     // alert("selected item: " + userid);
-    if (userid === userData.id) {
-      // Bug: if userid == userData.id
+    if (userid === myid) {
       navigate(`/profile`);
     } else navigate(`/${userid}`);
   };

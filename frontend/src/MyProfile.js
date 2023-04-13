@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import db from "./firebase";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Avatar, Button} from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
 
@@ -38,6 +38,7 @@ function MyProfile() {
         if (docSnapshot.exists) {
           const userData = docSnapshot.data();
           setUserData(userData);
+          console.debug(userData);
         } else {
           console.log("User not found");
         }
@@ -79,7 +80,7 @@ function MyProfile() {
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
                   >
-                   {userData.username}
+                    {userData.username}
                   </div>
                 </div>
               </div>
@@ -110,7 +111,7 @@ function MyProfile() {
                   />
                   <div className="flex flex-row">
                     <div className="font-bold" style={{ marginTop: "10px" }}>
-                    {userData.username}
+                      {userData.username}
                     </div>
                     <Button
                       variant="outlined"
@@ -187,17 +188,23 @@ function MyProfile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
-                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers</div>
+                    <div style={{ marginRight: "10px" }}>
+                      {userData.Following.length} Following
+                    </div>
+                    <div style={{ marginLeft: "10px" }}>
+                      {" "}
+                      {userData.Followers.length} Followers
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <Widgets />
+          <Widgets myid={userData.id} />
         </div>
       ) : (
-        <p>Loading...</p>
+        // <p>Loading...</p>
+        <div></div>
       )}
     </div>
   );

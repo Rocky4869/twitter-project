@@ -12,6 +12,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import Widgets from "./Widgets";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // defining table
 let rows = [];
@@ -216,7 +218,13 @@ function AdminTable() {
           }}
         />
 
-        <Button variant="outlined" onClick={handleAddopen} sx={{ mt: 2 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddopen}
+          sx={{ mt: 2 }}
+          style={{ marginTop: "20px" }}
+        >
           Add User
         </Button>
 
@@ -225,7 +233,7 @@ function AdminTable() {
           <DialogTitle>Add New User</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Please enter all information bewlow to add a new user.
+              Please enter all information below to add a new user.
               <br />
             </DialogContentText>
             <br />
@@ -287,11 +295,11 @@ function AdminTable() {
             <Button variant="outlined" color="error" onClick={handleDelete}>
               Delete User
             </Button>
-            <Button variant="outlined" onClick={handleClickClose}>
-              Cancel
-            </Button>
             <Button variant="outlined" onClick={handleUpdate}>
               Update
+            </Button>
+            <Button variant="outlined" onClick={handleClickClose}>
+              Cancel
             </Button>
           </DialogActions>
         </Dialog>
