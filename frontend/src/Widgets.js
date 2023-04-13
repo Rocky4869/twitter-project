@@ -200,6 +200,8 @@ const Widgets = forwardRef(({ avatar, uid, myid }, ref) => {
           options={{ height: 400 }}
         />
       </div>
+
+      
     </div>
   );
 });

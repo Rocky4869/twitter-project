@@ -1,9 +1,12 @@
-.sidebar {
+.sidebar {     
+  /*
   flex: 0.3;
-  min-width: 250px;
-  margin-top: 20px;
-  padding-left: 20px;
+  padding-left: 10px;
+  border-right: 1px solid var(--twitter-background);
   padding-right: 20px;
+  */
+  width: 200px;
+  margin-top: 20px;
 }
 
 .sidebar_twitterIcon {

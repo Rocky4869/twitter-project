@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import CreateTweetDialog from "./CreateTweetDialog";
 import LogoutDialog from "./LogoutDialog";
 import db from "../firebase";
+import "../css/SideBarContainer.css";
 
 function SideBarContainer({ uid }) {
   const [openTweet, setOpenTweet] = useState(false);
@@ -56,7 +57,7 @@ function SideBarContainer({ uid }) {
   }, [uid]);
 
   return (
-    <div>
+    <div className="sidebarcontainer">
       <Sidebar
         onTweetButtonClick={handleOpenTweet}
         onLogoutButtonClick={handleOpenLogout}
