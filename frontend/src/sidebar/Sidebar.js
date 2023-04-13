@@ -13,6 +13,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Button } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import db from "../firebase";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
   const [userData, setUserData] = useState(null);
@@ -44,6 +45,9 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
       {/* SidebarOption */}
       <Link to="/home" className="link">
         <SidebarOption active Icon={HomeIcon} text="Home" />
+      </Link>
+      <Link to="/viewtweets" className="link">
+        <SidebarOption Icon={VisibilityIcon} text="View Tweets" />
       </Link>
       <Link to="/follow" className="link">
         <SidebarOption Icon={BookmarkBorderIcon} text="Following" />
