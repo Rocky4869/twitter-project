@@ -14,8 +14,11 @@ import firebase from "firebase/app";
 
 function Profile() {
   let { userid } = useParams();
-  const [userData, setUserData] = useState(null);
-  const [uid, setUid] = useState(null);
+  const [userData, setUserData] = useState(null); //target user all data
+  const [targetId, setTargetId] = useState(null); //target user, primary key in database
+  const [uid, setUid] = useState(null); //myself (loggedin user) primary key
+  const [loggedInUserData, setLoggedInUserData] = useState(null);
+
   const [isFollowing, setIsFollowing] = useState(false);
 
   let navigate = useNavigate();
@@ -26,12 +29,28 @@ function Profile() {
       const querySnapshot = await collectionRef.where("id", "==", userid).get();
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
+        setTargetId(doc.id);
         setUserData(doc.data());
+        // alert(doc.data().id);
+        // alert(doc.id);
       } else {
         console.log("User not found");
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
+    }
+  };
+  const fetchLoggedInUserData = async () => {
+    if (uid) {
+      const loggedInUserDocRef = db.collection("users").doc(uid);
+      try {
+        const loggedInUserDocSnapshot = await loggedInUserDocRef.get();
+        if (loggedInUserDocSnapshot.exists) {
+          setLoggedInUserData(loggedInUserDocSnapshot.data());
+        }
+      } catch (error) {
+        console.error("Error fetching logged-in user data:", error);
+      }
     }
   };
 
@@ -49,10 +68,65 @@ function Profile() {
       unsubscribe();
     };
   }, [userid]);
+  //fetch logged-in user data
+  useEffect(() => {
+    fetchLoggedInUserData();
+  }, [uid]);
 
-  const handleFollow = () => {
+  useEffect(() => {
+    if (loggedInUserData && userData) {
+      setIsFollowing(loggedInUserData.Following.includes(targetId)); //already exsits in logged in user Following list?
+    }
+  }, [loggedInUserData, userData, targetId]);
+
+  //update db when follow or unfollow
+  const updateFollowing = async () => {
+    if (uid && targetId) {
+      const loggedInUserDocRef = db.collection("users").doc(uid);
+      const targetUserDocRef = db.collection("users").doc(targetId);
+  
+      try {
+        const batch = db.batch();
+        if (isFollowing) {
+          // Remove the target user from the Following 
+          batch.update(loggedInUserDocRef, {
+            Following: firebase.firestore.FieldValue.arrayRemove(targetId),
+          });
+          // Remove the logged-in user from the target user's Followers
+          batch.update(targetUserDocRef, {
+            Followers: firebase.firestore.FieldValue.arrayRemove(uid),
+          });
+          setUserData((prevUserData) => ({
+            ...prevUserData,
+            Followers: prevUserData.Followers.filter((id) => id !== uid),
+          }));
+        } else {
+          // Add the target user to the Following
+          batch.update(loggedInUserDocRef, {
+            Following: firebase.firestore.FieldValue.arrayUnion(targetId),
+          });
+          // Add the logged-in user to the target user's Followers
+          batch.update(targetUserDocRef, {
+            Followers: firebase.firestore.FieldValue.arrayUnion(uid),
+          });
+          setUserData((prevUserData) => ({
+            ...prevUserData,
+            Followers: [...prevUserData.Followers, uid],
+          }));
+        }
+        
+        await batch.commit();
+      } catch (error) {
+        console.error("Error updating following and followers:", error);
+      }
+    }
+  };  
+
+  const handleFollow = async () => {
+    await updateFollowing();
     setIsFollowing(!isFollowing);
   };
+
   const handleReturn = () => {
     navigate("/home");
   };
