@@ -59,7 +59,7 @@ function LoginCard() {
       navigate("/home");
     } catch (error) {
       // console.error("Error logging in:", error);
-      toast.error("Username or Email or Eassword Incorrect!");
+      toast.error("Username or Email or Password Incorrect!");
     }
   };
 

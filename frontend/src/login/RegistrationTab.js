@@ -86,12 +86,15 @@ function RegistrationTab() {
 
       // console.log(defaultUserId);
       // Save the username to Firestore
+      const timestamp = firebase.firestore.Timestamp.now();
       await db.collection("users").doc(user.uid).set({
         email,
         username,
         id: defaultUserId,
         Followers: [],
         Following: [],
+        joinedAt: timestamp,
+        introduction: "Hi there!, I am using twitter!"
       });
 
       // console.log("User signed up:", user);
