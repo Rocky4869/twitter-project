@@ -94,7 +94,7 @@ function TweetBox({ uid, onPostSubmit }) {
       created_at: timestamp,
       //use it self user avatar instead
       avatar:
-        "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+        userData.avator,
     });
     if (onPostSubmit) {
       onPostSubmit();
@@ -129,12 +129,14 @@ function TweetBox({ uid, onPostSubmit }) {
   };
 
   return (
+    <div>
+    {userData && (
     <div className="tweetBox">
       <form>
         <div className="tweetBox_input">
           <Avatar
             style={{ height: "90px", width: "90px" }}
-            src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
+            src={userData.avator}
           />
           <TextField
             autoFocus
@@ -249,6 +251,8 @@ function TweetBox({ uid, onPostSubmit }) {
           Tweet
         </Button>
       </form>
+    </div>
+    )}
     </div>
   );
 }

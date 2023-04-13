@@ -1,0 +1,4 @@
+.listItem{
+    border: 1px solid var(--twitter-background); 
+    background-color: var(--twitter-background);
+}

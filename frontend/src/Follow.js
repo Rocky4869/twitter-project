@@ -10,6 +10,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
 import Post from "./Post";
 import Flipmove from "react-flip-move";
+import "./Follow.css"
 
 function Follow(){
     const [userData, setUserData] = useState(null);
@@ -102,14 +103,14 @@ function Follow(){
                         </div>
                         <div>
                             {followingData.length > 0  ?   followingData.map(({ id, data }) => (
-                                <div key={id} style={{
+                                <div key={id} className="listItem" style={{
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
                                     padding: '10px',
                                     margin: '5px 0',
                                     borderRadius: '5px',
-                                    backgroundColor: '#f1f1f1',
+                                    // backgroundColor: '#f1f1f1',
                                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
                                   }}
                                   onClick={() => navigate(`/${data.id}`)}

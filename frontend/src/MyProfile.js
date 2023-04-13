@@ -10,6 +10,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
 import Post from "./Post";
 import Flipmove from "react-flip-move";
+import EditProfileDialog from "./EditProfileDialog";
 
 function MyProfile() {
   // let { userid } = useParams();
@@ -17,6 +18,16 @@ function MyProfile() {
   const [uid, setUid] = useState(null);
   let navigate = useNavigate();
   const [posts, setPosts] = useState([]);
+  const [showDialog, setShowDialog] = useState(false);
+
+  const handleEditProfileClick = () => {
+    setShowDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setShowDialog(false);
+  };
+
   //fetch posts tweet by logged in user
   const fetchPosts = async () => {
     try {
@@ -123,7 +134,7 @@ function MyProfile() {
                 >
                   <Avatar
                     style={{ height: "90px", width: "90px" }}
-                    src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
+                    src={userData.avator}
                   />
                   <div className="flex flex-row">
                     <div className="font-bold" style={{ marginTop: "10px" }}>
@@ -141,10 +152,12 @@ function MyProfile() {
                         width: "125px",
                         marginLeft: "500px",
                       }}
+                      onClick={handleEditProfileClick}
                     >
                       Edit Profile
                       {/* show profile if is user himself */}
                     </Button>
+                    {showDialog && <EditProfileDialog onClose={handleCloseDialog} />}
                   </div>
                   <div
                     style={{

@@ -94,7 +94,8 @@ function RegistrationTab() {
         Followers: [],
         Following: [],
         joinedAt: timestamp,
-        introduction: "Hi there!, I am using twitter!"
+        introduction: "Hi there!, I am using twitter!",
+        avator: "",
       });
 
       // console.log("User signed up:", user);

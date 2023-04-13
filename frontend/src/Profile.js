@@ -201,7 +201,8 @@ function Profile() {
                 >
                   <Avatar
                     style={{ height: "90px", width: "90px" }}
-                    src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
+                    // src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
+                    src={userData.avator}
                   />
                   <div className="flex flex-row">
                     <div className="font-bold" style={{ marginTop: "10px" }}>

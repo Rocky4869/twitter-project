@@ -23,10 +23,10 @@ import {
 import { Close, InsertEmoticon, Image } from "@material-ui/icons";
 
 // testing for edit prfile, later do
-function EditProfileDialog({ open, onClose }) {
+function EditProfileDialog({ onClose }) {
   return (
     <Dialog
-      open={open}
+      // open={open}
       onClose={onClose}
       maxWidth="sm"
       PaperProps={{ style: { borderRadius: 20 } }}
@@ -80,7 +80,7 @@ function EditProfileDialog({ open, onClose }) {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <Button
-                onClick={handeleLogout}
+                // onClick={handeleLogout}
                 variant="contained"
                 color="primary"
                 style={{
