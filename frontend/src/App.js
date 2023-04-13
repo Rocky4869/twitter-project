@@ -34,7 +34,7 @@ function App() {
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/:userid" element={<Profile />} />
         <Route path="/setting" element={<Setting />} />
-        <Route path="/adminTable" element={<AdminTable />} />
+        <Route path="/admin" element={<AdminTable />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>

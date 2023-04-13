@@ -8,50 +8,35 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
-import firebase from "firebase/app";
-const Widgets = forwardRef(({ avatar, uid }, ref) => {
+import TwitterFollow from "./TwitterFollow";
+import TwitterTrending from "./TwitterTrending";
+
+const Widgets = forwardRef(({ avatar, uid, myid }, ref) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(true);
   const dropDownRef = useRef(null);
-  // const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null);
   let navigate = useNavigate();
-  const [currentUserid, setUid] = useState(null);
-  // const fetchUserData = async () => {
-  //   try {
-  //     const docRef = db.collection("users").doc(uid);
-  //     const docSnapshot = await docRef.get();
-  //     if (!docSnapshot.empty) {
-  //       const userData = docSnapshot.data();
-  //       setUserData(userData);
-  //       // console.debug(userData);
-  //       // alert(uid);
-  //       // alert(userData.username);
-  //     } else {
-  //       console.log("User not found");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchUserData();
-  // }, []);
-  useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setUid(user.uid);
+
+  const fetchUserData = async () => {
+    try {
+      const docRef = db.collection("users").doc(uid);
+      const docSnapshot = await docRef.get();
+      if (!docSnapshot.empty) {
+        const userData = docSnapshot.data();
+        setUserData(userData);
+        console.debug(userData.id);
       } else {
-        setUid(null);
-        navigate("/");
+        console.log("User not found");
       }
-    });
-
-    return () => {
-      unsubscribe();
-    };
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
   }, []);
-
 
   useEffect(() => {
     if (searchInput.trim() === "") {
@@ -116,11 +101,10 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
           const id = doc.id;
           const data = doc.data;
           const name = doc.data.username;
-          // console.log(`Document ID: ${id}`);
-          // console.log(`UID: ${currentUserid}`);
-          // console.log("Document data:", data);
-          // console.log(`userID: ${data.id}`);
-          // console.log(`Name: ${name}`);
+          console.log(`Document ID: ${id}`);
+          console.log("Document data:", data);
+          console.log(`userID: ${data.id}`);
+          console.log(`Name: ${name}`);
         });
         setSearchResults(docs);
         //   console.log(searchResults);
@@ -150,13 +134,29 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
   const handleItemClick = (userid) => {
     setDropdownVisible(false);
     setSearchInput("");
-    // // alert("selected item: " + userid);
-    // if (userid === userData.id) {
-    //   // Bug: if userid == userData.id
-    //   navigate(`/profile`);
-    // } else navigate(`/${userid}`);
-    navigate(`/${userid}`);
+    // alert("selected item: " + userid);
+    if (userid === myid) {
+      navigate(`/profile`);
+    } else navigate(`/${userid}`);
   };
+
+  const [widgetsFollow, setWidgetsFollow] = useState([]);
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) =>
+      setWidgetsFollow(
+        snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      )
+    );
+  }, []);
+
+  const [widgetsTrending, setWidgetsTrending] = useState([]);
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) =>
+      setWidgetsTrending(
+        snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      )
+    );
+  }, []);
 
   return (
     <div className="widgets">
@@ -180,7 +180,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
           )}
         </div>
       </div>
-      {dropdownVisible && searchInput.trim() !== "" &&(
+      {dropdownVisible && (
         <div
           className="dropdown"
           ref={dropDownRef}
@@ -188,8 +188,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
             marginLeft: "10px",
           }}
         >
-          {searchResults.length > 0 ? (searchResults.filter((doc) => doc.id !== currentUserid)
-          .map((doc) => (
+          {searchResults.map((doc) => (
             <div
               className="dropdown-item flex"
               key={doc.id}
@@ -209,21 +208,50 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
                 <div style={{ color: "gray" }}>@{doc.data.id}</div>
               </div>
             </div>
-          ))):(
-            <div className="dropdown-item">
-              <p>No such user</p>
-            </div>
-          )}
+          ))}
         </div>
       )}
+      <div className="widgets_widgetContainer_follow">
+        <h2>You may also like</h2>
+
+        {widgetsFollow.slice(0, 3).map((widgetFollow) => (
+          <TwitterFollow
+            id={widgetFollow.id}
+            displayName={widgetFollow.displayName}
+            username={widgetFollow.username}
+            verified={widgetFollow.verified}
+            text={widgetFollow.text}
+            avatar={widgetFollow.avatar}
+            image={widgetFollow.image}
+            likes={widgetFollow.likes}
+          />
+        ))}
+
+        {/*
+                <TwitterFollowButton
+                    screenName={'ivestarship'} />
+                <TwitterFollowButton
+                    screenName={'blackpink'} />
+                <TwitterFollowButton
+                    screenName={'le_sserafim'} />
+                */}
+      </div>
+
       <div className="widgets_widgetContainer">
-        <h2>Recommendations</h2>
-        <TwitterTweetEmbed tweetId={"1639974872406446084"} />
-        <TwitterTimelineEmbed
-          sourceType="profile"
-          screenName="offclASTRO"
-          options={{ height: 400 }}
-        />
+        <h2>What's happening</h2>
+
+        {widgetsTrending.slice(0, 3).map((widgetTrending) => (
+          <TwitterTrending
+            id={widgetTrending.id}
+            displayName={widgetTrending.displayName}
+            username={widgetTrending.username}
+            verified={widgetTrending.verified}
+            text={widgetTrending.text}
+            avatar={widgetTrending.avatar}
+            image={widgetTrending.image}
+            likes={widgetTrending.likes}
+          />
+        ))}
       </div>
     </div>
   );

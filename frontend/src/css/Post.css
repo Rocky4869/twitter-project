@@ -3,7 +3,6 @@
   align-items: flex-start;
   border-bottom: 1px solid var(--twitter-background);
   padding-bottom: 10px;
-  margin-top: 10px;
 }
 
 .post_body {
@@ -24,6 +23,19 @@
 .post_headerDescription {
   margin-bottom: 10px;
   font-size: 15px;
+}
+
+.tempImage {
+  width: 640px;
+  height: 360px;
+  overflow: hidden;
+}
+
+.tempImage > img {
+  border-radius: 20px;
+  width:100%;
+  width:600px;
+  display: flex;
 }
 
 .post_avator {
@@ -52,9 +64,9 @@
   display: flex;
 }
 
-img {
-  width: 100%;
-  max-width: 600px;
+img{
+  width:100%;
+  width:600px;
   display: flex;
 }
 
@@ -71,7 +83,7 @@ img {
   border: none;
   display: flex;
   padding: 10px;
-  margin-left: 10px;
+  margin-left: 10px;  
 }
 
 .comment_form .tweetBox_input > Avatar {
@@ -85,20 +97,21 @@ img {
   margin-right: 20px;
 }
 
-/* .post_comment {
+.post_comment {
   display: flex;
+  padding: 20px;
   background-color: rgb(206, 241, 247);
-  border-radius: 10px;
-} */
+  border-radius: 10px;    
+}
 
 .post_comment > .post_comment_text {
   flex: 1;
-  width: 80%;
+  width:80%;
   font-size: 15px;
   border: none;
   display: flex;
   padding: 10px;
-  margin-left: 10px;
+  margin-left: 10px;  
 }
 
 .comment_form .tweetBox_additional {
@@ -114,7 +127,7 @@ img {
   border: none;
   display: flex;
   padding: 10px;
-  margin-right: 10px;
+  margin-right: 10px;  
 }
 
 .comment_form .tweetBox_input > .tweetBox_tweetButton {

@@ -12,14 +12,24 @@ import Comment from "./Comment";
 
 const Post = forwardRef(
   (
-    { id, displayName, username, verified, text, avatar, image, likes, createdAt },
+    {
+      id,
+      displayName,
+      username,
+      verified,
+      text,
+      avatar,
+      image,
+      likes,
+      createdAt,
+    },
     ref
   ) => {
     const [tweetMessage, setTweetMessage] = useState("");
     const [tweetImage, setTweetImage] = useState("");
     const getFileExtension = (url) => {
-      const splitUrl = url.split('?')[0];
-      return "." + splitUrl.substring(splitUrl.lastIndexOf('.') + 1);
+      const splitUrl = url.split("?")[0];
+      return "." + splitUrl.substring(splitUrl.lastIndexOf(".") + 1);
     };
     const isImage = (url) => {
       const ext = getFileExtension(url);
@@ -63,6 +73,67 @@ const Post = forwardRef(
         );
     }, []);
 
+    const sendRetweet = (e) => {
+      e.preventDefault();
+      alert("Retweet");
+
+      db.collection("retweets").add({
+        displayName: "Cha Eun Woo",
+        username: "eunwo.o_c",
+        verified: true,
+        avatar:
+          "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+        new_likes: 0,
+        retweet_id: id,
+        retweet_displayName: displayName,
+        retweet_username: username,
+        retweet_verified: verified,
+        retweet_text: text,
+        retweet_avatar: avatar,
+        retweet_image: image,
+        retweet_likes: likes,
+      });
+    };
+    const [isLiked, setIsLiked] = useState(false);
+
+    const likePost = (e) => {
+      e.preventDefault();
+
+      db.collection("posts")
+        .doc(id)
+        .update({
+          likes: likes + 1,
+        });
+      setIsLiked((value) => !value);
+    };
+
+    const unlikePost = (e) => {
+      e.preventDefault();
+
+      db.collection("posts")
+        .doc(id)
+        .update({
+          likes: likes - 1,
+        });
+      setIsLiked((value) => !value);
+    };
+
+    let like_button_status;
+
+    if (isLiked) {
+      like_button_status = (
+        <Button onClick={unlikePost} type="submit">
+          <SidebarOption active Icon={FavoriteBorderIcon} text={likes} />
+        </Button>
+      );
+    } else {
+      like_button_status = (
+        <Button onClick={likePost} type="submit">
+          <SidebarOption Icon={FavoriteBorderIcon} text={likes} />
+        </Button>
+      );
+    }
+
     return (
       <div className="post" ref={ref}>
         <div className="post_avator">
@@ -87,13 +158,27 @@ const Post = forwardRef(
             <div className="post_headerDescription">
               <p>{text}</p>
               {/* <p>{image}</p> */}
-            {(isImage(image) || isVideo(image)) && <div style={{ width: "640px", height: "360px", overflow: "hidden" }}>
-            {isImage(image) && <img src={image} style={{ width: "100%", height: "100%", objectFit: "contain" }} alt="image" />}
-            {isVideo(image) && <video src={image} style={{ width: "100%", height: "100%", objectFit: "contain" }} controls />}
-            </div>}
+              {(isImage(image) || isVideo(image)) && (
+                <div classname="tempImage">
+                  {isImage(image) && <img src={image} alt="image" />}{" "}
+                  {isVideo(image) && (
+                    <video
+                      src={image}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                      }}
+                      controls
+                    />
+                  )}
+                </div>
+              )}
             </div>
           </div>
-          {/* <img src={image} alt="" /> */}
+          {/* <img src={image} alt="" /> 
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+          */}
 
           <br></br>
 
@@ -128,8 +213,10 @@ const Post = forwardRef(
 
           <div className="post_footer">
             <SidebarOption active Icon={MapsUgcOutlinedIcon} />
-            <SidebarOption Icon={RepeatIcon} />
-            <SidebarOption Icon={FavoriteBorderIcon} text={likes} />
+            <Button onClick={sendRetweet} type="submit">
+              <SidebarOption Icon={RepeatIcon} />
+            </Button>
+            {like_button_status}
             <SidebarOption Icon={PublishIcon} />
 
             {/*
@@ -192,7 +279,6 @@ const Post = forwardRef(
                   marginTop: "30px",
                 }}
               />
-
               <Button
                 onClick={sendTweet}
                 type="submit"
@@ -204,7 +290,7 @@ const Post = forwardRef(
           </form>
           <div className="post_id">
             {/* <h6>Post ID: {id}</h6> */}
-            <h6>Created at: {createdAt.toDate().toLocaleString('en-US')}</h6>
+            {/* <h6>Created at: {createdAt.toDate().toLocaleString("en-US")}</h6> */}
           </div>
         </div>
       </div>

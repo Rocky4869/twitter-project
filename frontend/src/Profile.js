@@ -11,17 +11,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Avatar, Button, TextField } from "@material-ui/core";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
-import Post from "./Post";
-import Flipmove from "react-flip-move";
 
 function Profile() {
   let { userid } = useParams();
-  const [userData, setUserData] = useState(null); //target user all data
-  const [targetUserId, settargetUserId] = useState(null); //target user, primary key in database
-  const [uid, setUid] = useState(null); //myself (loggedin user) primary key
-  const [loggedInUserData, setLoggedInUserData] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [uid, setUid] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
-  const [posts, setPosts] = useState([]);
   let navigate = useNavigate();
 
   const fetchUserData = async () => {
@@ -30,48 +25,12 @@ function Profile() {
       const querySnapshot = await collectionRef.where("id", "==", userid).get();
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
-        settargetUserId(doc.id);
         setUserData(doc.data());
-        // alert(doc.data().id);
-        // alert(doc.id);
       } else {
         console.log("User not found");
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
-    }
-  };
-  const fetchLoggedInUserData = async () => {
-    if (uid) {
-      const loggedInUserDocRef = db.collection("users").doc(uid);
-      try {
-        const loggedInUserDocSnapshot = await loggedInUserDocRef.get();
-        if (loggedInUserDocSnapshot.exists) {
-          setLoggedInUserData(loggedInUserDocSnapshot.data());
-        }
-      } catch (error) {
-        console.error("Error fetching logged-in user data:", error);
-      }
-    }
-  };
-
-  //fetch this searched user posts!
-  const fetchPosts = async () => {
-    try {
-      const querySnapshot = await db
-        .collection('posts')
-        .where('userId', '==', targetUserId)
-        .orderBy("created_at", "desc")
-        .get();
-
-      const userPosts = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data(),
-      }));
-
-      setPosts(userPosts);
-    } catch (error) {
-      console.error('Error fetching posts:', error);
     }
   };
 
@@ -90,70 +49,6 @@ function Profile() {
     };
   }, [userid]);
 
-  //fetch logged-in user data
-  useEffect(() => {
-    fetchLoggedInUserData();
-  }, [uid]);
-
-  useEffect(() => {
-    if (loggedInUserData && userData) {
-      setIsFollowing(loggedInUserData.Following.includes(targetUserId)); //already exsits in logged in user Following list?
-      fetchPosts();
-    }
-  }, [loggedInUserData, userData, targetUserId]);
-
-  //update db when follow or unfollow
-  const updateFollowing = async () => {
-    if (uid && targetUserId) {
-      const loggedInUserDocRef = db.collection("users").doc(uid);
-      const targetUserDocRef = db.collection("users").doc(targetUserId);
-  
-      try {
-        const batch = db.batch();
-        if (isFollowing) {
-          // Remove the target user from the Following 
-          batch.update(loggedInUserDocRef, {
-            Following: firebase.firestore.FieldValue.arrayRemove(targetUserId),
-          });
-          // Remove the logged-in user from the target user's Followers
-          batch.update(targetUserDocRef, {
-            Followers: firebase.firestore.FieldValue.arrayRemove(uid),
-          });
-          setUserData((prevUserData) => ({
-            ...prevUserData,
-            Followers: prevUserData.Followers.filter((id) => id !== uid),
-          }));
-        } else {
-          // Add the target user to the Following
-          batch.update(loggedInUserDocRef, {
-            Following: firebase.firestore.FieldValue.arrayUnion(targetUserId),
-          });
-          // Add the logged-in user to the target user's Followers
-          batch.update(targetUserDocRef, {
-            Followers: firebase.firestore.FieldValue.arrayUnion(uid),
-          });
-          setUserData((prevUserData) => ({
-            ...prevUserData,
-            Followers: [...prevUserData.Followers, uid],
-          }));
-        }
-        
-        await batch.commit();
-      } catch (error) {
-        console.error("Error updating following and followers:", error);
-      }
-    }
-  };  
-
-  const handleFollow = async () => {
-    await updateFollowing();
-    setIsFollowing(!isFollowing);
-  };
-
-  const handleReturn = () => {
-    navigate("/home");
-  };
-
   return (
     <div>
       {uid && userData ? (
@@ -163,13 +58,12 @@ function Profile() {
             <div className="feed">
               <div className="feed_header">
                 <div className="flex flex-row">
-                    <ArrowBackIcon
-                      style={{
-                        marginTop: "10px",
-                        marginRight: "20px",
-                      }}
-                      onClick={handleReturn}
-                    ></ArrowBackIcon>
+                  <ArrowBackIcon
+                    style={{
+                      marginTop: "10px",
+                      marginRight: "20px",
+                    }}
+                  ></ArrowBackIcon>
                   <div
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
@@ -222,7 +116,8 @@ function Profile() {
                     className="flex flex-row"
                   >
                     <div>
-                      {userData.introduction}
+                      Hey, this is {userData.username} here! This is my
+                      introduction section.
                     </div>
                     <Button
                       variant="outlined"
@@ -234,9 +129,11 @@ function Profile() {
                         backgroundColor: "black",
                         textTransform: "none",
                         width: "100px",
-                        marginLeft: "400px",
+                        marginLeft: "200px",
                       }}
-                      onClick={handleFollow}
+                      onClick={() => {
+                        setIsFollowing(!isFollowing);
+                      }}
                     >
                       {isFollowing ? "Following" : "Follow"}
                     </Button>
@@ -257,7 +154,7 @@ function Profile() {
                         marginTop: "5px",
                       }}
                     >
-                      {userData.joinedAt.toDate().toLocaleString('en-US')}
+                      Joined April 2023
                     </span>
                   </div>
                   <div
@@ -266,36 +163,23 @@ function Profile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
-                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers </div>
+                    <div style={{ marginRight: "10px" }}>
+                      {userData.Following.length} Following
+                    </div>
+                    <div style={{ marginLeft: "10px" }}>
+                      {" "}
+                      {userData.Followers.length} Followers{" "}
+                    </div>
                   </div>
                 </div>
               </div>
-              <Flipmove>
-                {posts.map((post) => (
-                  <Post
-                    key={post.id}
-                    id={post.data.id}
-                    displayName={post.data.displayName}
-                    username={post.data.displayId}
-                    verified={post.data.verified}
-                    text={post.data.text}
-                    avatar={post.data.avatar}
-                    image={post.data.image}
-                    likes={post.data.likes}
-                    createdAt={post.data.created_at}
-                    // comment_avatar={post.data.comment_avatar}
-                    // comment_text={post.data.comment_text}
-                    // comment_account={post.data.comment_account}
-                  />
-                ))}
-              </Flipmove>
             </div>
           </div>
           <Widgets />
         </div>
       ) : (
-        <p>Loading...</p>
+        // <p>Loading...</p>
+        <div></div>
       )}
     </div>
   );

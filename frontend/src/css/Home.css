@@ -1,0 +1,13 @@
+body {
+    --twitter-color: #6bc5fd;
+    --twitter-background: rgb(198, 239, 249);
+  }
+  
+.home {
+    display: flex;
+    height: 100vh;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px;
+}

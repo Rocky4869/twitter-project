@@ -10,12 +10,16 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { Button } from "@material-ui/core";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import db from "../firebase";
 
 function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
   const [userData, setUserData] = useState(null);
+
+  const location = useLocation();
+  const activePage = location.pathname;
 
   const fetchUserData = async () => {
     try {
@@ -43,7 +47,11 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
 
       {/* SidebarOption */}
       <Link to="/home" className="link">
-        <SidebarOption active Icon={HomeIcon} text="Home" />
+        <SidebarOption
+          active={activePage === "/home"}
+          Icon={HomeIcon}
+          text="Home"
+        />
       </Link>
 
       <SidebarOption Icon={BookmarkBorderIcon} text="Following" />
@@ -51,11 +59,27 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
       <SidebarOption Icon={MailOutlineIcon} text="Messages" />
 
       <Link to={"/profile"} className="link">
-        <SidebarOption Icon={PermIdentityIcon} text="Profile" />
+        <SidebarOption
+          active={activePage === "/profile"}
+          Icon={PermIdentityIcon}
+          text="Profile"
+        />
       </Link>
 
       <Link to="/setting" className="link">
-        <SidebarOption Icon={MoreHorizIcon} text="Setting" />
+        <SidebarOption
+          active={activePage === "/setting"}
+          Icon={MoreHorizIcon}
+          text="Setting"
+        />
+      </Link>
+
+      <Link to="/admin" className="link">
+        <SidebarOption
+          active={activePage === "/admin"}
+          Icon={AdminPanelSettingsIcon}
+          text="Admin"
+        />
       </Link>
 
       {/* Button -> Tweet */}

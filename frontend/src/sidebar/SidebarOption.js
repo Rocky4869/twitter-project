@@ -6,7 +6,7 @@ import { useEffect, useState, useRef, forwardRef } from "react";
 function SidebarOption({ active, text, Icon, onClick }) {
   return (
     <div
-      className={`sidebarOption ${active && "sidebarOption--active"}`}
+      className={`sidebarOption ${active ? "sidebarOption--active" : ""}`}
       onClick={onClick}
     >
       <Icon />

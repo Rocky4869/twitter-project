@@ -6,6 +6,7 @@ import SideBarContainer from "./sidebar/SideBarContainer";
 import firebase from "firebase/app";
 import { useEffect, useState } from "react";
 import db from "./firebase";
+import './css/Home.css';
 
 function Home() {
   const [uid, setUid] = useState(null);
@@ -30,7 +31,7 @@ function Home() {
   return (
     <>
       {uid ? (
-        <div className="app">
+        <div className="home">
           <SideBarContainer uid={uid} />
           <Feed uid={uid} />
           <Widgets uid={uid} />
