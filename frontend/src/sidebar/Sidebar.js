@@ -54,7 +54,11 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
         />
       </Link>
       <Link to="/follow" className="link">
-        <SidebarOption Icon={BookmarkBorderIcon} text="Following" />
+        <SidebarOption
+          active={activePage === "/follow"}
+          Icon={BookmarkBorderIcon}
+          text="Following"
+        />
       </Link>
       <SidebarOption Icon={MailOutlineIcon} text="Messages" />
 
