@@ -8,27 +8,39 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Avatar, Button} from "@material-ui/core";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
+import Post from "./Post";
+import Flipmove from "react-flip-move";
 
 function MyProfile() {
   // let { userid } = useParams();
   const [userData, setUserData] = useState(null);
   const [uid, setUid] = useState(null);
   let navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+  //fetch posts tweet by logged in user
+  const fetchPosts = async () => {
+    try {
+      const querySnapshot = await db
+        .collection('posts')
+        .where('userId', '==', uid)
+        .orderBy("created_at", "desc")
+        .get();
 
-  // const fetchUserData = async () => {
-  //   const collectionRef = db.collection("users");
-  //   try {
-  //     const querySnapshot = await collectionRef.where("id", "==", userid).get();
-  //     if (!querySnapshot.empty) {
-  //       const doc = querySnapshot.docs[0];
-  //       setUserData(doc.data());
-  //     } else {
-  //       console.log("User not found");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
+      const userPosts = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+
+      setPosts(userPosts);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };
+  useEffect(() => {
+    if (uid) {
+      fetchPosts();
+    }
+  }, [uid]);
 
   useEffect(() => {
     const fetchUserData = async (uid) => {
@@ -197,6 +209,26 @@ function MyProfile() {
                   </div>
                 </div>
               </div>
+              {/* inside feed */}
+              <Flipmove>
+                {posts.map((post) => (
+                  <Post
+                    key={post.id}
+                    id={post.data.id}
+                    displayName={post.data.displayName}
+                    username={post.data.displayId}
+                    verified={post.data.verified}
+                    text={post.data.text}
+                    avatar={post.data.avatar}
+                    image={post.data.image}
+                    likes={post.data.likes}
+                    createdAt={post.data.created_at}
+                    // comment_avatar={post.data.comment_avatar}
+                    // comment_text={post.data.comment_text}
+                    // comment_account={post.data.comment_account}
+                  />
+                ))}
+              </Flipmove>
             </div>
           </div>
           <Widgets />

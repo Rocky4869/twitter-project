@@ -11,6 +11,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Avatar, Button, TextField } from "@material-ui/core";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
+import Post from "./Post";
+import Flipmove from "react-flip-move";
 
 function Profile() {
   let { userid } = useParams();
@@ -18,9 +20,8 @@ function Profile() {
   const [targetId, setTargetId] = useState(null); //target user, primary key in database
   const [uid, setUid] = useState(null); //myself (loggedin user) primary key
   const [loggedInUserData, setLoggedInUserData] = useState(null);
-
   const [isFollowing, setIsFollowing] = useState(false);
-
+  const [posts, setPosts] = useState([]);
   let navigate = useNavigate();
 
   const fetchUserData = async () => {
@@ -54,6 +55,26 @@ function Profile() {
     }
   };
 
+  //fetch this searched user posts!
+  const fetchPosts = async () => {
+    try {
+      const querySnapshot = await db
+        .collection('posts')
+        .where('userId', '==', targetId)
+        .orderBy("created_at", "desc")
+        .get();
+
+      const userPosts = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+
+      setPosts(userPosts);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };
+
   useEffect(() => {
     fetchUserData();
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -68,6 +89,7 @@ function Profile() {
       unsubscribe();
     };
   }, [userid]);
+
   //fetch logged-in user data
   useEffect(() => {
     fetchLoggedInUserData();
@@ -76,6 +98,7 @@ function Profile() {
   useEffect(() => {
     if (loggedInUserData && userData) {
       setIsFollowing(loggedInUserData.Following.includes(targetId)); //already exsits in logged in user Following list?
+      fetchPosts();
     }
   }, [loggedInUserData, userData, targetId]);
 
@@ -211,7 +234,7 @@ function Profile() {
                         backgroundColor: "black",
                         textTransform: "none",
                         width: "100px",
-                        marginLeft: "200px",
+                        marginLeft: "400px",
                       }}
                       onClick={handleFollow}
                     >
@@ -248,6 +271,25 @@ function Profile() {
                   </div>
                 </div>
               </div>
+              <Flipmove>
+                {posts.map((post) => (
+                  <Post
+                    key={post.id}
+                    id={post.data.id}
+                    displayName={post.data.displayName}
+                    username={post.data.displayId}
+                    verified={post.data.verified}
+                    text={post.data.text}
+                    avatar={post.data.avatar}
+                    image={post.data.image}
+                    likes={post.data.likes}
+                    createdAt={post.data.created_at}
+                    // comment_avatar={post.data.comment_avatar}
+                    // comment_text={post.data.comment_text}
+                    // comment_account={post.data.comment_account}
+                  />
+                ))}
+              </Flipmove>
             </div>
           </div>
           <Widgets />
