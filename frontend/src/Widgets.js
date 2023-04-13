@@ -99,10 +99,10 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
           const id = doc.id;
           const data = doc.data;
           const name = doc.data.username;
-          console.log(`Document ID: ${id}`);
-          console.log("Document data:", data);
-          console.log(`userID: ${data.id}`);
-          console.log(`Name: ${name}`);
+          // console.log(`Document ID: ${id}`);
+          // console.log("Document data:", data);
+          // console.log(`userID: ${data.id}`);
+          // console.log(`Name: ${name}`);
         });
         setSearchResults(docs);
         //   console.log(searchResults);
