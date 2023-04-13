@@ -21,8 +21,8 @@ function MyProfile() {
   const fetchPosts = async () => {
     try {
       const querySnapshot = await db
-        .collection('posts')
-        .where('userId', '==', uid)
+        .collection("posts")
+        .where("userId", "==", uid)
         .orderBy("created_at", "desc")
         .get();
 
@@ -33,7 +33,7 @@ function MyProfile() {
 
       setPosts(userPosts);
     } catch (error) {
-      console.error('Error fetching posts:', error);
+      console.error("Error fetching posts:", error);
     }
   };
   useEffect(() => {
@@ -160,9 +160,7 @@ function MyProfile() {
                     }}
                     className="flex flex-row"
                   >
-                    <div>
-                      {userData.introduction}
-                    </div>
+                    <div>{userData.introduction}</div>
                     {/* <Button
                       variant="outlined"
                       style={{
