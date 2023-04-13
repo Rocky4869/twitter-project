@@ -1,5 +1,5 @@
 import React from 'react';
-import './Retweet.css';
+import './css/Retweet.css';
 import {forwardRef, useEffect, useState} from 'react';
 import { Avatar, Button } from '@material-ui/core';
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -7,7 +7,7 @@ import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
-import SidebarOption from './SidebarOption';
+import SidebarOption from './sidebar/SidebarOption';
 import db from "./firebase";
 
 const Retweet = forwardRef((

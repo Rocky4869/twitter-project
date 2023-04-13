@@ -2,7 +2,7 @@ import React from 'react'
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 import { Avatar, Button } from '@material-ui/core';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import './TwitterTrending.css';
+import './css/TwitterTrending.css';
 
 function TwitterTrending( 
     {
