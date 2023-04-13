@@ -157,7 +157,7 @@ function MyProfile() {
                       Edit Profile
                       {/* show profile if is user himself */}
                     </Button>
-                    {showDialog && <EditProfileDialog onClose={handleCloseDialog} />}
+                    {/* {showDialog && <EditProfileDialog onClose={handleCloseDialog} />} */}
                   </div>
                   <div
                     style={{
