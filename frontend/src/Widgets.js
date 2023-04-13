@@ -8,6 +8,8 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
+import TwitterFollow from './TwitterFollow';
+import TwitterTrending from './TwitterTrending';
 
 const Widgets = forwardRef(({ avatar, uid, myid }, ref) => {
   const [searchInput, setSearchInput] = useState("");
@@ -138,6 +140,20 @@ const Widgets = forwardRef(({ avatar, uid, myid }, ref) => {
     } else navigate(`/${userid}`);
   };
 
+  const [widgetsFollow, setWidgetsFollow] = useState([]);
+  useEffect(() => {
+      db.collection('posts').onSnapshot( snapshot => (  
+          setWidgetsFollow(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+      ))       
+  }, [])
+
+  const [widgetsTrending, setWidgetsTrending] = useState([]);
+  useEffect(() => {
+      db.collection('posts').onSnapshot( snapshot => (  
+          setWidgetsTrending(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+      ))       
+  }, [])
+  
   return (
     <div className="widgets">
       <div className="widgets_input">
@@ -191,14 +207,49 @@ const Widgets = forwardRef(({ avatar, uid, myid }, ref) => {
           ))}
         </div>
       )}
-      <div className="widgets_widgetContainer">
-        <h2>Recommendations</h2>
-        <TwitterTweetEmbed tweetId={"1639974872406446084"} />
-        <TwitterTimelineEmbed
-          sourceType="profile"
-          screenName="offclASTRO"
-          options={{ height: 400 }}
-        />
+            <div className='widgets_widgetContainer_follow'>
+                <h2>You may also like</h2>
+
+                
+                {widgetsFollow.slice(0, 3).map(widgetFollow => (
+                <TwitterFollow
+                id={widgetFollow.id}
+                displayName={widgetFollow.displayName}
+                username={widgetFollow.username}
+                verified={widgetFollow.verified}
+                text={widgetFollow.text}
+                avatar={widgetFollow.avatar}
+                image={widgetFollow.image}
+                likes={widgetFollow.likes}
+                />
+                ))}
+
+                {/*
+                <TwitterFollowButton
+                    screenName={'ivestarship'} />
+                <TwitterFollowButton
+                    screenName={'blackpink'} />
+                <TwitterFollowButton
+                    screenName={'le_sserafim'} />
+                */}
+
+            </div>
+             <div className="widgets_widgetContainer">
+                <h2>What's happening</h2>
+
+                {widgetsTrending.slice(0, 3).map(widgetTrending => (
+                <TwitterTrending
+                id={widgetTrending.id}
+                displayName={widgetTrending.displayName}
+                username={widgetTrending.username}
+                verified={widgetTrending.verified}
+                text={widgetTrending.text}
+                avatar={widgetTrending.avatar}
+                image={widgetTrending.image}
+                likes={widgetTrending.likes}
+                />
+                ))}
+
       </div>
 
       
