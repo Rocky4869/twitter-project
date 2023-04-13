@@ -53,6 +53,9 @@ function Profile() {
   const handleFollow = () => {
     setIsFollowing(!isFollowing);
   };
+  const handleReturn = () => {
+    navigate("/home");
+  };
 
   return (
     <div>
@@ -63,12 +66,13 @@ function Profile() {
             <div className="feed">
               <div className="feed_header">
                 <div className="flex flex-row">
-                  <ArrowBackIcon
-                    style={{
-                      marginTop: "10px",
-                      marginRight: "20px",
-                    }}
-                  ></ArrowBackIcon>
+                    <ArrowBackIcon
+                      style={{
+                        marginTop: "10px",
+                        marginRight: "20px",
+                      }}
+                      onClick={handleReturn}
+                    ></ArrowBackIcon>
                   <div
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
@@ -121,8 +125,7 @@ function Profile() {
                     className="flex flex-row"
                   >
                     <div>
-                      Hey, this is {userData.username} here! This is my
-                      introduction section.
+                      {userData.introduction}
                     </div>
                     <Button
                       variant="outlined"
@@ -157,7 +160,7 @@ function Profile() {
                         marginTop: "5px",
                       }}
                     >
-                      Joined April 2023
+                      {userData.joinedAt.toDate().toLocaleString('en-US')}
                     </span>
                   </div>
                   <div
@@ -166,8 +169,8 @@ function Profile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>83 Following</div>
-                    <div style={{ marginLeft: "10px" }}> 224 Followers </div>
+                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
+                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers </div>
                   </div>
                 </div>
               </div>

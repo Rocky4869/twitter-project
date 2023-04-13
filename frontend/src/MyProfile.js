@@ -60,6 +60,10 @@ function MyProfile() {
     };
   }, []);
 
+  const handleReturn = () => {
+    navigate("/home");
+  };
+
   return (
     <div>
       {uid && userData ? (
@@ -74,6 +78,7 @@ function MyProfile() {
                       marginTop: "10px",
                       marginRight: "20px",
                     }}
+                    onClick={handleReturn}
                   ></ArrowBackIcon>
                   <div
                     className="font-bold flex"
@@ -143,7 +148,7 @@ function MyProfile() {
                     className="flex flex-row"
                   >
                     <div>
-                      Hey, this is Oscar here! This is my introduction section.
+                      {userData.introduction}
                     </div>
                     {/* <Button
                       variant="outlined"
@@ -178,7 +183,7 @@ function MyProfile() {
                         marginTop: "5px",
                       }}
                     >
-                      Joined April 2023
+                      {userData.joinedAt.toDate().toLocaleString('en-US')}
                     </span>
                   </div>
                   <div

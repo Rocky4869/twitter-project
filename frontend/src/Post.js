@@ -204,7 +204,7 @@ const Post = forwardRef(
           </form>
           <div className="post_id">
             {/* <h6>Post ID: {id}</h6> */}
-            <h6>Created at: {createdAt.toDate().toLocaleString()}</h6>
+            <h6>Created at: {createdAt.toDate().toLocaleString('en-US')}</h6>
           </div>
         </div>
       </div>
