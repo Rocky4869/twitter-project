@@ -234,6 +234,8 @@ const Widgets = forwardRef(({ avatar, uid, myid }, ref) => {
                 */}
 
             </div>
+
+            
              <div className="widgets_widgetContainer">
                 <h2>What's happening</h2>
 
@@ -249,8 +251,8 @@ const Widgets = forwardRef(({ avatar, uid, myid }, ref) => {
                 likes={widgetTrending.likes}
                 />
                 ))}
-
-      </div>
+              </div>
+            
 
       
     </div>

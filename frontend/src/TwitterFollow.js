@@ -25,7 +25,7 @@ function TwitterFollow(
             <div className='twitterfollow_header'>
                 <div className='twitterfollow_headerText'>
                     <h3>
-                    {displayName} {" "}
+                    {displayName} {" "} {username}
                     <span className='twitterfollow_headerSpecial'>
                         {verified && <VerifiedIcon className="twitterfollow_badge"></VerifiedIcon>} 
                     </span>
