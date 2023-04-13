@@ -47,7 +47,7 @@ function Profile() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [userid]);
 
   return (
     <div>
@@ -163,8 +163,8 @@ function Profile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>9 Following</div>
-                    <div style={{ marginLeft: "10px" }}> 200 Followers </div>
+                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
+                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers </div>
                   </div>
                 </div>
               </div>
