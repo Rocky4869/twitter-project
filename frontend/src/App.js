@@ -22,6 +22,7 @@ import Setting from "./Setting";
 import { ToastContainer } from "react-toastify";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import AdminTable from "./AdminTable";
+import Follow from "./Follow";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/register" element={<RegistrationTab />} />
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/:userid" element={<Profile />} />
+        <Route path="/follow" element={<Follow />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/admin" element={<AdminTable />} />
         <Route path="*" element={<NoMatch />} />
