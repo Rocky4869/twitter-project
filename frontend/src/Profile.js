@@ -16,6 +16,7 @@ function Profile() {
   let { userid } = useParams();
   const [userData, setUserData] = useState(null);
   const [uid, setUid] = useState(null);
+  const [isFollowing, setIsFollowing] = useState(false);
   let navigate = useNavigate();
 
   const fetchUserData = async () => {
@@ -67,7 +68,7 @@ function Profile() {
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
                   >
-                    Oscar
+                    {userData.username}
                   </div>
                 </div>
               </div>
@@ -98,31 +99,15 @@ function Profile() {
                   />
                   <div className="flex flex-row">
                     <div className="font-bold" style={{ marginTop: "10px" }}>
-                      Oscar
+                      {userData.username}
                     </div>
-                    <Button
-                      variant="outlined"
-                      style={{
-                        padding: "5px",
-                        color: "white",
-                        borderRadius: "30px",
-                        fontWeight: "bold",
-                        backgroundColor: "black",
-                        textTransform: "none",
-                        width: "150px",
-                        marginLeft: "500px",
-                      }}
-                    >
-                      Edit Profile
-                      {/* show profile if is user himself */}
-                    </Button>
                   </div>
                   <div
                     style={{
                       color: "gray",
                     }}
                   >
-                    @{userid}
+                    @{userData.id}
                   </div>
                   <div
                     style={{
@@ -131,7 +116,8 @@ function Profile() {
                     className="flex flex-row"
                   >
                     <div>
-                      Hey, this is Oscar here! This is my introduction section.
+                      Hey, this is {userData.username} here! This is my
+                      introduction section.
                     </div>
                     <Button
                       variant="outlined"
@@ -145,9 +131,11 @@ function Profile() {
                         width: "100px",
                         marginLeft: "200px",
                       }}
+                      onClick={() => {
+                        setIsFollowing(!isFollowing);
+                      }}
                     >
-                      Follow
-                      {/* show follow if is not user himself */}
+                      {isFollowing ? "Following" : "Follow"}
                     </Button>
                   </div>
                   <div
