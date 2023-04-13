@@ -48,7 +48,7 @@ function Profile() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [userid]);
 
   const handleFollow = () => {
     setIsFollowing(!isFollowing);

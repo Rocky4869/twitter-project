@@ -132,11 +132,12 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
   const handleItemClick = (userid) => {
     setDropdownVisible(false);
     setSearchInput("");
-    // alert("selected item: " + userid);
-    if (userid === userData.id) {
-      // Bug: if userid == userData.id
-      navigate(`/profile`);
-    } else navigate(`/${userid}`);
+    // // alert("selected item: " + userid);
+    // if (userid === userData.id) {
+    //   // Bug: if userid == userData.id
+    //   navigate(`/profile`);
+    // } else navigate(`/${userid}`);
+    navigate(`/${userid}`);
   };
 
   return (
