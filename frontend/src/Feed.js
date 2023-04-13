@@ -7,7 +7,7 @@ import Flipmove from "react-flip-move";
 
 function Feed({ uid }) {
   const [posts, setPosts] = useState([]);
-
+  const [loggedInUserData, setLoggedInUserData] = useState(null);
   // https://firebase.google.com/docs/firestore/query-data/get-data
   //const querySnapshot = await db.collection("posts").get();
 
@@ -31,30 +31,76 @@ function Feed({ uid }) {
     }, [])
     
     */
+    const fetchLoggedInUserData = async () => {
+      try {
+        const userDoc = await db.collection("users").doc(uid).get();
+        if (userDoc.exists) {
+          setLoggedInUserData(userDoc.data());
+        }
+      } catch (error) {
+        console.error("Error fetching logged in user data:", error);
+      }
+    };
+
+    // const fetchPosts = async () => {
+    //   try {
+    //     const querySnapshot = await db
+    //       .collection('posts')
+    //       .where('userId', '==', uid)
+    //       .orderBy("created_at", "desc")
+    //       .get();
+
+    //     const userPosts = querySnapshot.docs.map((doc) => ({
+    //       id: doc.id,
+    //       data: doc.data(),
+    //     }));
+
+    //     setPosts(userPosts);
+    //   } catch (error) {
+    //     console.error('Error fetching posts:', error);
+    //   }
+    // };
     const fetchPosts = async () => {
       try {
-        const querySnapshot = await db
-          .collection('posts')
-          .where('userId', '==', uid)
-          .orderBy("created_at", "desc")
-          .get();
-
-        const userPosts = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }));
-
-        setPosts(userPosts);
+        if (loggedInUserData) {
+          const followedUsers = loggedInUserData.Following;
+          const userPostsPromises = followedUsers.map(async (followedUserId) => {
+            const querySnapshot = await db
+              .collection("posts")
+              .where("userId", "==", followedUserId)
+              .orderBy("created_at", "desc")
+              .get();
+            return querySnapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }));
+          });
+          const allFollowedUserPosts = await Promise.all(userPostsPromises);
+          const postArray = [].concat(...allFollowedUserPosts);
+          const sortedPosts = postArray.sort((x, y) => {
+            return (
+              y.data.created_at.toDate().getTime() -
+              x.data.created_at.toDate().getTime()
+            );
+          });
+          setPosts(sortedPosts);
+        }
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error("Error fetching posts:", error);
       }
     };
     useEffect(() => {
       if (uid) {
-        fetchPosts();
+        // alert(uid);
+        // fetchPosts();
+        fetchLoggedInUserData();
       }
     }, [uid]);
-
+    useEffect(() => {
+      if (loggedInUserData) {
+        fetchPosts();
+      }
+    }, [loggedInUserData]);
   return (
     <div className="feed">
       {/* Header */}

@@ -17,7 +17,7 @@ import Flipmove from "react-flip-move";
 function Profile() {
   let { userid } = useParams();
   const [userData, setUserData] = useState(null); //target user all data
-  const [targetId, setTargetId] = useState(null); //target user, primary key in database
+  const [targetUserId, settargetUserId] = useState(null); //target user, primary key in database
   const [uid, setUid] = useState(null); //myself (loggedin user) primary key
   const [loggedInUserData, setLoggedInUserData] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -30,7 +30,7 @@ function Profile() {
       const querySnapshot = await collectionRef.where("id", "==", userid).get();
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
-        setTargetId(doc.id);
+        settargetUserId(doc.id);
         setUserData(doc.data());
         // alert(doc.data().id);
         // alert(doc.id);
@@ -60,7 +60,7 @@ function Profile() {
     try {
       const querySnapshot = await db
         .collection('posts')
-        .where('userId', '==', targetId)
+        .where('userId', '==', targetUserId)
         .orderBy("created_at", "desc")
         .get();
 
@@ -97,23 +97,23 @@ function Profile() {
 
   useEffect(() => {
     if (loggedInUserData && userData) {
-      setIsFollowing(loggedInUserData.Following.includes(targetId)); //already exsits in logged in user Following list?
+      setIsFollowing(loggedInUserData.Following.includes(targetUserId)); //already exsits in logged in user Following list?
       fetchPosts();
     }
-  }, [loggedInUserData, userData, targetId]);
+  }, [loggedInUserData, userData, targetUserId]);
 
   //update db when follow or unfollow
   const updateFollowing = async () => {
-    if (uid && targetId) {
+    if (uid && targetUserId) {
       const loggedInUserDocRef = db.collection("users").doc(uid);
-      const targetUserDocRef = db.collection("users").doc(targetId);
+      const targetUserDocRef = db.collection("users").doc(targetUserId);
   
       try {
         const batch = db.batch();
         if (isFollowing) {
           // Remove the target user from the Following 
           batch.update(loggedInUserDocRef, {
-            Following: firebase.firestore.FieldValue.arrayRemove(targetId),
+            Following: firebase.firestore.FieldValue.arrayRemove(targetUserId),
           });
           // Remove the logged-in user from the target user's Followers
           batch.update(targetUserDocRef, {
@@ -126,7 +126,7 @@ function Profile() {
         } else {
           // Add the target user to the Following
           batch.update(loggedInUserDocRef, {
-            Following: firebase.firestore.FieldValue.arrayUnion(targetId),
+            Following: firebase.firestore.FieldValue.arrayUnion(targetUserId),
           });
           // Add the logged-in user to the target user's Followers
           batch.update(targetUserDocRef, {
