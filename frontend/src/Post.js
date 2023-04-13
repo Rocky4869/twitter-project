@@ -7,6 +7,7 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import SidebarOption from "./sidebar/SidebarOption";
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import db from "./firebase";
 import Comment from "./Comment";
 
@@ -21,6 +22,7 @@ const Post = forwardRef(
       avatar,
       image,
       likes,
+      // dislikes, 
       createdAt,
     },
     ref
@@ -94,11 +96,19 @@ const Post = forwardRef(
         retweet_likes: likes,
       });
     };
-    const [isLiked, setIsLiked] = useState(false);
-
+    const [ isLiked, setIsLiked] = useState(false);
+    const [ disLiked, setDisliked] = useState(false);
     const likePost = (e) => {
       e.preventDefault();
 
+      // if (disLiked) {
+      //   db.collection("posts")
+      //   .doc(id)
+      //   .update({
+      //     likes: likes + 1,
+      //     dislikes: dislikes -1;
+      //   });
+      // }
       db.collection("posts")
         .doc(id)
         .update({
@@ -118,6 +128,38 @@ const Post = forwardRef(
       setIsLiked((value) => !value);
     };
 
+    // dislike function 
+    // const disLikePost = (e) => {
+    //   e.preventDefault();
+
+    //   if (isLiked) {
+    //     db.collection("posts")
+    //       .doc(id)
+    //       .update({
+    //         dislikes: dislikes + 1,
+    //         likes: likes -1 
+    //       });
+    //   } else {
+    //     db.collection("posts")
+    //     .doc(id)
+    //     .update({
+    //       dislikes: dislikes + 1,
+    //     });
+    //   }
+    //   setIsLiked((value) => !value);
+    // };
+
+    // const unDislikePost = (e) => {
+    //   e.preventDefault();
+
+    //   db.collection("posts")
+    //     .doc(id)
+    //     .update({
+    //       dislikes: dislikes - 1,
+    //     });
+    //   setIsLiked((value) => !value);
+    // };
+
     let like_button_status;
 
     if (isLiked) {
@@ -133,6 +175,21 @@ const Post = forwardRef(
         </Button>
       );
     }
+
+    // dislike logic 
+    // if (disLiked) {
+    //   like_button_status = (
+    //     <Button onClick={unDislikePost} type="submit">
+    //       <SidebarOption active Icon={ThumbDownOffAltIcon} text={dislikes} />
+    //     </Button>
+    //   );
+    // } else {
+    //   like_button_status = (
+    //     <Button onClick={disLikePost} type="submit">
+    //       <SidebarOption Icon={ThumbDownOffAltIcon} text={dislikes} />
+    //     </Button>
+    //   );
+    // }
 
     return (
       <div className="post" ref={ref}>
