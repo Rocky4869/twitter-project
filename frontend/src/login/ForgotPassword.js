@@ -137,7 +137,7 @@ function ForgotPassword() {
                     borderRadius: "30px",
                     transition: "background-color 0.2s ease-in-out",
                   }}
-                  to="/login"
+                  to="/"
                 >
                   Back
                 </Link>

@@ -81,7 +81,7 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
           text="Following"
         />
       </Link>
-      <SidebarOption Icon={MailOutlineIcon} text="Messages" />
+      {/* <SidebarOption Icon={MailOutlineIcon} text="Messages" /> */}
 
       <Link to={"/profile"} className="link">
         <SidebarOption

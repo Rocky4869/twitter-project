@@ -67,7 +67,7 @@ function Feed({ uid }) {
           const userPostsPromises = followedUsers.map(async (followedUserId) => {
             const querySnapshot = await db
               .collection("posts")
-              .where("userId", "==", followedUserId)
+              // .where("userId", "==", followedUserId)
               .orderBy("created_at", "desc")
               .get();
             return querySnapshot.docs.map((doc) => ({

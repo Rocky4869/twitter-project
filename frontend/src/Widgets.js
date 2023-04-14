@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
 import firebase from "firebase/app";
+import TwitterFollow from "./TwitterFollow";
+import TwitterTrending from "./TwitterTrending";
+
 const Widgets = forwardRef(({ avatar, uid }, ref) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -17,26 +20,24 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
   // const [userData, setUserData] = useState(null);
   let navigate = useNavigate();
   const [currentUserid, setUid] = useState(null);
-  // const fetchUserData = async () => {
-  //   try {
-  //     const docRef = db.collection("users").doc(uid);
-  //     const docSnapshot = await docRef.get();
-  //     if (!docSnapshot.empty) {
-  //       const userData = docSnapshot.data();
-  //       setUserData(userData);
-  //       // console.debug(userData);
-  //       // alert(uid);
-  //       // alert(userData.username);
-  //     } else {
-  //       console.log("User not found");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchUserData();
-  // }, []);
+  const [widgetsFollow, setWidgetsFollow] = useState([]);
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) =>
+      setWidgetsFollow(
+        snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      )
+    );
+  }, []);
+
+  const [widgetsTrending, setWidgetsTrending] = useState([]);
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) =>
+      setWidgetsTrending(
+        snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      )
+    );
+  }, []);
+
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -52,7 +53,6 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
     };
   }, []);
 
-
   useEffect(() => {
     if (searchInput.trim() === "") {
       setSearchResults([]);
@@ -61,27 +61,6 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
     const searchInputNext =
       searchInput.slice(0, -1) +
       String.fromCharCode(searchInput.charCodeAt(searchInput.length - 1) + 1);
-    // // alert("press enter");
-    // let results = db.collection('users')
-    // .where("name" ,">=", searchInput)
-    // .where("name" ,"<", searchInputNext).get()
-    // .then((querySnapshot) => {
-    //     if (!querySnapshot.empty) {
-    //         let docs =[]
-    //         querySnapshot.forEach((doc) => {
-    //           console.log('Document ID:', doc.id);
-    //           console.log('Document data:', doc.data());
-    //           console.log('Document data:', doc.data().id);
-    //           docs.push(doc.data());
-    //         });
-    //         setSearchResults(docs);
-    //       } else {
-    //         console.log('No document found with the specified field value');
-    //       }
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error adding document:', error);
-    //   });
     const collectionRef = db.collection("users");
     const queryByName = collectionRef
       .where("username", ">=", searchInput)
@@ -180,7 +159,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
           )}
         </div>
       </div>
-      {dropdownVisible && searchInput.trim() !== "" &&(
+      {dropdownVisible && searchInput.trim() !== "" && (
         <div
           className="dropdown"
           ref={dropDownRef}
@@ -188,42 +167,85 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
             marginLeft: "10px",
           }}
         >
-          {searchResults.length > 0 ? (searchResults.filter((doc) => doc.id !== currentUserid)
-          .map((doc) => (
-            <div
-              className="dropdown-item flex"
-              key={doc.id}
-              onClick={() => handleItemClick(doc.data.id)}
-            >
-              <Avatar
-                style={{
-                  height: "50px",
-                  width: "50px",
-                  margin: "10px 25px 10px 10px",
-                }}
-                src={avatar}
-                ref={ref}
-              ></Avatar>
-              <div className="flex flex-col" style={{ marginTop: "15px" }}>
-                <div className="font-bold">{doc.data.username}</div>
-                <div style={{ color: "gray" }}>@{doc.data.id}</div>
-              </div>
-            </div>
-          ))):(
+          {searchResults.length > 0 ? (
+            searchResults
+              .filter((doc) => doc.id !== currentUserid)
+              .map((doc) => (
+                <div
+                  className="dropdown-item flex"
+                  key={doc.id}
+                  onClick={() => handleItemClick(doc.data.id)}
+                >
+                  <Avatar
+                    style={{
+                      height: "50px",
+                      width: "50px",
+                      margin: "10px 25px 10px 10px",
+                    }}
+                    src={avatar}
+                    ref={ref}
+                  ></Avatar>
+                  <div className="flex flex-col" style={{ marginTop: "15px" }}>
+                    <div className="font-bold">{doc.data.username}</div>
+                    <div style={{ color: "gray" }}>@{doc.data.id}</div>
+                  </div>
+                </div>
+              ))
+          ) : (
             <div className="dropdown-item">
               <p>No such user</p>
             </div>
           )}
         </div>
       )}
+      <div className="widgets_widgetContainer_follow">
+        <h2>You may also like</h2>
+
+        {widgetsFollow.slice(0, 3).map((widgetFollow) => (
+          <TwitterFollow
+            id={widgetFollow.id}
+            displayName={widgetFollow.displayName}
+            username={widgetFollow.username}
+            verified={widgetFollow.verified}
+            text={widgetFollow.text}
+            avatar={widgetFollow.avatar}
+            image={widgetFollow.image}
+            likes={widgetFollow.likes}
+          />
+        ))}
+
+        {/*
+                <TwitterFollowButton
+                    screenName={'ivestarship'} />
+                <TwitterFollowButton
+                    screenName={'blackpink'} />
+                <TwitterFollowButton
+                    screenName={'le_sserafim'} />
+                */}
+      </div>
       <div className="widgets_widgetContainer">
-        <h2>Recommendations</h2>
-        <TwitterTweetEmbed tweetId={"1639974872406446084"} />
-        <TwitterTimelineEmbed
-          sourceType="profile"
-          screenName="offclASTRO"
-          options={{ height: 400 }}
-        />
+        <h2>What's happening</h2>
+
+        {widgetsTrending.slice(0, 3).map((widgetTrending) => (
+          <TwitterTrending
+            id={widgetTrending.id}
+            displayName={widgetTrending.displayName}
+            username={widgetTrending.username}
+            verified={widgetTrending.verified}
+            text={widgetTrending.text}
+            avatar={widgetTrending.avatar}
+            image={widgetTrending.image}
+            likes={widgetTrending.likes}
+          />
+        ))}
+
+        {/*
+                <TwitterTimelineEmbed 
+                    sourceType="profile"
+                    screenName="IVEstarship"
+                    options={{ height: 400 }}
+                />
+                */}
       </div>
     </div>
   );
