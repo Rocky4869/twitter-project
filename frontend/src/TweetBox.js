@@ -75,7 +75,7 @@ function TweetBox({ uid, onPostSubmit }) {
       });
     }
     const querySnapshot = await db.collection("posts").get();
-    const postCount = querySnapshot.size;
+    let postCount = querySnapshot.size;
     let defaultPostId;
     let isUnique = false;
     while (!isUnique) {
@@ -110,9 +110,8 @@ function TweetBox({ uid, onPostSubmit }) {
       image: fileURL,
       created_at: timestamp,
       //use it self user avatar instead
-      avatar:
-        userData.avator,
-        postId: defaultPostId,
+      avatar: userData.avator,
+      postId: defaultPostId,
     });
     if (onPostSubmit) {
       onPostSubmit();
@@ -148,129 +147,129 @@ function TweetBox({ uid, onPostSubmit }) {
 
   return (
     <div>
-    {userData && (
-    <div className="tweetBox">
-      <form>
-        <div className="tweetBox_input">
-          <Avatar
-            style={{ height: "90px", width: "90px" }}
-            src={userData.avator}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            label="What's happening?"
-            type="text"
-            fullWidth
-            multiline
-            minRows={6}
-            maxRows={8}
-            value={tweetMessage}
-            onChange={(e) => setTweetMessage(e.target.value)}
-            style={{
-              fontWeight: "bold",
-              color: "gray",
-              marginLeft: "30px",
-              marginTop: "5px",
-            }}
-            InputProps={{
-              endAdornment: (
-                <>
-                  <IconButton onClick={handleOpenEmoji}>
-                    <InsertEmoticon />
-                  </IconButton>
-                  <IconButton onClick={handleOpenImage}>
-                    <Image />
-                    <input
-                      id="image-input"
-                      type="file"
-                      accept="image/*,video/*"
-                      style={{ display: "none" }}
-                      onChange={handleImageSelect}
-                    />
-                  </IconButton>
-                </>
-              ),
-            }}
-          >
-            Enter your reply...
-          </TextField>
-        </div>
-        <TextField
-          value={tweetImage}
-          onChange={(e) => setTweetImage(e.target.value)}
-          className="tweetBox_imageInput"
-          label="Optional: Enter image URL"
-          type="text"
-          InputProps={{ disableUnderline: !tweetImage }}
-          style={{
-            marginLeft: "30px",
-          }}
-        />
-        {showEmojiPicker && (
-          <Picker onEmojiClick={onEmojiClick} height={400} width={300} />
-        )}
-        {selectedImage && (
-          <div>
-            <div className="flex flex-row ">
-              <div
+      {userData && (
+        <div className="tweetBox">
+          <form>
+            <div className="tweetBox_input">
+              <Avatar
+                style={{ height: "90px", width: "90px" }}
+                src={userData.avator}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                label="What's happening?"
+                type="text"
+                fullWidth
+                multiline
+                minRows={6}
+                maxRows={8}
+                value={tweetMessage}
+                onChange={(e) => setTweetMessage(e.target.value)}
                 style={{
-                  marginBottom: "10px",
-                  alignItems: "center",
+                  fontWeight: "bold",
+                  color: "gray",
                   marginLeft: "30px",
+                  marginTop: "5px",
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <>
+                      <IconButton onClick={handleOpenEmoji}>
+                        <InsertEmoticon />
+                      </IconButton>
+                      <IconButton onClick={handleOpenImage}>
+                        <Image />
+                        <input
+                          id="image-input"
+                          type="file"
+                          accept="image/*,video/*"
+                          style={{ display: "none" }}
+                          onChange={handleImageSelect}
+                        />
+                      </IconButton>
+                    </>
+                  ),
                 }}
               >
-                File Preview:
-              </div>
-              <Button
-                variant="contained"
-                color="primary"
-                style={{
-                  border: "1px solid #C4C4C4",
-                  boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
-                  width: "150px",
-                  marginLeft: "auto",
-                  textTransform: "none",
-                  borderRadius: "20px",
-                  marginBottom: "10px",
-                }}
-                onClick={closePreview}
-              >
-                Close Preview
-              </Button>
+                Enter your reply...
+              </TextField>
             </div>
-            {isImage(selectedImage) && (
-              <img
-                src={URL.createObjectURL(selectedImage)}
-                alt="Selected image"
-                style={{
-                  maxWidth: "50%",
-                  marginLeft: "30px",
-                }}
-              />
+            <TextField
+              value={tweetImage}
+              onChange={(e) => setTweetImage(e.target.value)}
+              className="tweetBox_imageInput"
+              label="Optional: Enter image URL"
+              type="text"
+              InputProps={{ disableUnderline: !tweetImage }}
+              style={{
+                marginLeft: "30px",
+              }}
+            />
+            {showEmojiPicker && (
+              <Picker onEmojiClick={onEmojiClick} height={400} width={300} />
             )}
-            {isVideo(selectedImage) && (
-              <video
-                src={URL.createObjectURL(selectedImage)}
-                controls
-                style={{
-                  maxWidth: "50%",
-                  marginLeft: "30px",
-                }}
-              />
+            {selectedImage && (
+              <div>
+                <div className="flex flex-row ">
+                  <div
+                    style={{
+                      marginBottom: "10px",
+                      alignItems: "center",
+                      marginLeft: "30px",
+                    }}
+                  >
+                    File Preview:
+                  </div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={{
+                      border: "1px solid #C4C4C4",
+                      boxShadow: "2px solid rgba(0, 0, 0, 0.2)",
+                      width: "150px",
+                      marginLeft: "auto",
+                      textTransform: "none",
+                      borderRadius: "20px",
+                      marginBottom: "10px",
+                    }}
+                    onClick={closePreview}
+                  >
+                    Close Preview
+                  </Button>
+                </div>
+                {isImage(selectedImage) && (
+                  <img
+                    src={URL.createObjectURL(selectedImage)}
+                    alt="Selected image"
+                    style={{
+                      maxWidth: "50%",
+                      marginLeft: "30px",
+                    }}
+                  />
+                )}
+                {isVideo(selectedImage) && (
+                  <video
+                    src={URL.createObjectURL(selectedImage)}
+                    controls
+                    style={{
+                      maxWidth: "50%",
+                      marginLeft: "30px",
+                    }}
+                  />
+                )}
+              </div>
             )}
-          </div>
-        )}
-        <Button
-          onClick={sendTweet}
-          type="submit"
-          className="tweetBox_tweetButton"
-        >
-          Tweet
-        </Button>
-      </form>
-    </div>
-    )}
+            <Button
+              onClick={sendTweet}
+              type="submit"
+              className="tweetBox_tweetButton"
+            >
+              Tweet
+            </Button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
