@@ -97,6 +97,7 @@ function RegistrationTab() {
         introduction: "Hi there!, I am using twitter!",
         avator: "",
         postLiked: [],
+        role:"user,"
       });
 
       // console.log("User signed up:", user);
