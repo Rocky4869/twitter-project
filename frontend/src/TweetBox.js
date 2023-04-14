@@ -75,7 +75,7 @@ function TweetBox({ uid, onPostSubmit }) {
       });
     }
     const querySnapshot = await db.collection("posts").get();
-    const postCount = querySnapshot.size;
+    let postCount = querySnapshot.size;
     let defaultPostId;
     let isUnique = false;
     while (!isUnique) {
