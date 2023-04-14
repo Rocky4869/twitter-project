@@ -37,6 +37,7 @@ const Post = forwardRef(
       e.preventDefault();
       
       console.log("send  Tweet");
+      console.log(postId);
       if (loggedInUserData && postId) {
         const timestamp = firebase.firestore.Timestamp.now();
         db.collection("posts")
@@ -76,26 +77,62 @@ const Post = forwardRef(
     //       )
     //     );
     // }, []);
-    useEffect(() => {
-      if (postId) {
-        const unsubscribe = db
-          .collection("posts")
-          .doc(postId)
-          .collection("comments")
-           // You can add this line to order comments by their creation time
-          .limit(50) // Set a higher limit; for example, 50
-          .onSnapshot((snapshot) => {
-            const fetchedComments = snapshot.docs.map((doc_comment) => ({
-              id: doc_comment.id,
-              ...doc_comment.data(),
-            }));
-            console.log("Fetched comments:", fetchedComments);
-            setComments(fetchedComments);
-          });
+    // useEffect(() => {
+    //   console.log(postId);
+    //   if (postId) {
+    //     const unsubscribe = db
+    //       .collection("posts")
+    //       .doc(postId)
+    //       .collection("comments")
+    //        // You can add this line to order comments by their creation time
+    //       .limit(50) // Set a higher limit; for example, 50
+    //       .onSnapshot((snapshot) => {
+    //         const fetchedComments = snapshot.docs.map((doc_comment) => ({
+    //           id: doc_comment.id,
+    //           ...doc_comment.data(),
+    //         }));
+    //         console.log("Fetched comments:", fetchedComments);
+    //         setComments(fetchedComments);
+    //       });
     
-        return () => {
-          unsubscribe();
-        };
+    //     return () => {
+    //       unsubscribe();
+    //     };
+    //   }
+    // }, [postId]);
+    useEffect(() => {
+      console.log(postId);
+      if (postId) {
+        // Query the `posts` collection to find the post with the matching `postId`
+        db.collection("posts")
+          .where("postId", "==", postId)
+          .limit(1)
+          .get()
+          .then((querySnapshot) => {
+            if (!querySnapshot.empty) {
+              // Get the `postId` from the matching post document
+              const postId = querySnapshot.docs[0].id;
+    
+              // Fetch the comments for the matching post
+              const unsubscribe = db
+                .collection("posts")
+                .doc(postId)
+                .collection("comments")
+                .limit(50)
+                .onSnapshot((snapshot) => {
+                  const fetchedComments = snapshot.docs.map((doc_comment) => ({
+                    id: doc_comment.id,
+                    ...doc_comment.data(),
+                  }));
+                  console.log("Fetched comments:", fetchedComments);
+                  setComments(fetchedComments);
+                });
+    
+              return () => {
+                unsubscribe();
+              };
+            }
+          });
       }
     }, [postId]);
     
