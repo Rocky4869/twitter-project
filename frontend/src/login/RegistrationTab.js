@@ -96,6 +96,7 @@ function RegistrationTab() {
         joinedAt: timestamp,
         introduction: "Hi there!, I am using twitter!",
         avator: "",
+        postLiked: [],
       });
 
       // console.log("User signed up:", user);

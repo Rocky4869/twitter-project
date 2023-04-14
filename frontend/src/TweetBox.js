@@ -74,7 +74,24 @@ function TweetBox({ uid, onPostSubmit }) {
         );
       });
     }
+    const querySnapshot = await db.collection("posts").get();
+    const postCount = querySnapshot.size;
+    let defaultPostId;
+    let isUnique = false;
+    while (!isUnique) {
+      defaultPostId = "post" + (postCount + 1);
 
+      const existingUserSnapshot = await db
+        .collection("posts")
+        .where("postId", "==", defaultPostId)
+        .get();
+
+      if (existingUserSnapshot.empty) {
+        isUnique = true;
+      } else {
+        postCount++;
+      }
+    }
     const timestamp = firebase.firestore.Timestamp.now();
     await db.collection("posts").add({
       // displayName: "Cha Eun Woo",
@@ -95,6 +112,7 @@ function TweetBox({ uid, onPostSubmit }) {
       //use it self user avatar instead
       avatar:
         userData.avator,
+        postId: defaultPostId,
     });
     if (onPostSubmit) {
       onPostSubmit();
