@@ -13,6 +13,8 @@ import Post from "./Post";
 
 function ViewAllTweets() {
     const [posts, setPosts] = useState([]);
+    const [uid, setUid] = useState(null);
+    const [userData, setUserData] = useState(null);
     let navigate = useNavigate();
     const fetchAllPosts = () => {
         const unsubscribe = db
@@ -41,6 +43,20 @@ function ViewAllTweets() {
           unsubscribe();
         };
       }, []);      
+      useEffect(() => {
+        const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            setUid(user.uid);
+          } else {
+            setUid(null);
+            navigate("/");
+          }
+        });
+    
+        return () => {
+          unsubscribe();
+        };
+      }, []);
 
       const handleReturn = () => {
         navigate("/home");
@@ -83,6 +99,7 @@ return (
                             image={post.data.image}
                             likes={post.data.likes}
                             createdAt={post.data.created_at}
+                            postId={post.data.postId}
                             // comment_avatar={post.data.comment_avatar}
                             // comment_text={post.data.comment_text}
                             // comment_account={post.data.comment_account}

@@ -227,6 +227,7 @@ function MyProfile() {
                 {posts.map((post) => (
                   <Post
                     key={post.id}
+                    loggedInUserData ={userData}
                     id={post.data.id}
                     displayName={post.data.displayName}
                     username={post.data.displayId}
@@ -236,6 +237,7 @@ function MyProfile() {
                     image={post.data.image}
                     likes={post.data.likes}
                     createdAt={post.data.created_at}
+                    postId={post.data.postId}
                     // comment_avatar={post.data.comment_avatar}
                     // comment_text={post.data.comment_text}
                     // comment_account={post.data.comment_account}

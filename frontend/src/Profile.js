@@ -277,14 +277,16 @@ function Profile() {
                   <Post
                     key={post.id}
                     id={post.data.id}
+                    loggedInUserData ={loggedInUserData}
                     displayName={post.data.displayName}
                     username={post.data.displayId}
-                    verified={post.data.verified}
+                    verified={false}
                     text={post.data.text}
                     avatar={post.data.avatar}
                     image={post.data.image}
                     likes={post.data.likes}
                     createdAt={post.data.created_at}
+                    postId={post.data.postId}
                     // comment_avatar={post.data.comment_avatar}
                     // comment_text={post.data.comment_text}
                     // comment_account={post.data.comment_account}

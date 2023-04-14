@@ -10,10 +10,10 @@ import SidebarOption from "./sidebar/SidebarOption";
 import db from "./firebase";
 import Comment from "./Comment";
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
+import firebase from "firebase/app";
 const Post = forwardRef(
   (
-    { loggedInUserData, id, displayName, username, verified, text, avatar, image, likes, createdAt, postId},
+    { key, loggedInUserData, id, displayName, username, verified, text, avatar, image, likes, createdAt, postId},
     ref
   ) => {
     const [tweetMessage, setTweetMessage] = useState("");
@@ -35,36 +35,69 @@ const Post = forwardRef(
     };
     const sendTweet = (e) => {
       e.preventDefault();
-
-      db.collection("posts").doc(id).collection("comments").add({
-        displayName: "Cha Eun Woo",
-        username: "eunwo.o_c",
-        verified: true,
-        text: tweetMessage,
-        image: tweetImage,
-        avatar:
-          "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
-      });
-
+      
+      console.log("send  Tweet");
+      if (loggedInUserData && postId) {
+        const timestamp = firebase.firestore.Timestamp.now();
+        db.collection("posts")
+          .where("postId", "==", postId)
+          .get()
+          .then((querySnapshot) => {
+            if (!querySnapshot.empty) {
+              const postIdt = querySnapshot.docs[0].id;
+              db.collection("posts").doc(postIdt).collection("comments").add({
+                displayName: loggedInUserData.username,
+                username: loggedInUserData.id,
+                verified: false,
+                text: tweetMessage,
+                image: tweetImage,
+                avatar: loggedInUserData.avator,
+                createdAt: timestamp,
+              });
+            }
+          });
       setTweetMessage("");
       setTweetImage("");
+      }
     };
 
     const [comments, setComments] = useState([]);
 
+    // useEffect(() => {
+    //   db.collection("posts")
+    //     .doc(postId)
+    //     .collection("comments")
+    //     .onSnapshot((snapshot) =>
+    //       setComments(
+    //         snapshot.docs.map((doc_comment) => ({
+    //           id: doc_comment.id,
+    //           ...doc_comment.data(),
+    //         }))
+    //       )
+    //     );
+    // }, []);
     useEffect(() => {
-      db.collection("posts")
-        .doc(id)
-        .collection("comments")
-        .onSnapshot((snapshot) =>
-          setComments(
-            snapshot.docs.map((doc_comment) => ({
+      if (postId) {
+        const unsubscribe = db
+          .collection("posts")
+          .doc(postId)
+          .collection("comments")
+           // You can add this line to order comments by their creation time
+          .limit(50) // Set a higher limit; for example, 50
+          .onSnapshot((snapshot) => {
+            const fetchedComments = snapshot.docs.map((doc_comment) => ({
               id: doc_comment.id,
               ...doc_comment.data(),
-            }))
-          )
-        );
-    }, []);
+            }));
+            console.log("Fetched comments:", fetchedComments);
+            setComments(fetchedComments);
+          });
+    
+        return () => {
+          unsubscribe();
+        };
+      }
+    }, [postId]);
     
     const handleLikeToggle = async () => {
       if (loggedInUserData && postId) {
@@ -121,7 +154,7 @@ const Post = forwardRef(
                     <VerifiedIcon className="post_badge"></VerifiedIcon>
                   )}
                 </span>{" "}
-                @{username}{loggedInUserData && (loggedInUserData.postLiked.length)}!!! check if postId is inside
+                @{username}
               </h3>
             </div>
             <div className="post_headerDescription">
@@ -143,10 +176,10 @@ const Post = forwardRef(
                 comment_text={comment_text}
                 comment_account={comment_account}/>
             */}
-
+          Comments:
           {comments.map((comment) => (
             <Comment
-              avatar={comment.avatar}
+              avatar={comment.avatar.url}
               displayName={comment.displayName}
               image={comment.image}
               text={comment.text}
@@ -154,6 +187,7 @@ const Post = forwardRef(
               verified={comment.verified}
             />
           ))}
+
 
           {/*
             {comment_account ? 
@@ -165,7 +199,7 @@ const Post = forwardRef(
                     <br></br>
                 </div> : ''}
             */}
-          {loggedInUserData && (
+          
           <div className="post_footer">
             <SidebarOption active Icon={MapsUgcOutlinedIcon} />
             <SidebarOption Icon={RepeatIcon} />
@@ -206,13 +240,13 @@ const Post = forwardRef(
                 <PublishIcon fontSize="small" />
 
                 */}
-          </div>)}
+          </div>
 
           <form className="comment_form">
             <div className="tweetBox_input">
               <Avatar
                 style={{ height: "50px", width: "50px" }}
-                src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
+                src={loggedInUserData}
               />
               <TextField
                 onChange={(e) => setTweetMessage(e.target.value)}
