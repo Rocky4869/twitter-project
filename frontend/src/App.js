@@ -24,6 +24,9 @@ import SideBarContainer from "./sidebar/SideBarContainer";
 import AdminTable from "./AdminTable";
 import Follow from "./Follow";
 import ViewAllTweets from "./ViewAllTweets";
+import ForgotPassword from "./login/ForgotPassword";
+import Message from "./Message";
+
 function App() {
   return (
     <BrowserRouter>
@@ -32,15 +35,17 @@ function App() {
         <Route path="/" element={<LoginCard />} />
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<RegistrationTab />} />
+        <Route path="/forget_password" element={<ForgotPassword />} />
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/:userid" element={<Profile />} />
         <Route path="/follow" element={<Follow />} />
         <Route path="/viewtweets" element={<ViewAllTweets />} />
         <Route path="/setting" element={<Setting />} />
-        <Route path="/adminTable" element={<AdminTable />} />
+        <Route path="/admin" element={<AdminTable />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>
+    // <Message />
   );
 }
 

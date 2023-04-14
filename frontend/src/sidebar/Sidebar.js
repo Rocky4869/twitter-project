@@ -10,13 +10,17 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { Button } from "@material-ui/core";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import db from "../firebase";
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
   const [userData, setUserData] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const location = useLocation();
+  const activePage = location.pathname;
 
   const fetchUserData = async () => {
     try {
@@ -25,7 +29,7 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
       if (!docSnapshot.empty) {
         const userData = docSnapshot.data();
         setUserData(userData);
-        // console.debug(userData);
+        console.debug(userData);
       } else {
         console.log("User not found");
       }
@@ -33,8 +37,28 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
       console.error("Error fetching user data:", error);
     }
   };
+
+  const checkAdmin = async () => {
+    let role = "";
+    try {
+      const userSnapshot = await db
+        .collection("users")
+        .doc(uid)
+        .get()
+        .then((doc) => {
+          console.log((role = doc.data().role));
+        });
+      if (role === "admin") {
+        setIsAdmin(true);
+      }
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+
   useEffect(() => {
     fetchUserData();
+    checkAdmin();
   }, []);
 
   return (
@@ -44,23 +68,46 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
 
       {/* SidebarOption */}
       <Link to="/home" className="link">
-        <SidebarOption active Icon={HomeIcon} text="Home" />
-      </Link>
-      <Link to="/viewtweets" className="link">
-        <SidebarOption Icon={VisibilityIcon} text="View Tweets" />
+        <SidebarOption
+          active={activePage === "/home"}
+          Icon={HomeIcon}
+          text="Home"
+        />
       </Link>
       <Link to="/follow" className="link">
-        <SidebarOption Icon={BookmarkBorderIcon} text="Following" />
+        <SidebarOption
+          active={activePage === "/follow"}
+          Icon={BookmarkBorderIcon}
+          text="Following"
+        />
       </Link>
       <SidebarOption Icon={MailOutlineIcon} text="Messages" />
 
       <Link to={"/profile"} className="link">
-        <SidebarOption Icon={PermIdentityIcon} text="Profile" />
+        <SidebarOption
+          active={activePage === "/profile"}
+          Icon={PermIdentityIcon}
+          text="Profile"
+        />
       </Link>
 
       <Link to="/setting" className="link">
-        <SidebarOption Icon={MoreHorizIcon} text="Setting" />
+        <SidebarOption
+          active={activePage === "/setting"}
+          Icon={MoreHorizIcon}
+          text="Setting"
+        />
       </Link>
+
+      {isAdmin && (
+        <Link to="/admin" className="link">
+          <SidebarOption
+            active={activePage === "/admin"}
+            Icon={AdminPanelSettingsIcon}
+            text="Admin"
+          />
+        </Link>
+      )}
 
       {/* Button -> Tweet */}
       <Button
