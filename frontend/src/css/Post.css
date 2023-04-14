@@ -117,10 +117,10 @@ img {
   margin-right: 10px;
 }
 
-.comment_form .tweetBox_input > .tweetBox_tweetButton {
+/* .comment_form .tweetBox_input > .tweetBox_tweetButton {
   display: flex;
   padding: 10px;
-}
+} */
 
 .post_id {
   display: flex;

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import db from "./firebase";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Avatar, Button} from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
 import Post from "./Post";
@@ -32,8 +32,8 @@ function MyProfile() {
   const fetchPosts = async () => {
     try {
       const querySnapshot = await db
-        .collection('posts')
-        .where('userId', '==', uid)
+        .collection("posts")
+        .where("userId", "==", uid)
         .orderBy("created_at", "desc")
         .get();
 
@@ -44,7 +44,7 @@ function MyProfile() {
 
       setPosts(userPosts);
     } catch (error) {
-      console.error('Error fetching posts:', error);
+      console.error("Error fetching posts:", error);
     }
   };
   useEffect(() => {
@@ -107,7 +107,7 @@ function MyProfile() {
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
                   >
-                   {userData.username}
+                    {userData.username}
                   </div>
                 </div>
               </div>
@@ -138,7 +138,7 @@ function MyProfile() {
                   />
                   <div className="flex flex-row">
                     <div className="font-bold" style={{ marginTop: "10px" }}>
-                    {userData.username}
+                      {userData.username}
                     </div>
                     <Button
                       variant="outlined"
@@ -172,9 +172,7 @@ function MyProfile() {
                     }}
                     className="flex flex-row"
                   >
-                    <div>
-                      {userData.introduction}
-                    </div>
+                    <div>{userData.introduction}</div>
                     {/* <Button
                       variant="outlined"
                       style={{
@@ -208,7 +206,7 @@ function MyProfile() {
                         marginTop: "5px",
                       }}
                     >
-                      {userData.joinedAt.toDate().toLocaleString('en-US')}
+                      {userData.joinedAt.toDate().toLocaleString("en-US")}
                     </span>
                   </div>
                   <div
@@ -217,8 +215,13 @@ function MyProfile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
-                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers</div>
+                    <div style={{ marginRight: "10px" }}>
+                      {userData.Following.length} Following
+                    </div>
+                    <div style={{ marginLeft: "10px" }}>
+                      {" "}
+                      {userData.Followers.length} Followers
+                    </div>
                   </div>
                 </div>
               </div>
@@ -227,6 +230,7 @@ function MyProfile() {
                 {posts.map((post) => (
                   <Post
                     key={post.id}
+                    loggedInUserData={userData}
                     id={post.data.id}
                     displayName={post.data.displayName}
                     username={post.data.displayId}
@@ -236,6 +240,7 @@ function MyProfile() {
                     image={post.data.image}
                     likes={post.data.likes}
                     createdAt={post.data.created_at}
+                    postId={post.data.postId}
                     // comment_avatar={post.data.comment_avatar}
                     // comment_text={post.data.comment_text}
                     // comment_account={post.data.comment_account}

@@ -59,8 +59,8 @@ function Profile() {
   const fetchPosts = async () => {
     try {
       const querySnapshot = await db
-        .collection('posts')
-        .where('userId', '==', targetUserId)
+        .collection("posts")
+        .where("userId", "==", targetUserId)
         .orderBy("created_at", "desc")
         .get();
 
@@ -71,7 +71,7 @@ function Profile() {
 
       setPosts(userPosts);
     } catch (error) {
-      console.error('Error fetching posts:', error);
+      console.error("Error fetching posts:", error);
     }
   };
 
@@ -107,11 +107,11 @@ function Profile() {
     if (uid && targetUserId) {
       const loggedInUserDocRef = db.collection("users").doc(uid);
       const targetUserDocRef = db.collection("users").doc(targetUserId);
-  
+
       try {
         const batch = db.batch();
         if (isFollowing) {
-          // Remove the target user from the Following 
+          // Remove the target user from the Following
           batch.update(loggedInUserDocRef, {
             Following: firebase.firestore.FieldValue.arrayRemove(targetUserId),
           });
@@ -137,13 +137,13 @@ function Profile() {
             Followers: [...prevUserData.Followers, uid],
           }));
         }
-        
+
         await batch.commit();
       } catch (error) {
         console.error("Error updating following and followers:", error);
       }
     }
-  };  
+  };
 
   const handleFollow = async () => {
     await updateFollowing();
@@ -163,13 +163,13 @@ function Profile() {
             <div className="feed">
               <div className="feed_header">
                 <div className="flex flex-row">
-                    <ArrowBackIcon
-                      style={{
-                        marginTop: "10px",
-                        marginRight: "20px",
-                      }}
-                      onClick={handleReturn}
-                    ></ArrowBackIcon>
+                  <ArrowBackIcon
+                    style={{
+                      marginTop: "10px",
+                      marginRight: "20px",
+                    }}
+                    onClick={handleReturn}
+                  ></ArrowBackIcon>
                   <div
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
@@ -222,9 +222,7 @@ function Profile() {
                     }}
                     className="flex flex-row"
                   >
-                    <div>
-                      {userData.introduction}
-                    </div>
+                    <div>{userData.introduction}</div>
                     <Button
                       variant="outlined"
                       style={{
@@ -258,7 +256,7 @@ function Profile() {
                         marginTop: "5px",
                       }}
                     >
-                      {userData.joinedAt.toDate().toLocaleString('en-US')}
+                      {userData.joinedAt.toDate().toLocaleString("en-US")}
                     </span>
                   </div>
                   <div
@@ -267,8 +265,13 @@ function Profile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
-                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers </div>
+                    <div style={{ marginRight: "10px" }}>
+                      {userData.Following.length} Following
+                    </div>
+                    <div style={{ marginLeft: "10px" }}>
+                      {" "}
+                      {userData.Followers.length} Followers{" "}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -277,14 +280,16 @@ function Profile() {
                   <Post
                     key={post.id}
                     id={post.data.id}
+                    loggedInUserData={loggedInUserData}
                     displayName={post.data.displayName}
                     username={post.data.displayId}
-                    verified={post.data.verified}
+                    verified={false}
                     text={post.data.text}
                     avatar={post.data.avatar}
                     image={post.data.image}
                     likes={post.data.likes}
                     createdAt={post.data.created_at}
+                    postId={post.data.postId}
                     // comment_avatar={post.data.comment_avatar}
                     // comment_text={post.data.comment_text}
                     // comment_account={post.data.comment_account}

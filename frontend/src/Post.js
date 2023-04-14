@@ -9,20 +9,35 @@ import PublishIcon from "@material-ui/icons/Publish";
 import SidebarOption from "./sidebar/SidebarOption";
 import db from "./firebase";
 import Comment from "./Comment";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import firebase from "firebase/app";
 const Post = forwardRef(
   (
-    { loggedInUserData, id, displayName, username, verified, text, avatar, image, likes, createdAt, postId},
+    {
+      key,
+      loggedInUserData,
+      id,
+      displayName,
+      username,
+      verified,
+      text,
+      avatar,
+      image,
+      likes,
+      createdAt,
+      postId,
+    },
     ref
   ) => {
     const [tweetMessage, setTweetMessage] = useState("");
     const [tweetImage, setTweetImage] = useState("");
-    const [isLiked, setIsLiked] = useState(loggedInUserData && loggedInUserData.postLiked.includes(postId));
+    const [isLiked, setIsLiked] = useState(
+      loggedInUserData && loggedInUserData.postLiked.includes(postId)
+    );
     const [postLikes, setPostLikes] = useState(likes);
     const getFileExtension = (url) => {
-      const splitUrl = url.split('?')[0];
-      return "." + splitUrl.substring(splitUrl.lastIndexOf('.') + 1);
+      const splitUrl = url.split("?")[0];
+      return "." + splitUrl.substring(splitUrl.lastIndexOf(".") + 1);
     };
     const isImage = (url) => {
       const ext = getFileExtension(url);
@@ -36,70 +51,104 @@ const Post = forwardRef(
     const sendTweet = (e) => {
       e.preventDefault();
 
-      db.collection("posts").doc(id).collection("comments").add({
-        displayName: "Cha Eun Woo",
-        username: "eunwo.o_c",
-        verified: true,
-        text: tweetMessage,
-        image: tweetImage,
-        avatar:
-          "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
-      });
-
-      setTweetMessage("");
-      setTweetImage("");
+      console.log("send  Tweet");
+      if (loggedInUserData && postId) {
+        const timestamp = firebase.firestore.Timestamp.now();
+        db.collection("posts")
+          .where("postId", "==", postId)
+          .get()
+          .then((querySnapshot) => {
+            if (!querySnapshot.empty) {
+              const postIdt = querySnapshot.docs[0].id;
+              db.collection("posts").doc(postIdt).collection("comments").add({
+                displayName: loggedInUserData.username,
+                username: loggedInUserData.id,
+                verified: false,
+                text: tweetMessage,
+                image: tweetImage,
+                avatar: loggedInUserData.avator,
+                createdAt: timestamp,
+              });
+            }
+          });
+        setTweetMessage("");
+        setTweetImage("");
+      }
     };
 
     const [comments, setComments] = useState([]);
 
+    // useEffect(() => {
+    //   db.collection("posts")
+    //     .doc(postId)
+    //     .collection("comments")
+    //     .onSnapshot((snapshot) =>
+    //       setComments(
+    //         snapshot.docs.map((doc_comment) => ({
+    //           id: doc_comment.id,
+    //           ...doc_comment.data(),
+    //         }))
+    //       )
+    //     );
+    // }, []);
     useEffect(() => {
-      db.collection("posts")
-        .doc(id)
-        .collection("comments")
-        .onSnapshot((snapshot) =>
-          setComments(
-            snapshot.docs.map((doc_comment) => ({
+      if (postId) {
+        const unsubscribe = db
+          .collection("posts")
+          .doc(postId)
+          .collection("comments")
+          // You can add this line to order comments by their creation time
+          .limit(50) // Set a higher limit; for example, 50
+          .onSnapshot((snapshot) => {
+            const fetchedComments = snapshot.docs.map((doc_comment) => ({
               id: doc_comment.id,
               ...doc_comment.data(),
-            }))
-          )
-        );
-    }, []);
-    
+            }));
+            console.log("Fetched comments:", fetchedComments);
+            setComments(fetchedComments);
+          });
+
+        return () => {
+          unsubscribe();
+        };
+      }
+    }, [postId]);
+
     const handleLikeToggle = async () => {
       if (loggedInUserData && postId) {
         // console.log("Hi reached here");
         // console.log(postId);
         // console.log(loggedInUserData.id);
-      // const postRef = db.collection("posts").where('postId', '==', postId);
-      // const userRef = db.collection("users").where('id', '==', loggedInUserData.id);
-      const postQuery = db.collection("posts").where('postId', '==', postId);
-      const userQuery = db.collection("users").where('id', '==', loggedInUserData.id);
+        // const postRef = db.collection("posts").where('postId', '==', postId);
+        // const userRef = db.collection("users").where('id', '==', loggedInUserData.id);
+        const postQuery = db.collection("posts").where("postId", "==", postId);
+        const userQuery = db
+          .collection("users")
+          .where("id", "==", loggedInUserData.id);
 
-      const postSnapshot = await postQuery.get();
-      const userSnapshot = await userQuery.get();
+        const postSnapshot = await postQuery.get();
+        const userSnapshot = await userQuery.get();
 
-      if (!postSnapshot.empty && !userSnapshot.empty) {
-        // console.log("Hi reached nested if");
-        const post = postSnapshot.docs[0].data();
-        const user = userSnapshot.docs[0].data();
-        const liked = user.postLiked.includes(postId);
-        // alert(liked);
-        // Update the post's likes counter
-        await postSnapshot.docs[0].ref.update({
-          likes: liked ? post.likes - 1 : post.likes + 1,
-        });
-    
-        // Update the user's postLiked array
-        await userSnapshot.docs[0].ref.update({
-          postLiked: liked
-            ? user.postLiked.filter((id) => id !== postId)
-            : [...user.postLiked, postId],
-        });
-        setPostLikes(liked ? post.likes - 1 : post.likes + 1);
-        setIsLiked(!liked);
+        if (!postSnapshot.empty && !userSnapshot.empty) {
+          // console.log("Hi reached nested if");
+          const post = postSnapshot.docs[0].data();
+          const user = userSnapshot.docs[0].data();
+          const liked = user.postLiked.includes(postId);
+          // alert(liked);
+          // Update the post's likes counter
+          await postSnapshot.docs[0].ref.update({
+            likes: liked ? post.likes - 1 : post.likes + 1,
+          });
+
+          // Update the user's postLiked array
+          await userSnapshot.docs[0].ref.update({
+            postLiked: liked
+              ? user.postLiked.filter((id) => id !== postId)
+              : [...user.postLiked, postId],
+          });
+          setPostLikes(liked ? post.likes - 1 : post.likes + 1);
+          setIsLiked(!liked);
         }
-        
       }
     };
 
@@ -121,32 +170,58 @@ const Post = forwardRef(
                     <VerifiedIcon className="post_badge"></VerifiedIcon>
                   )}
                 </span>{" "}
-                @{username}{loggedInUserData && (loggedInUserData.postLiked.length)}!!! check if postId is inside
+                @{username}
               </h3>
             </div>
             <div className="post_headerDescription">
               <p>{text}</p>
               {/* <p>{image}</p> */}
-            {(isImage(image) || isVideo(image)) && <div style={{ width: "640px", height: "360px", overflow: "hidden" }}>
-            {isImage(image) && <img src={image} style={{ width: "100%", height: "100%", objectFit: "contain" }} alt="image" />}
-            {isVideo(image) && <video src={image} style={{ width: "100%", height: "100%", objectFit: "contain" }} controls />}
-            </div>}
+              {(isImage(image) || isVideo(image)) && (
+                <div
+                  style={{
+                    width: "640px",
+                    height: "360px",
+                    overflow: "hidden",
+                  }}
+                >
+                  {isImage(image) && (
+                    <img
+                      src={image}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                      }}
+                      alt="image"
+                    />
+                  )}
+                  {isVideo(image) && (
+                    <video
+                      src={image}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                      }}
+                      controls
+                    />
+                  )}
+                </div>
+              )}
             </div>
           </div>
           {/* <img src={image} alt="" /> */}
-
           <br></br>
-
           {/*
                 <Comment 
                 comment_avatar={comment_avatar}
                 comment_text={comment_text}
                 comment_account={comment_account}/>
             */}
-
+          Comments:
           {comments.map((comment) => (
             <Comment
-              avatar={comment.avatar}
+              avatar={comment.avatar.url}
               displayName={comment.displayName}
               image={comment.image}
               text={comment.text}
@@ -154,7 +229,6 @@ const Post = forwardRef(
               verified={comment.verified}
             />
           ))}
-
           {/*
             {comment_account ? 
                 <div className='post_comment'>
@@ -165,22 +239,19 @@ const Post = forwardRef(
                     <br></br>
                 </div> : ''}
             */}
-          {loggedInUserData && (
           <div className="post_footer">
             <SidebarOption active Icon={MapsUgcOutlinedIcon} />
             <SidebarOption Icon={RepeatIcon} />
-            
-            <SidebarOption Icon={
-                isLiked
-                  ? FavoriteIcon
-                  : FavoriteBorderIcon
-              } text={postLikes}
-              onClick={handleLikeToggle}  
-               iconStyle={{
+
+            <SidebarOption
+              Icon={isLiked ? FavoriteIcon : FavoriteBorderIcon}
+              text={postLikes}
+              onClick={handleLikeToggle}
+              iconStyle={{
                 color: isLiked ? "red" : "inherit",
-                
-              }}/>
-              
+              }}
+            />
+
             <SidebarOption Icon={PublishIcon} />
 
             {/*
@@ -206,13 +277,12 @@ const Post = forwardRef(
                 <PublishIcon fontSize="small" />
 
                 */}
-          </div>)}
-
+          </div>
           <form className="comment_form">
             <div className="tweetBox_input">
               <Avatar
                 style={{ height: "50px", width: "50px" }}
-                src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg"
+                src={loggedInUserData}
               />
               <TextField
                 onChange={(e) => setTweetMessage(e.target.value)}
@@ -255,7 +325,7 @@ const Post = forwardRef(
           </form>
           <div className="post_id">
             {/* <h6>Post ID: {id}</h6> */}
-            <h6>Created at: {createdAt.toDate().toLocaleString('en-US')}</h6>
+            <h6>Created at: {createdAt.toDate().toLocaleString("en-US")}</h6>
           </div>
         </div>
       </div>
