@@ -1,11 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import "../css/ForgotPassword.css";
 import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
+import "firebase/auth";
+import "firebase/firestore";
+import db from "../firebase";
+import firebase from "firebase/app";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  const handleForgotPassword = (event) => {
+    event.preventDefault();
+
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        setSuccessMessage("Password reset email sent!");
+        toast.success("Password reset email sent successfully!");
+        setError(null);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setSuccessMessage(null);
+      });
+  };
+
   return (
     <>
       <LoginHeader />
@@ -75,6 +102,7 @@ function ForgotPassword() {
                     padding: "16px",
                     borderRadius: "10px",
                   }}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="flex justify-center">
@@ -90,6 +118,7 @@ function ForgotPassword() {
                     padding: "10px",
                     marginTop: "100px",
                   }}
+                  onClick={handleForgotPassword}
                 >
                   Submit
                 </Button>

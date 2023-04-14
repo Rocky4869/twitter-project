@@ -45,11 +45,6 @@ function LoginCard() {
         .auth()
         .signInWithEmailAndPassword(email, password);
       const user = userCredential.user;
-      // console.log("User logged in:", user.uid);
-      // console.log("User logged in:", user.email);
-      // console.log("User logged in:", user.displayName);
-      // alert("User logged in:", user.uid);
-      // localStorage.setItem("uid", user.uid);
       toast.success("Log in successfully!", {
         position: toast.POSITION.TOP_CENTER,
         style: {
@@ -58,7 +53,6 @@ function LoginCard() {
       });
       navigate("/home");
     } catch (error) {
-      // console.error("Error logging in:", error);
       toast.error("Username or Email or Password Incorrect!");
     }
   };

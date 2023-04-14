@@ -55,7 +55,6 @@ function RegistrationTab() {
       //regrex checking, if invalid
       // document.querySelector("#new-email").classList.add("is-invalid");
       toast.error("Wrong format of Email!");
-      console.debug(123)
       return;
     }
     try {
@@ -97,6 +96,7 @@ function RegistrationTab() {
         introduction: "Hi there!, I am using twitter!",
         avator: "",
         postLiked: [],
+        role: "user,",
       });
 
       // console.log("User signed up:", user);

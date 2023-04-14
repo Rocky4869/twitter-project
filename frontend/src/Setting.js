@@ -120,7 +120,7 @@ function Setting() {
               <Switch
                 checked={isAllowAdsChecked}
                 onChange={() => setIsAllowAdsChecked(!isAllowAdsChecked)}
-                color={isAllowAdsChecked ? "secondary" : "default"}
+                color={isAllowAdsChecked ? "primary" : "default"}
               ></Switch>
             </div>
           </div>
@@ -178,7 +178,7 @@ function Setting() {
               <Switch
                 checked={isPushChecked}
                 onChange={() => setIsPushChecked(!isPushChecked)}
-                color={isPushChecked ? "secondary" : "default"}
+                color={isPushChecked ? "primary" : "default"}
               ></Switch>
             </div>
           </div>

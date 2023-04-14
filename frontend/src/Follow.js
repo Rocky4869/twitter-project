@@ -10,7 +10,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
 import Post from "./Post";
 import Flipmove from "react-flip-move";
-import "./Follow.css"
+import "./css/Follow.css"
 
 function Follow(){
     const [userData, setUserData] = useState(null);
