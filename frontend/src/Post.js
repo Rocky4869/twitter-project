@@ -118,7 +118,7 @@ const Post = forwardRef(
                 .collection("posts")
                 .doc(postId)
                 .collection("comments")
-                .limit(50)
+                .limit(1)
                 .onSnapshot((snapshot) => {
                   const fetchedComments = snapshot.docs.map((doc_comment) => ({
                     id: doc_comment.id,
