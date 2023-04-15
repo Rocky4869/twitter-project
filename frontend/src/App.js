@@ -21,7 +21,6 @@ import AdminTable from "./AdminTable";
 import Follow from "./Follow";
 import ViewAllTweets from "./ViewAllTweets";
 import ForgotPassword from "./login/ForgotPassword";
-import Message from "./Message";
 
 function App() {
   return (
