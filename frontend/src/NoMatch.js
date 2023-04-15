@@ -1,12 +1,9 @@
 function NoMatch() {
-    return (
+  return (
     <div>
-    <h3>
-    Error!
-    </h3>
+      <h3>Error!</h3>
     </div>
-    );
-  }
+  );
+}
 
-  
 export default NoMatch;

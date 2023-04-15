@@ -31,17 +31,18 @@ const Post = forwardRef(
   ) => {
     const [tweetMessage, setTweetMessage] = useState("");
     const [tweetImage, setTweetImage] = useState("");
+    const [comments, setComments] = useState([]);
     const [isLiked, setIsLiked] = useState(
       loggedInUserData && loggedInUserData.postLiked.includes(postId)
     );
     const [postLikes, setPostLikes] = useState(likes);
+
     const getFileExtension = (url) => {
       const splitUrl = url.split("?")[0];
       return "." + splitUrl.substring(splitUrl.lastIndexOf(".") + 1);
     };
     const isImage = (url) => {
       const ext = getFileExtension(url);
-      // alert(ext);
       return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(ext);
     };
     const isVideo = (url) => {
@@ -77,44 +78,6 @@ const Post = forwardRef(
       }
     };
 
-    const [comments, setComments] = useState([]);
-
-    // useEffect(() => {
-    //   db.collection("posts")
-    //     .doc(postId)
-    //     .collection("comments")
-    //     .onSnapshot((snapshot) =>
-    //       setComments(
-    //         snapshot.docs.map((doc_comment) => ({
-    //           id: doc_comment.id,
-    //           ...doc_comment.data(),
-    //         }))
-    //       )
-    //     );
-    // }, []);
-    // useEffect(() => {
-    //   console.log(postId);
-    //   if (postId) {
-    //     const unsubscribe = db
-    //       .collection("posts")
-    //       .doc(postId)
-    //       .collection("comments")
-    //        // You can add this line to order comments by their creation time
-    //       .limit(50) // Set a higher limit; for example, 50
-    //       .onSnapshot((snapshot) => {
-    //         const fetchedComments = snapshot.docs.map((doc_comment) => ({
-    //           id: doc_comment.id,
-    //           ...doc_comment.data(),
-    //         }));
-    //         console.log("Fetched comments:", fetchedComments);
-    //         setComments(fetchedComments);
-    //       });
-
-    //     return () => {
-    //       unsubscribe();
-    //     };
-    //   }
-    // }, [postId]);
     useEffect(() => {
       console.log(postId);
       if (postId) {
@@ -153,11 +116,6 @@ const Post = forwardRef(
 
     const handleLikeToggle = async () => {
       if (loggedInUserData && postId) {
-        // console.log("Hi reached here");
-        // console.log(postId);
-        // console.log(loggedInUserData.id);
-        // const postRef = db.collection("posts").where('postId', '==', postId);
-        // const userRef = db.collection("users").where('id', '==', loggedInUserData.id);
         const postQuery = db.collection("posts").where("postId", "==", postId);
         const userQuery = db
           .collection("users")
@@ -167,11 +125,9 @@ const Post = forwardRef(
         const userSnapshot = await userQuery.get();
 
         if (!postSnapshot.empty && !userSnapshot.empty) {
-          // console.log("Hi reached nested if");
           const post = postSnapshot.docs[0].data();
           const user = userSnapshot.docs[0].data();
           const liked = user.postLiked.includes(postId);
-          // alert(liked);
           // Update the post's likes counter
           await postSnapshot.docs[0].ref.update({
             likes: liked ? post.likes - 1 : post.likes + 1,
@@ -212,7 +168,6 @@ const Post = forwardRef(
             </div>
             <div className="post_headerDescription">
               <p>{text}</p>
-              {/* <p>{image}</p> */}
               {(isImage(image) || isVideo(image)) && (
                 <div
                   style={{
@@ -247,7 +202,6 @@ const Post = forwardRef(
               )}
             </div>
           </div>
-          {/* <img src={image} alt="" /> */}
           <br></br>
           {/*
                 <Comment 
@@ -266,16 +220,6 @@ const Post = forwardRef(
               verified={comment.verified}
             />
           ))}
-          {/*
-            {comment_account ? 
-                <div className='post_comment'>
-                    <Avatar style={{ height: '50px', width: '50px' }} src={comment_avatar} />
-                    <div className='post_comment_text'>
-                        <p>@{comment_account} has commented: {comment_text}</p>
-                    </div>
-                    <br></br>
-                </div> : ''}
-            */}
           <div className="post_footer">
             <SidebarOption active Icon={MapsUgcOutlinedIcon} />
             <SidebarOption Icon={RepeatIcon} />
@@ -290,30 +234,6 @@ const Post = forwardRef(
             />
 
             <SidebarOption Icon={PublishIcon} />
-
-            {/*
-
-            <div className='user_comment'>
-                <Avatar style={{ height: '50px', width: '50px' }} src="https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg" />
-                <input
-                onChange={(e) => setTweetComment(e.target.value)}
-                value={tweetComment}
-                placeholder="Your response?"
-                type="text"/>
-            </div>
-
-                <Button 
-                onclick={sendComment} 
-                type="submit">Comment 
-                </Button>
-
-                <button onclick={handleClick}>Open Popup</button>
-                <MapsUgcOutlinedIcon fontsize='small' />
-                <RepeatIcon fontSize="small" />
-                <FavoriteBorderIcon fontSize="small" />
-                <PublishIcon fontSize="small" />
-
-                */}
           </div>
           <form className="comment_form">
             <div className="tweetBox_input">
@@ -370,7 +290,6 @@ const Post = forwardRef(
             </div>
           </form>
           <div className="post_id">
-            {/* <h6>Post ID: {id}</h6> */}
             <h6>Created at: {createdAt.toDate().toLocaleString("en-US")}</h6>
           </div>
         </div>

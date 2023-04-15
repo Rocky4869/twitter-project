@@ -33,11 +33,7 @@ function TweetBox({ uid, onPostSubmit }) {
   useEffect(() => {
     fetchUserData();
   }, []);
-  // useEffect(() => {
-  //   if (userData) {
-  //     alert("User data: " + userData.username);
-  //   }
-  // }, [userData]);
+
   const isImage = (file) => {
     return file && /^image\/(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(file.type);
   };
@@ -94,13 +90,6 @@ function TweetBox({ uid, onPostSubmit }) {
     }
     const timestamp = firebase.firestore.Timestamp.now();
     await db.collection("posts").add({
-      // displayName: "Cha Eun Woo",
-      // username: "eunwo.o_c",
-      // verified: true,
-      // text: tweetMessage,
-      // image: tweetImage,
-      // avatar:
-      //   "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
       displayName: userData.username,
       displayId: userData.id,
       userId: uid,

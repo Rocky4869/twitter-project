@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import "./Comment.css";
+import "./css/Comment.css";
 import { useState } from "react";
 import db from "./firebase";
 import { Avatar } from "@material-ui/core";
@@ -32,35 +32,6 @@ const Comment = ({ avatar, displayName, image, text, username, verified }) => {
           </div>
           <img src={image} alt="" />
         </div>
-
-        {/*
-    <div className='comment_inner'>
-        <div className='post_comment'>
-            <Avatar style={{ height: '50px', width: '50px' }} src={avatar} />
-            <div className='post_comment_text'>
-                <b>{displayName}</b> {" "}
-                <span className='post_headerSpecial'>
-                    {verified && <VerifiedIcon className="post_badge"></VerifiedIcon>} 
-                </span>
-                {" "} @{username} has commented: {text}
-            </div>
-            <img src={image}
-                alt='' />
-        <br></br>
-        </div>
-        
-    
-
-        {comment_account ? 
-        <div className='post_comment'>
-            <Avatar style={{ height: '50px', width: '50px' }} src={comment_avatar} />
-            <div className='post_comment_text'>
-                <p>@{comment_account} has commented: {comment_text}</p>
-            </div>
-            <br></br>
-        </div> : ''}
-
-    */}
       </div>
     </div>
   );

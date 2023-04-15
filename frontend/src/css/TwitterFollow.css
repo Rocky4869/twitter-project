@@ -1,0 +1,35 @@
+.twitterfollow {
+  display: flex;
+  align-items: flex-start;
+  border-top: 1px solid var(--twitter-background);
+  padding-bottom: 10px;
+  background-color: aliceblue;
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+
+.twitterfollow_avator {
+  padding: 10px;
+  display: flex;
+}
+
+.twitterfollow_body {
+  flex: 1;
+  padding: 10px;
+}
+
+.twitterfollow_headerText > h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.twitterfollow_headerSpecial {
+  font-weight: 600;
+  font-size: 12px;
+  color: gray;
+}
+
+.twitterfollow_badge {
+  font-size: 14px !important;
+  color: var(--twitter-color);
+}

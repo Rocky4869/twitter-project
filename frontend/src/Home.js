@@ -9,8 +9,49 @@ import db from "./firebase";
 
 function Home() {
   const [uid, setUid] = useState(null);
-
+  const [userData, setUserData] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   let navigate = useNavigate();
+
+  const fetchUserData = async () => {
+    try {
+      const docRef = db.collection("users").doc(uid);
+      const docSnapshot = await docRef.get();
+      if (!docSnapshot.empty) {
+        const userData = docSnapshot.data();
+        setUserData(userData);
+        console.debug(userData);
+      } else {
+        console.log("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  const checkAdmin = async () => {
+    let role = "";
+    try {
+      const userSnapshot = await db
+        .collection("users")
+        .doc(uid)
+        .get()
+        .then((doc) => {
+          console.log((role = doc.data().role));
+        });
+      if (role === "admin") {
+        setIsAdmin(true);
+      }
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+    checkAdmin();
+  });
+
   //get uid function
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -29,14 +70,30 @@ function Home() {
 
   return (
     <>
-      {uid ? (
-        <div className="app">
-          <SideBarContainer uid={uid} />
-          <Feed uid={uid} />
-          <Widgets uid={uid} />
-        </div>
+      {!isAdmin ? (
+        <>
+          {uid ? (
+            <div className="app">
+              <SideBarContainer uid={uid} />
+              <Feed uid={uid} />
+              <Widgets uid={uid} />
+            </div>
+          ) : (
+            <div>{/* Nothing to show  */}</div>
+          )}
+        </>
       ) : (
-        <div>{/* Nothing to show  */}</div>
+        <>
+          {uid ? (
+            <div className="admin">
+              <SideBarContainer uid={uid} />
+              <Feed uid={uid} />
+              <Widgets uid={uid} />
+            </div>
+          ) : (
+            <div>{/* Nothing to show  */}</div>
+          )}
+        </>
       )}
     </>
   );

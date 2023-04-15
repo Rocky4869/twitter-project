@@ -20,6 +20,10 @@
   padding: 15px 20px;
 }
 
+.admin_header {
+  background-color: pink !important;
+}
+
 .feed_header > h2 {
   font-size: 20px;
   font-weight: 800;
