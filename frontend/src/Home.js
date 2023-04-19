@@ -20,7 +20,7 @@ function Home() {
       if (!docSnapshot.empty) {
         const userData = docSnapshot.data();
         setUserData(userData);
-        console.debug(userData);
+        // console.debug(userData);
       } else {
         console.log("User not found");
       }
