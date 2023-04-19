@@ -7,7 +7,13 @@
 //- Network:  http://192.168.8.2:3000
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Router,
+  HashRouter,
+} from "react-router-dom";
 import Home from "./Home";
 import Profile from "./Profile";
 import MyProfile from "./MyProfile";
@@ -24,7 +30,7 @@ import ForgotPassword from "./login/ForgotPassword";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ToastContainer />
       <Routes>
         <Route path="/" element={<LoginCard />} />
@@ -39,7 +45,7 @@ function App() {
         <Route path="/admin" element={<AdminTable />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
     // <Message />
   );
 }
