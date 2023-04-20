@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import db from "./firebase";
 import { DataGrid, gridClasses, GridToolbar } from "@mui/x-data-grid";
-import { grey } from "@mui/material/colors";
-
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -11,8 +9,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import SideBarContainer from "./sidebar/SideBarContainer";
-import Widgets from "./Widgets";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // defining table
@@ -24,7 +20,6 @@ function AdminTable() {
   const [addopen, setAddopen] = useState(false);
   const [rowId, setRowId] = useState(0);
   const [username, setUsername] = useState(null);
-  const [email, setEmail] = useState("");
   const [pageSize, setPageSize] = useState(5);
   const [updatedata, setUpdatedata] = useState(false);
 
@@ -160,27 +155,6 @@ function AdminTable() {
     setOpen(false);
   };
 
-  // update user function not mentioned in requirement
-  // const handleUpdate = () => {
-  //   let newaddname = document.querySelector("#newUsername").value.trim();
-
-  //   if (!newaddname) {
-  //     alert("Must fill all fields");
-  //   } else if (window.confirm("Do You confirm update user info?")) {
-  //     // find doc with given id and do update
-  //     db.collection("users")
-  //       .doc(rowId)
-  //       .update({
-  //         // fields to be udpated
-  //         username: username,
-  //       })
-  //       .then(() => console.log("Document successfully updated!"));
-  //   }
-
-  //   setUpdatedata(!updatedata);
-  //   setOpen(false);
-  // };
-
   return (
     <div className="app">
       <SideBarContainer />
@@ -246,14 +220,6 @@ function AdminTable() {
               fullWidth
               variant="standard"
             />
-            {/* <TextField
-						margin="dense"
-						id="newUsername"
-						label="New User Name"
-						type="text"
-						fullWidth
-						variant="standard"
-					/> */}
           </DialogContent>
           <DialogActions>
             <Button variant="outlined" onClick={handleAddclose}>
@@ -274,32 +240,11 @@ function AdminTable() {
               <br />
             </DialogContentText>
             <br />
-            {/* <TextField
-              margin="dense"
-              id="newUsername"
-              label="New User Name"
-              type="text"
-              fullWidth
-              variant="standard"
-              defaultValue={username}
-            /> */}
-            {/* <TextField
-						margin="dense"
-						id="newUsername"
-						label="New User Name"
-						type="text"
-						fullWidth
-						variant="standard"
-					/> */}
           </DialogContent>
           <DialogActions>
             <Button variant="outlined" color="error" onClick={handleDelete}>
               Delete User
             </Button>
-
-            {/* <Button variant="outlined" onClick={handleUpdate}>
-              Update
-            </Button> */}
             <Button variant="outlined" onClick={handleClickClose}>
               Cancel
             </Button>

@@ -30,16 +30,6 @@ const Retweet = forwardRef(
     },
     ref
   ) => {
-    /*    
-    const likePost = (e) => {
-        e.preventDefault();
-        
-        db.collection("retweets").doc(id).update({
-            new_likes: new_likes+1
-        });
-    };
-    */
-
     const [isLiked, setIsLiked] = useState(false);
 
     const likeRetweet = (e) => {

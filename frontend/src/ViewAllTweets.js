@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import db from "./firebase";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Avatar, Button } from "@material-ui/core";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
 import Flipmove from "react-flip-move";
 import Post from "./Post";

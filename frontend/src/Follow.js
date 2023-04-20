@@ -5,11 +5,7 @@ import { useEffect, useState } from "react";
 import db from "./firebase";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Avatar, Button } from "@material-ui/core";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
-import Post from "./Post";
-import Flipmove from "react-flip-move";
 import "./css/Follow.css";
 
 function Follow() {

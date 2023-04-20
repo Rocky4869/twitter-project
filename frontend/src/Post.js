@@ -203,12 +203,6 @@ const Post = forwardRef(
             </div>
           </div>
           <br></br>
-          {/*
-                <Comment 
-                comment_avatar={comment_avatar}
-                comment_text={comment_text}
-                comment_account={comment_account}/>
-            */}
           Comments:
           {comments.map((comment) => (
             <Comment

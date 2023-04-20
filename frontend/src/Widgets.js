@@ -17,10 +17,11 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
   const [searchResults, setSearchResults] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(true);
   const dropDownRef = useRef(null);
-  // const [userData, setUserData] = useState(null);
-  let navigate = useNavigate();
   const [currentUserid, setUid] = useState(null);
   const [widgetsFollow, setWidgetsFollow] = useState([]);
+
+  let navigate = useNavigate();
+
   useEffect(() => {
     db.collection("posts").onSnapshot((snapshot) =>
       setWidgetsFollow(
@@ -129,11 +130,6 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
   const handleItemClick = (userid) => {
     setDropdownVisible(false);
     setSearchInput("");
-    // // alert("selected item: " + userid);
-    // if (userid === userData.id) {
-    //   // Bug: if userid == userData.id
-    //   navigate(`/profile`);
-    // } else navigate(`/${userid}`);
     navigate(`/${userid}`);
   };
 
@@ -213,15 +209,6 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
             likes={widgetFollow.likes}
           />
         ))}
-
-        {/*
-                <TwitterFollowButton
-                    screenName={'ivestarship'} />
-                <TwitterFollowButton
-                    screenName={'blackpink'} />
-                <TwitterFollowButton
-                    screenName={'le_sserafim'} />
-                */}
       </div>
       <div className="widgets_widgetContainer">
         <h2>What's happening</h2>
@@ -238,14 +225,6 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
             likes={widgetTrending.likes}
           />
         ))}
-
-        {/*
-                <TwitterTimelineEmbed 
-                    sourceType="profile"
-                    screenName="IVEstarship"
-                    options={{ height: 400 }}
-                />
-                */}
       </div>
     </div>
   );

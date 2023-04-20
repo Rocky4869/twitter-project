@@ -46,7 +46,6 @@ function App() {
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </HashRouter>
-    // <Message />
   );
 }
 

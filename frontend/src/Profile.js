@@ -1,12 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
-import Sidebar from "./sidebar/Sidebar";
-import Feed from "./Feed";
 import Widgets from "./Widgets";
 import "./App.css";
 import { useEffect, useState } from "react";
 import db from "./firebase";
 import SideBarContainer from "./sidebar/SideBarContainer";
-import TweetBox from "./TweetBox";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Avatar, Button, TextField } from "@material-ui/core";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";

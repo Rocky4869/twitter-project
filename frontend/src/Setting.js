@@ -1,25 +1,12 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, withRouter } from "react-router-dom";
 import { Button, Switch } from "@material-ui/core";
 import PrivacyTipIcon from "@mui/icons-material/PrivacyTip";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import BusinessIcon from "@mui/icons-material/Business";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
-import { useNavigate } from "react-router-dom";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import Widgets from "./Widgets";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Typography,
-  Box,
-  Grid,
-  IconButton,
-} from "@mui/material";
-import { Close, InsertEmoticon, Image } from "@material-ui/icons";
 
 function Setting() {
   const [isPublicChecked, setIsPublilcChecked] = useState(false);

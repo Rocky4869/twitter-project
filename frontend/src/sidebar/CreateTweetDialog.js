@@ -5,7 +5,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Typography,
   Box,
   Grid,
   IconButton,
@@ -85,13 +84,6 @@ const CreateTweetDialog = forwardRef(
 
       const timestamp = firebase.firestore.Timestamp.now();
       await db.collection("posts").add({
-        // displayName: "Cha Eun Woo",
-        // username: "eunwo.o_c",
-        // verified: true,
-        // text: tweetMessage,
-        // image: tweetImage,
-        // avatar:
-        //   "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
         displayName: userData.username,
         displayId: userData.id,
         userId: uid,
@@ -206,7 +198,6 @@ const CreateTweetDialog = forwardRef(
             {showEmojiPicker && (
               <Picker onEmojiClick={onEmojiClick} height={400} width={300} />
             )}
-            {/* Bug:  image preview will show in tweetbox but not in tweet popup */}
             {selectedImage && (
               <div>
                 <div className="flex flex-row ">
@@ -259,11 +250,7 @@ const CreateTweetDialog = forwardRef(
           </DialogContent>
           <DialogActions>
             <Grid textAlign="right">
-              <Button
-                // onClick={sendTweet}
-                type="submit"
-                className="tweetBox_tweetButton"
-              >
+              <Button type="submit" className="tweetBox_tweetButton">
                 Tweet
               </Button>
             </Grid>

@@ -6,7 +6,6 @@ import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
 import "firebase/auth";
 import "firebase/firestore";
-import db from "../firebase";
 import firebase from "firebase/app";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

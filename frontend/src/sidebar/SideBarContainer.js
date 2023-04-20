@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import CreateTweetDialog from "./CreateTweetDialog";
 import LogoutDialog from "./LogoutDialog";
