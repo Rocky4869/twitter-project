@@ -145,6 +145,28 @@ const Post = forwardRef(
       }
     };
 
+    const sendRetweet = (e) => {
+      e.preventDefault();
+      alert("Retweet");
+
+      db.collection("retweets").add({
+        displayName: "Cha Eun Woo",
+        username: "eunwo.o_c",
+        verified: true,
+        avatar:
+          "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
+        new_likes: 0,
+        // retweet_id: id,
+        retweet_displayName: displayName,
+        retweet_username: username,
+        // retweet_verified: verified,
+        retweet_text: text,
+        retweet_avatar: avatar,
+        retweet_image: image,
+        retweet_likes: likes,
+      });
+    };
+
     return (
       <div className="post" ref={ref}>
         <div className="post_avator">
@@ -180,8 +202,8 @@ const Post = forwardRef(
                     <img
                       src={image}
                       style={{
-                        width: "100%",
-                        height: "100%",
+                        width: "90%",
+                        height: "90%",
                         objectFit: "contain",
                       }}
                       alt="image"
@@ -191,8 +213,8 @@ const Post = forwardRef(
                     <video
                       src={image}
                       style={{
-                        width: "100%",
-                        height: "100%",
+                        width: "90%",
+                        height: "90%",
                         objectFit: "contain",
                       }}
                       controls
@@ -203,7 +225,13 @@ const Post = forwardRef(
             </div>
           </div>
           <br></br>
-          Comments:
+          <div
+            style={{
+              marginBottom: "10px",
+            }}
+          >
+            Comments:
+          </div>
           {comments.map((comment) => (
             <Comment
               avatar={comment.avatar.url}
@@ -216,8 +244,9 @@ const Post = forwardRef(
           ))}
           <div className="post_footer">
             <SidebarOption active Icon={MapsUgcOutlinedIcon} />
-            <SidebarOption Icon={RepeatIcon} />
-
+            <Button onClick={sendRetweet} type="submit">
+              <SidebarOption Icon={RepeatIcon} />
+            </Button>
             <SidebarOption
               Icon={isLiked ? FavoriteIcon : FavoriteBorderIcon}
               text={postLikes}

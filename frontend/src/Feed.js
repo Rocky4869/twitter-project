@@ -4,12 +4,14 @@ import Post from "./Post";
 import "./css/Feed.css";
 import db from "./firebase";
 import Flipmove from "react-flip-move";
+import Retweet from "./Retweet";
 
 function Feed({ uid }) {
   const [posts, setPosts] = useState([]);
   const [loggedInUserData, setLoggedInUserData] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [retweets, setRetweets] = useState([]);
 
   const fetchLoggedInUserData = async () => {
     try {
@@ -89,16 +91,25 @@ function Feed({ uid }) {
       console.error("Error fetching posts:", error);
     }
   };
+
   useEffect(() => {
     if (uid) {
       fetchLoggedInUserData();
     }
   }, [uid]);
+
   useEffect(() => {
     if (loggedInUserData) {
       fetchPosts();
     }
   }, [loggedInUserData]);
+
+  useEffect(() => {
+    db.collection("retweets").onSnapshot((snapshot) =>
+      setRetweets(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+    );
+  }, []);
+
   return (
     <div className="feed">
       {/* Header */}
@@ -113,6 +124,27 @@ function Feed({ uid }) {
       </div>
 
       <TweetBox uid={uid} onPostSubmit={fetchPosts} />
+
+      <Flipmove>
+        {retweets.map((retweet) => (
+          <Retweet
+            id={retweet.id}
+            displayName={retweet.displayName}
+            username={retweet.username}
+            verified={retweet.verified}
+            avatar={retweet.avatar}
+            new_likes={retweet.new_likes}
+            retweet_id={retweet.retweet_id}
+            retweet_displayName={retweet.retweet_displayName}
+            retweet_username={retweet.retweet_username}
+            retweet_verified={retweet.retweet_verified}
+            retweet_text={retweet.retweet_text}
+            retweet_avatar={retweet.retweet_avatar}
+            retweet_image={retweet.retweet_image}
+            retweet_likes={retweet.retweet_likes}
+          />
+        ))}
+      </Flipmove>
 
       {loggedInUserData && (
         <Flipmove>

@@ -10,13 +10,13 @@
     padding: 10px;
     background-color: rgb(247, 230, 255);
     border-radius: 30px;
-    width: 640px;
+    width: 550px;
 }
   
 .retweet_body img {
     border-radius: 30px;
     padding: 20px;
-    width: 600px ;
+    width: 500px ;
     display: flex ;
 }
   

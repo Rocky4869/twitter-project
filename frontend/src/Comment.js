@@ -1,7 +1,5 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import "./css/Comment.css";
-import { useState } from "react";
-import db from "./firebase";
 import { Avatar } from "@material-ui/core";
 import VerifiedIcon from "@mui/icons-material/Verified";
 

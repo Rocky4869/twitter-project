@@ -64,6 +64,7 @@
   padding: 20px;
   background-color: rgb(215, 245, 250);
   border-radius: 10px;
+  width: 550px;
 }
 
 .comment_form .tweetBox_input > input {
@@ -91,6 +92,7 @@
   background-color: rgb(206, 241, 247);
   border-radius: 10px;
   margin-bottom: 10px;
+  width: 550px;
 }
 
 .post_comment > .post_comment_text {

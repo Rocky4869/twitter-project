@@ -25,7 +25,6 @@ import { ToastContainer } from "react-toastify";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import AdminTable from "./AdminTable";
 import Follow from "./Follow";
-import ViewAllTweets from "./ViewAllTweets";
 import ForgotPassword from "./login/ForgotPassword";
 
 function App() {
@@ -40,7 +39,6 @@ function App() {
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/:userid" element={<Profile />} />
         <Route path="/follow" element={<Follow />} />
-        <Route path="/viewtweets" element={<ViewAllTweets />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/admin" element={<AdminTable />} />
         <Route path="*" element={<NoMatch />} />

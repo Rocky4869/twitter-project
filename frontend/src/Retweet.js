@@ -7,7 +7,7 @@ import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
-import SidebarOption from "./SidebarOption";
+import SidebarOption from "./sidebar/SidebarOption";
 import db from "./firebase";
 
 const Retweet = forwardRef(
