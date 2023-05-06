@@ -1,3 +1,22 @@
+/*
+The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with modifications
+
+Documentation by ChatGPT (modified):
+
+The Widget.css file contains CSS styles for a widget component. Here is a breakdown of the different CSS classes and their styles:
+
+.widgets: This class sets the margin-right property to 10px.
+.widgets_input: This class sets the display property to flex, align-items property to center, background-color property to #e8f5fe, padding property to 10px, border-radius property to 50px, margin-top property to 10px, and margin-left property to 20px. The input element inside this class has its border property set to none and background-color property set to a custom CSS variable.
+.widgets_searchIcon: This class sets the color property to #1da1f2 and margin-right property to 10px.
+.widgets_widgetContainer: This class sets the margin-top property to 15px, margin-left property to 20px, padding property to 20px, background-color property to #d9edfa, and border-radius property to 20px. The h2 element inside this class has its font-size property set to 18px and font-weight property set to 800.
+.dropdown: This class sets the position property to relative, display property to inline-block, width property to 100%, max-height property to 200px, overflow property to auto, border property to 1px solid #ccc, border-radius property to 10px, box-shadow property to 0 2px 10px rgba(0, 0, 0, 0.2), background-color property to white, z-index property to 1, and background-color property to #f8f8f8.
+.dropdown-item: This class sets the padding property to 8px 16px and cursor property to pointer. When hovered over, this class sets the background-color property to #e0e0e0.
+.cancelBtn: This class sets the display property to flex, align-items property to center, justify-content property to center, width property to 24px, height property to 24px, border-radius property to 50%, cursor property to pointer, and background-color property to #e8f5fe.
+.widgets_input:hover: This class sets the border property to 2px solid #90cdf4 when the widgets_input class is hovered over.
+.widgets_widgetContainer_follow: This class sets the margin-top property to 15px, margin-left property to 20px, padding property to 20px, background-color property to #d9fad9, and border-radius property to 20px. The h2 element inside this class has its font-size property set to 18px and font-weight property set to 800.
+
+*/
+
 .widgets {
   /*
   flex: 0.3;
