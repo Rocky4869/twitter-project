@@ -8,13 +8,7 @@
 //- Network:  http://192.168.8.2:3000
 import React from "react";
 import "./App.css";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Router,
-  HashRouter,
-} from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import Home from "./Home";
 import Profile from "./Profile";
 import MyProfile from "./MyProfile";
@@ -23,7 +17,6 @@ import LoginCard from "./login/LoginCard";
 import RegistrationTab from "./login/RegistrationTab";
 import Setting from "./Setting";
 import { ToastContainer } from "react-toastify";
-import SideBarContainer from "./sidebar/SideBarContainer";
 import AdminTable from "./AdminTable";
 import Follow from "./Follow";
 import ForgotPassword from "./login/ForgotPassword";

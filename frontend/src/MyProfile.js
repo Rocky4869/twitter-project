@@ -27,6 +27,7 @@ function MyProfile() {
         .get();
 
       const userPosts = querySnapshot.docs.map((doc) => ({
+        // get user posts
         id: doc.id,
         data: doc.data(),
       }));
@@ -37,6 +38,7 @@ function MyProfile() {
     }
   };
   useEffect(() => {
+    // fetch posts
     if (uid) {
       fetchPosts();
     }
@@ -44,6 +46,7 @@ function MyProfile() {
 
   useEffect(() => {
     const fetchUserData = async (uid) => {
+      // fetch user data
       try {
         const docRef = db.collection("users").doc(uid);
         const docSnapshot = await docRef.get();
@@ -58,6 +61,7 @@ function MyProfile() {
       }
     };
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      // check if user is logged in
       if (user) {
         setUid(user.uid);
         fetchUserData(user.uid);
@@ -68,11 +72,12 @@ function MyProfile() {
       }
     });
     return () => {
-      unsubscribe();
+      unsubscribe(); // Detach the listener when the component unmounts
     };
   }, []);
 
   const handleReturn = () => {
+    // return to home page
     navigate("/home");
   };
 

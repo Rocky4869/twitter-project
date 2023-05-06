@@ -26,17 +26,18 @@ const CreateTweetDialog = forwardRef(
     const [userData, setUserData] = useState(null);
 
     const fetchUserData = async () => {
+      // fetch user data from firestore
       try {
-        const docRef = db.collection("users").doc(uid);
+        const docRef = db.collection("users").doc(uid); // query user data from firestore
         const docSnapshot = await docRef.get();
         if (!docSnapshot.empty) {
-          const userData = docSnapshot.data();
+          const userData = docSnapshot.data(); // get user data
           setUserData(userData);
         } else {
           console.log("User not found");
         }
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching user data:", error); // if error, set error message
       }
     };
 
@@ -45,18 +46,19 @@ const CreateTweetDialog = forwardRef(
     }, []);
 
     const isImage = (file) => {
-      return file && /^image\/(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(file.type);
+      return file && /^image\/(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(file.type); // check if file is image
     };
 
     const isVideo = (file) => {
       return (
-        file && /^video\/(mp4|webm|ogg|mov|avi|wmv|flv|3gp)$/i.test(file.type)
+        file && /^video\/(mp4|webm|ogg|mov|avi|wmv|flv|3gp)$/i.test(file.type) // check if file is video
       );
     };
 
     const sendTweet = async (e) => {
+      // send tweet
       e.preventDefault();
-      const storageRef = firebase.storage().ref();
+      const storageRef = firebase.storage().ref(); // get storage reference
       let fileURL = "";
       if (selectedImage) {
         const uploadTask = storageRef
@@ -64,16 +66,17 @@ const CreateTweetDialog = forwardRef(
           .put(selectedImage);
         // alert(selectedImage.name);
         await new Promise((resolve, reject) => {
+          // upload image to storage
           uploadTask.on(
             "state_changed",
             null,
             (error) => {
-              console.error("Upload error:", error);
+              console.error("Upload error:", error); // if error, set error message
               reject(error);
             },
             async () => {
               const downloadURL =
-                await uploadTask.snapshot.ref.getDownloadURL();
+                await uploadTask.snapshot.ref.getDownloadURL(); // get download url
               console.log("File available at", downloadURL);
               fileURL = downloadURL;
               resolve();
@@ -82,8 +85,9 @@ const CreateTweetDialog = forwardRef(
         });
       }
 
-      const timestamp = firebase.firestore.Timestamp.now();
+      const timestamp = firebase.firestore.Timestamp.now(); // get current timestamp
       await db.collection("posts").add({
+        // add post to firestore
         displayName: userData.username,
         displayId: userData.id,
         userId: uid,
@@ -97,6 +101,7 @@ const CreateTweetDialog = forwardRef(
           "https://dep.com.vn/wp-content/uploads/2022/11/phong-cach-thoi-trang-cha-eun-woo-1.jpg",
       });
       if (onPostSubmit) {
+        // if onPostSubmit is defined, call it
         onPostSubmit();
       }
       setSelectedImage("");
@@ -105,24 +110,29 @@ const CreateTweetDialog = forwardRef(
     };
 
     const handleOpenEmoji = () => {
+      // open emoji picker
       setShowEmojiPicker(!showEmojiPicker);
     };
 
     const onEmojiClick = (emojiObject) => {
+      // add emoji to tweet message
       setTweetMessage(tweetMessage + emojiObject.emoji);
     };
 
     const handleOpenImage = () => {
+      // open file input
       const fileInput = document.getElementById("image-input");
       fileInput.click();
     };
 
     const handleImageSelect = (event) => {
+      // handle image select
       const file = event.target.files[0];
       setSelectedImage(file);
     };
 
     const closePreview = () => {
+      // close image preview
       setSelectedImage(null);
     };
 

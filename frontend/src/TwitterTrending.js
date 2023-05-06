@@ -1,30 +1,8 @@
 import React from "react";
-import {
-  TwitterTimelineEmbed,
-  TwitterShareButton,
-  TwitterFollowButton,
-  TwitterHashtagButton,
-  TwitterMentionButton,
-  TwitterTweetEmbed,
-  TwitterMomentShare,
-  TwitterDMButton,
-  TwitterVideoEmbed,
-  TwitterOnAirButton,
-} from "react-twitter-embed";
-import { Avatar, Button } from "@material-ui/core";
-import VerifiedIcon from "@mui/icons-material/Verified";
+import { TwitterTimelineEmbed } from "react-twitter-embed";
 import "./css/TwitterTrending.css";
 
-function TwitterTrending({
-  id,
-  displayName,
-  username,
-  verified,
-  text,
-  avatar,
-  image,
-  likes,
-}) {
+function TwitterTrending({ username }) {
   return (
     <div className="twittertrending">
       <TwitterTimelineEmbed

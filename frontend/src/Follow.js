@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Widgets from "./Widgets";
 import "./App.css";
 import { useEffect, useState } from "react";
@@ -14,9 +14,10 @@ function Follow() {
   const [followingData, setFollowingData] = useState([]);
   let navigate = useNavigate();
   useEffect(() => {
+    // fetch user data
     const fetchUserData = async (uid) => {
       try {
-        const docRef = db.collection("users").doc(uid);
+        const docRef = db.collection("users").doc(uid); // get user data
         const docSnapshot = await docRef.get();
         if (docSnapshot.exists) {
           const userData = docSnapshot.data();
@@ -29,9 +30,10 @@ function Follow() {
       }
     };
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      // check if user is logged in
       if (user) {
         setUid(user.uid);
-        fetchUserData(user.uid);
+        fetchUserData(user.uid); // fetch user data
       } else {
         setUid(null);
         setUserData(null); // Clear the user data when the user is logged out
@@ -39,16 +41,18 @@ function Follow() {
       }
     });
     return () => {
-      unsubscribe();
+      unsubscribe(); // Detach the listener when the component unmounts
     };
   }, []);
 
   const handleReturn = () => {
+    // return to home page
     navigate("/home");
   };
 
   const fetchFollowingData = async () => {
     const userPromises = userData.Following.map(async (followedUserId) => {
+      // fetch following data
       const userDoc = await db.collection("users").doc(followedUserId).get();
       return {
         id: userDoc.id,
@@ -56,14 +60,16 @@ function Follow() {
       };
     });
 
-    const allFollowingUsersData = await Promise.all(userPromises);
+    const allFollowingUsersData = await Promise.all(userPromises); // set following data
     setFollowingData(allFollowingUsersData);
     console.log(allFollowingUsersData);
   };
 
   useEffect(() => {
+    // fetch following data
     if (userData) {
       if (userData.Following && userData.Following.length > 0) {
+        // check if user is following anyone
         fetchFollowingData();
       } else {
         setFollowingData([]);
@@ -73,7 +79,7 @@ function Follow() {
 
   return (
     <div>
-      {uid && userData ? (
+      {uid && userData ? ( // check if user is logged in
         <div className="app">
           <SideBarContainer />
           <div>

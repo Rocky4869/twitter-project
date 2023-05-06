@@ -4,7 +4,7 @@ import "../css/SidebarOption.css";
 function SidebarOption({ active, text, Icon, onClick, iconStyle}) {
   return (
     <div
-      className={`sidebarOption ${active && "sidebarOption--active"}`}
+      className={`sidebarOption ${active && "sidebarOption--active"}`} 
       onClick={onClick}
     >
       <Icon style={iconStyle}/>

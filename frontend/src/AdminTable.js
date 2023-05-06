@@ -24,6 +24,7 @@ function AdminTable() {
   const [updatedata, setUpdatedata] = useState(false);
 
   const columns = [
+    // defining columns
     {
       field: "id",
       headerName: "ID",
@@ -55,23 +56,25 @@ function AdminTable() {
     },
   ];
 
-  // fetch user info when rendering this component
   useEffect(() => {
+    // get users from firestore
     getUsers();
   }, []);
 
   useEffect(() => {
+    // update table when updatedata is changed
     getUsers();
   }, [updatedata]);
 
   const getUsers = async () => {
+    // get users from firestore
     const userList = [];
     await db
-      .collection("users")
+      .collection("users") // get users from firestore
       .get()
       .then((snapShot) => {
         snapShot.forEach((doc) => {
-          let singleUser = { id: doc.id, ...doc.data() };
+          let singleUser = { id: doc.id, ...doc.data() }; // get user data
           userList.push(singleUser);
         });
       })
@@ -82,15 +85,14 @@ function AdminTable() {
   };
 
   const deleteUser = () => {
+    // delete user
     if (window.confirm("Do you confirm delete?")) {
-      // find user by username
       let deleteItems = db
         .collection("users")
         .where("username", "==", username);
-      // delete
       deleteItems.get().then((snapshot) => {
         snapshot.docs.forEach((doc) => {
-          doc.ref.delete();
+          doc.ref.delete(); // delete user from firestore
         });
       });
       setUpdatedata(!updatedata);
@@ -99,20 +101,22 @@ function AdminTable() {
   };
 
   const handleClickOpen = () => {
+    // open the dialoge for update / delete
     setOpen(true);
   };
 
   const handleClickClose = () => {
+    // close the dialoge for update / delete
     setOpen(false);
   };
 
-  // open the adding form
   const handleAddopen = () => {
+    // open the adding form
     setAddopen(true);
   };
 
-  // close the adding form
   const handleAddclose = () => {
+    // close the adding form
     setAddopen(false);
   };
 

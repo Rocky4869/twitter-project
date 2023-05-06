@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import db from "./firebase";
 import SideBarContainer from "./sidebar/SideBarContainer";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Avatar, Button, TextField } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import firebase from "firebase/app";
 import Post from "./Post";
@@ -22,15 +22,13 @@ function Profile() {
   let navigate = useNavigate();
 
   const fetchUserData = async () => {
-    const collectionRef = db.collection("users");
+    const collectionRef = db.collection("users"); //get all users
     try {
       const querySnapshot = await collectionRef.where("id", "==", userid).get();
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
         settargetUserId(doc.id);
         setUserData(doc.data());
-        // alert(doc.data().id);
-        // alert(doc.id);
       } else {
         console.log("User not found");
       }
@@ -39,8 +37,9 @@ function Profile() {
     }
   };
   const fetchLoggedInUserData = async () => {
+    //fetch logged in user data
     if (uid) {
-      const loggedInUserDocRef = db.collection("users").doc(uid);
+      const loggedInUserDocRef = db.collection("users").doc(uid); //get logged in user data
       try {
         const loggedInUserDocSnapshot = await loggedInUserDocRef.get();
         if (loggedInUserDocSnapshot.exists) {
@@ -52,27 +51,29 @@ function Profile() {
     }
   };
 
-  //fetch this searched user posts!
   const fetchPosts = async () => {
+    //fetch posts tweet by target user
     try {
       const querySnapshot = await db
-        .collection('posts')
-        .where('userId', '==', targetUserId)
+        .collection("posts")
+        .where("userId", "==", targetUserId)
         .orderBy("created_at", "desc")
         .get();
 
       const userPosts = querySnapshot.docs.map((doc) => ({
+        // get user posts
         id: doc.id,
         data: doc.data(),
       }));
 
       setPosts(userPosts);
     } catch (error) {
-      console.error('Error fetching posts:', error);
+      console.error("Error fetching posts:", error); //error handling
     }
   };
 
   useEffect(() => {
+    //check if logged in
     fetchUserData();
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -83,13 +84,12 @@ function Profile() {
       }
     });
     return () => {
-      unsubscribe();
+      unsubscribe(); //clean up
     };
   }, [userid]);
 
-  //fetch logged-in user data
   useEffect(() => {
-    fetchLoggedInUserData();
+    fetchLoggedInUserData(); //fetch logged in user data
   }, [uid]);
 
   useEffect(() => {
@@ -104,11 +104,11 @@ function Profile() {
     if (uid && targetUserId) {
       const loggedInUserDocRef = db.collection("users").doc(uid);
       const targetUserDocRef = db.collection("users").doc(targetUserId);
-  
+
       try {
         const batch = db.batch();
         if (isFollowing) {
-          // Remove the target user from the Following 
+          // Remove the target user from the Following
           batch.update(loggedInUserDocRef, {
             Following: firebase.firestore.FieldValue.arrayRemove(targetUserId),
           });
@@ -134,20 +134,22 @@ function Profile() {
             Followers: [...prevUserData.Followers, uid],
           }));
         }
-        
+
         await batch.commit();
       } catch (error) {
         console.error("Error updating following and followers:", error);
       }
     }
-  };  
+  };
 
   const handleFollow = async () => {
+    //follow or unfollow
     await updateFollowing();
     setIsFollowing(!isFollowing);
   };
 
   const handleReturn = () => {
+    //return to home page
     navigate("/home");
   };
 
@@ -160,13 +162,13 @@ function Profile() {
             <div className="feed">
               <div className="feed_header">
                 <div className="flex flex-row">
-                    <ArrowBackIcon
-                      style={{
-                        marginTop: "10px",
-                        marginRight: "20px",
-                      }}
-                      onClick={handleReturn}
-                    ></ArrowBackIcon>
+                  <ArrowBackIcon
+                    style={{
+                      marginTop: "10px",
+                      marginRight: "20px",
+                    }}
+                    onClick={handleReturn}
+                  ></ArrowBackIcon>
                   <div
                     className="font-bold flex"
                     style={{ fontSize: "30px", marginTop: "1px" }}
@@ -219,9 +221,7 @@ function Profile() {
                     }}
                     className="flex flex-row"
                   >
-                    <div>
-                      {userData.introduction}
-                    </div>
+                    <div>{userData.introduction}</div>
                     <Button
                       variant="outlined"
                       style={{
@@ -255,7 +255,7 @@ function Profile() {
                         marginTop: "5px",
                       }}
                     >
-                      {userData.joinedAt.toDate().toLocaleString('en-US')}
+                      {userData.joinedAt.toDate().toLocaleString("en-US")}
                     </span>
                   </div>
                   <div
@@ -264,8 +264,13 @@ function Profile() {
                       marginTop: "20px",
                     }}
                   >
-                    <div style={{ marginRight: "10px" }}>{userData.Following.length} Following</div>
-                    <div style={{ marginLeft: "10px" }}> {userData.Followers.length} Followers </div>
+                    <div style={{ marginRight: "10px" }}>
+                      {userData.Following.length} Following
+                    </div>
+                    <div style={{ marginLeft: "10px" }}>
+                      {" "}
+                      {userData.Followers.length} Followers{" "}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -274,7 +279,7 @@ function Profile() {
                   <Post
                     key={post.id}
                     id={post.data.id}
-                    loggedInUserData ={loggedInUserData}
+                    loggedInUserData={loggedInUserData}
                     displayName={post.data.displayName}
                     username={post.data.displayId}
                     verified={false}

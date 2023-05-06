@@ -14,10 +14,11 @@ function Feed({ uid }) {
   const [retweets, setRetweets] = useState([]);
 
   const fetchLoggedInUserData = async () => {
+    // fetch logged in user data from firestore
     try {
       const userDoc = await db.collection("users").doc(uid).get();
       if (userDoc.exists) {
-        setLoggedInUserData(userDoc.data());
+        setLoggedInUserData(userDoc.data()); // set logged in user data
       }
     } catch (error) {
       console.error("Error fetching logged in user data:", error);
@@ -25,11 +26,12 @@ function Feed({ uid }) {
   };
 
   const fetchUserData = async () => {
+    // fetch user data from firestore
     try {
       const docRef = db.collection("users").doc(uid);
       const docSnapshot = await docRef.get();
       if (!docSnapshot.empty) {
-        const userData = docSnapshot.data();
+        const userData = docSnapshot.data(); // get user data
         setUserData(userData);
       } else {
         console.log("User not found");
@@ -40,6 +42,7 @@ function Feed({ uid }) {
   };
 
   const checkAdmin = async () => {
+    // check if user is admin
     let role = "";
     try {
       const userSnapshot = await db
@@ -47,7 +50,7 @@ function Feed({ uid }) {
         .doc(uid)
         .get()
         .then((doc) => {
-          console.log((role = doc.data().role));
+          console.log((role = doc.data().role)); // get user role
         });
       if (role === "admin") {
         setIsAdmin(true);
@@ -58,53 +61,57 @@ function Feed({ uid }) {
   };
 
   useEffect(() => {
+    // fetch user data and check if user is admin
     fetchUserData();
     checkAdmin();
   });
 
   const fetchPosts = async () => {
+    // fetch posts from firestore
     try {
       if (loggedInUserData) {
         const followedUsers = loggedInUserData.Following;
         const userPostsPromises = followedUsers.map(async (followedUserId) => {
           const querySnapshot = await db
             .collection("posts")
-            // .where("userId", "==", followedUserId)
-            .orderBy("created_at", "desc")
+            .orderBy("created_at", "desc") // get posts from followed users
             .get();
           return querySnapshot.docs.map((doc) => ({
             id: doc.id,
             data: doc.data(),
           }));
         });
-        const allFollowedUserPosts = await Promise.all(userPostsPromises);
+        const allFollowedUserPosts = await Promise.all(userPostsPromises); // get all posts from followed users
         const postArray = [].concat(...allFollowedUserPosts);
         const sortedPosts = postArray.sort((x, y) => {
           return (
-            y.data.created_at.toDate().getTime() -
+            y.data.created_at.toDate().getTime() - // sort posts by date
             x.data.created_at.toDate().getTime()
           );
         });
         setPosts(sortedPosts);
       }
     } catch (error) {
-      console.error("Error fetching posts:", error);
+      console.error("Error fetching posts:", error); // if error, set error message
     }
   };
 
   useEffect(() => {
+    // fetch logged in user data
     if (uid) {
       fetchLoggedInUserData();
     }
   }, [uid]);
 
   useEffect(() => {
+    // fetch posts
     if (loggedInUserData) {
       fetchPosts();
     }
   }, [loggedInUserData]);
 
   useEffect(() => {
+    // fetch retweets
     db.collection("retweets").onSnapshot((snapshot) =>
       setRetweets(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
     );

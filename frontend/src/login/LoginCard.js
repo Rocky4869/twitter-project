@@ -20,32 +20,32 @@ function LoginCard() {
     e.preventDefault();
     let email = usernameOrEmail;
     if (!usernameOrEmail.includes("@")) {
-      // it is username!
+      // if usernameOrEmail is username, query user data from firestore
       try {
-        const querySnapshot = await db
+        const querySnapshot = await db // query user data from firestore
           .collection("users")
           .where("username", "==", usernameOrEmail)
           .get();
         if (querySnapshot.empty) {
-          //can't find user
-          toast.error("User Not Found!");
+          toast.error("User Not Found!"); // if user not found, set error message
           return;
         }
-        const userData = querySnapshot.docs[0].data();
+        const userData = querySnapshot.docs[0].data(); // get user data
         email = userData.email;
       } catch (error) {
-        toast.error("Error fetching user data!");
+        toast.error("Error fetching user data!"); // if error, set error message
         console.error("Error fetching user data:", error);
         return;
       }
     }
 
     try {
-      const userCredential = await firebase
+      const userCredential = await firebase // login with email and password
         .auth()
         .signInWithEmailAndPassword(email, password);
       const user = userCredential.user;
       toast.success("Log in successfully!", {
+        // if login successfully, set success message
         position: toast.POSITION.TOP_CENTER,
         style: {
           textAlign: "center",
@@ -53,7 +53,7 @@ function LoginCard() {
       });
       navigate("/home");
     } catch (error) {
-      toast.error("Username or Email or Password Incorrect!");
+      toast.error("Username or Email or Password Incorrect!"); // if error, set error message
     }
   };
 
