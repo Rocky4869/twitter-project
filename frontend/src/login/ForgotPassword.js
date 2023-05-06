@@ -1,3 +1,21 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The ForgotPassword component is a React functional component that renders a form for users to reset their password. 
+It imports several dependencies including React, useState, Link, Button, and firebase. The component uses the useState hook to manage the state of the email input field, error message, and success message.
+
+The handleForgotPassword function is called when the user clicks the submit button. 
+It uses the Firebase sendPasswordResetEmail method to send a password reset email to the user's email address. 
+If the email is sent successfully, the success message is displayed and a success toast notification is shown using the react-toastify library. 
+If there is an error, the error message is displayed.
+
+The component renders a form with an email input field and a submit button. 
+It also includes a back button that links back to the login page. 
+The component also includes a header and footer component that are imported from separate files. 
+The styling for the component is done using CSS and the Material UI library.
+
+*/
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
