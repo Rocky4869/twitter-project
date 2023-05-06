@@ -1,3 +1,20 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The LoginFooter.js file contains a React component that renders a footer section for a login page. 
+The component imports a CSS file for styling and defines an array of footer links with their corresponding URLs.
+
+The LoginFooter function returns a footer element with a navigation element inside. 
+The navigation element maps over the footerLinks array and creates an anchor element for each link with the link name as the text and the URL as the href attribute. 
+The target and rel attributes are set to "_blank" and "noopener noreferrer" respectively to ensure that the links open in a new tab and prevent security vulnerabilities.
+
+Finally, the component includes a div element with the copyright information for the website. 
+The component is exported as the default export of the module, allowing it to be imported and used in other parts of the application.
+
+*/
+
+
 import React from "react";
 import "../css/LoginFooter.css";
 const footerLinks = [
