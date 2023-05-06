@@ -8,7 +8,7 @@ Link to the web: https://rocky4869.github.io/twitter-project/
 <img width="1104" alt="Screenshot 2023-05-06 at 4 07 42 PM" src="https://user-images.githubusercontent.com/101194662/236612922-75457ad9-8123-4c24-a0e4-0cb287b55a24.png">
 
 ## Overview ☁
-Twitter is a microblogging and social networking site where users broadcast short posts known as “tweets”. It is a powerful and beneficial system that connects people and business to cultivate a brand community and to provide real-time trends.
+Simplified Twitter is a web application that aims to provide a streamlined and easy-to-use version of the popular social media platform, Twitter. The goal of the project is to create a platform that emphasizes simplicity, user-friendliness, and a focus on the most essential features of Twitter.
 
 ## Features ✨
 - Authentication with Firebase Authentication
@@ -41,7 +41,7 @@ Here are the steps to run the project locally.
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/ccrsxx/twitter-clone.git
+   git clone https://github.com/Rocky4869/twitter-project.git
    ```
 
 2. Install dependencies
