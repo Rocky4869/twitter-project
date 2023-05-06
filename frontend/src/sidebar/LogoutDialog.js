@@ -1,3 +1,26 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The LogoutDialog component is a React functional component that displays a dialog box to confirm the user's intention to log out of the Twitter application. 
+It imports several components from the Material-UI and MUI libraries, including Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, Box, Grid, and IconButton. 
+It also imports icons from the @material-ui/icons library, including Close, InsertEmoticon, and Image.
+
+The component takes three props: open, onClose, and history. 
+The open prop is a boolean that determines whether the dialog box is open or closed. 
+The onClose prop is a function that is called when the user clicks the close button or cancels the logout action. 
+The history prop is not used in the component.
+
+The LogoutDialog component defines a handleLogout function that is called when the user clicks the logout button. 
+This function signs the user out of the Twitter application using Firebase authentication, displays a success message using the toast function from the react-toastify library, and navigates the user to the home page using the useNavigate hook from the react-router-dom library.
+
+The component renders a Dialog component from the Material-UI library that displays the logout confirmation dialog box. 
+The dialog box includes a close button, a Twitter logo, a title, a message, and two buttons: a logout button and a cancel button.
+The logout button calls the handleLogout function when clicked, and the cancel button calls the onClose function when clicked. 
+The dialog box is styled using the PaperProps prop to set the border radius to 20.
+
+*/
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@material-ui/core";

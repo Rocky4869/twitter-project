@@ -1,3 +1,10 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modification
+
+Documentation by ChatGPT (modified):
+
+*/
+
 import React, { useEffect, useState } from "react";
 import "../css/Sidebar.css";
 import TwitterIcon from "@material-ui/icons/Twitter";
