@@ -1,3 +1,25 @@
+/*
+The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with modifications
+
+Documentation by ChatGPT (modified):
+
+The TwitterFollow.css file contains CSS styles for a Twitter follow component. 
+Here is a breakdown of the different CSS classes and their properties:
+
+.twitterfollow: This class sets the display property to flex, aligns items to the top, adds a 1px solid border to the top, sets a padding of 10px to the bottom, sets a background color of aliceblue, adds a border radius of 20px, and sets a margin bottom of 5px.
+
+.twitterfollow_avator: This class sets a padding of 10px and sets the display property to flex.
+
+.twitterfollow_body: This class sets the flex property to 1 and sets a padding of 10px.
+
+.twitterfollow_headerText > h3: This class selects the h3 element inside the .twitterfollow_headerText class and sets the font size to 15px and margin bottom to 5px.
+
+.twitterfollow_headerSpecial: This class sets the font weight to 600, font size to 12px, and color to gray.
+
+.twitterfollow_badge: This class sets the font size to 14px and color to the Twitter color variable.
+
+*/
+
 .twitterfollow {
   display: flex;
   align-items: flex-start;
