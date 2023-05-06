@@ -1,3 +1,24 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The RegistrationTab.css file contains a set of CSS classes that are used to style the registration tab of a web page. Here is a brief documentation of the classes:
+
+.bg-blue-300: This class sets the background color of an element to a light blue shade (#90cdf4).
+.bg-white: This class sets the background color of an element to white (#ffffff).
+.text-center: This class centers the text within an element.
+.font-bold: This class sets the font weight of an element to bold.
+.flex: This class sets the display property of an element to flex, allowing it to be flexible in size and layout.
+.justify-center: This class centers the content of an element horizontally.
+.flex-row: This class sets the flex-direction property of an element to row, allowing its child elements to be arranged horizontally.
+.justify-between: This class evenly distributes the child elements of an element along the main axis, with extra space between them.
+.no-underline: This class removes the underline from a text link.
+.hover:underline:hover: This class adds an underline to a text link when it is hovered over by the user.
+.text-black: This class sets the text color of an element to black (#000000).
+.text-white: This class sets the text color of an element to white (#ffffff).
+
+*/
+
 .bg-blue-300 {
   background-color: #90cdf4;
 }
