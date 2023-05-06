@@ -1,3 +1,77 @@
+/*
+
+The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone
+
+Documentation by ChatGPT (modified):
+
+The Comment.css file contains styling rules for a comment section in a web page. 
+The are organized into different classes, each with its own set of properties.
+
+The .post_comment .post class is used to style the main container of a comment. 
+It sets the display property to flex, aligns items to the top, adds a bottom border, sets a border radius, and adds padding.
+
+The .post_comment .post_body class is used to style the body of a comment. 
+It sets the flex property to 1 and adds padding.
+
+The .post_comment .post_body > img class is used to style the image in a comment. 
+It sets a border radius.
+
+The .post_comment .post_footer class is used to style the footer of a comment. 
+It sets the display property to flex, justifies content to space-between, and adds margin to the top.
+
+The .post_comment .post_headerDescription class is used to style the description in a comment header. 
+It sets the font size and adds margin to the bottom.
+
+The .post_comment .post_avator class is used to style the avatar in a comment. 
+It adds padding and sets the display property to flex.
+
+The .post_comment .post_headerText > h3 class is used to style the text in a comment header. 
+It sets the font size and adds margin to the bottom.
+
+The .post_comment .post_badge class is used to style the badge in a comment header. 
+It sets the font size and color.
+
+The .post_comment .post_headerSpecial class is used to style the special text in a comment header. 
+It sets the font weight, font size, and color.
+
+The .post_comment .post_avatar class is used to style the avatar in a comment. 
+It adds padding and sets the display property to flex.
+
+The .post_comment .img class is used to style the image in a comment. 
+It sets the width and max-width properties.
+
+The .comment_form .tweetBox_input class is used to style the input box in a comment form. 
+It sets the display property to flex, adds padding, sets the background color, and sets the border radius and width.
+
+The .comment_form .tweetBox_input > input class is used to style the input field in a comment form. 
+It sets the flex property to 1, font size, border, display, padding, and margin.
+
+The .comment_form .tweetBox_input > Avatar class is used to style the avatar in a comment form. 
+It sets the display property to flex and adds padding.
+
+The .post_footer .sidebarOption > h2 class is used to style the header in a comment footer. 
+It sets the font weight, font size, and margin.
+
+The .post_comment class is used to style the main container of a comment. 
+It sets the display property to flex, adds a background color, sets a border radius, and adds margin.
+
+The .post_comment > .post_comment_text class is used to style the text in a comment. 
+It sets the flex property to 1, width, font size, border, display, padding, and margin.
+
+The .comment_form .tweetBox_additional class is used to style the additional input box in a comment form. 
+It sets the display property to flex, adds padding, sets the background color, and sets the border radius.
+
+The .comment_form .tweetBox_additional > input class is used to style the additional input field in a comment form. 
+It sets the flex property to 1, font size, border, display, padding, and margin.
+
+The .comment_form .tweetBox_input > .tweetBox_tweetButton class is used to style the tweet button in a comment form. 
+It sets the display property to flex and adds padding.
+
+The .post_id class is used to style the ID of a comment. 
+It sets the display property to flex and floats it to the right.
+
+*/
+
 .post_comment .post {
   display: flex;
   align-items: flex-start;
