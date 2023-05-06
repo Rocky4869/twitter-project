@@ -1,3 +1,28 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The Logincard.css file contains a set of CSS rules that define the styling of a login card. The file includes rules for background colors, animations, text alignment, font weight, and more. 
+Here is a breakdown of the different rules:
+
+.bg-blue-300: This rule sets the background color of an element to a light blue color (#90cdf4).
+.bg-white: This rule sets the background color of an element to white (#ffffff).
+@keyframes shinetxt: This rule defines an animation that creates a shining effect on text. It uses the background-position property to move a gradient background behind the text.
+.welcome: This rule sets the background of an element to a linear gradient of three colors and applies the shinetxt animation to create a shining effect on the text. It also sets the background-clip property to text to clip the background to the text and make it visible only where the text is.
+.animalShake: This rule defines an animation that shakes an element back and forth. It uses the transform property to rotate the element at different angles.
+.text-center: This rule centers the text of an element.
+.font-bold: This rule sets the font weight of an element to bold.
+.flex: This rule sets the display property of an element to flex to create a flexible container for its child elements.
+.justify-center: This rule centers the child elements of a flex container horizontally.
+.flex-row: This rule sets the flex-direction property of a flex container to row to arrange its child elements in a row.
+.justify-between: This rule evenly distributes the child elements of a flex container along the main axis and creates equal space between them.
+.no-underline: This rule removes the underline from a text link.
+.hover:underline:hover: This rule adds an underline to a text link when the mouse hovers over it.
+.text-black: This rule sets the color of an element's text to black (#000000).
+.text-white: This rule sets the color of an element's text to white (#ffffff).
+
+*/
+
 .bg-blue-300 {
   background-color: #90cdf4;
 }
