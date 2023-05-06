@@ -1,3 +1,26 @@
+/*
+
+The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone
+
+Documentation by ChatGPT (modified):
+
+The Feed.css file contains CSS styles for a feed section of a web page. 
+The first style rule hides the scrollbar of the feed section using the WebKit-specific pseudo-element ::-webkit-scrollbar.
+The second style rule sets the width and border properties of the feed section, and enables vertical scrolling using overflow-y: scroll. 
+The min-width property ensures that the feed section has a minimum width of 750 pixels.
+
+The third style rule sets the styles for the header of the feed section. 
+The position: sticky property makes the header stick to the top of the viewport when the user scrolls down the page. 
+The background-color property sets the background color of the header to white, and the z-index property ensures that the header appears above other elements on the page. 
+The border-bottom property adds a bottom border to the header, and the padding property adds padding to the top and bottom of the header.
+
+The fourth style rule sets the styles for an admin header, which has a pink background color.
+
+The fifth style rule sets the styles for the heading of the feed section. 
+The font-size property sets the font size to 20 pixels, and the font-weight property sets the font weight to 800 (which is bold).
+
+*/
+
 /* Hide the scrollbar */
 .feed::-webkit-scrollbar {
   display: none;
