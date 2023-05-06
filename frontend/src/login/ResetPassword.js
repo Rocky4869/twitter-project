@@ -1,3 +1,22 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+This is a React component called ResetPassword. 
+It imports React and Link from react-router-dom, as well as Button from @material-ui/core and a CSS file called ResetPassword.css.
+
+The component returns a div with a blue background and a child div that is centered and has a white background, border, and box shadow. 
+The child div has a fixed width and height of 700px and 800px respectively.
+
+Inside the child div, there is an image of the Twitter logo, a heading that says "Reset your password", a message asking the user to enter and confirm their new password, two input fields for the new password and confirm password, a submit button, and a link to go back to the login page.
+
+The submit button is a Material-UI Button component with the label "Submit" and a blue background color. 
+The link to go back to the login page is a react-router-dom Link component with the label "Back" and a black background color.
+
+The CSS file ResetPassword.css contains additional styling for this component.
+
+*/
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
