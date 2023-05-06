@@ -1,3 +1,16 @@
+/*
+The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with modifications
+
+Documentation by ChatGPT (modified):
+
+The TweetBox.css file contains CSS styles for a tweet box component. 
+The .tweetBox class sets the padding and border properties for the tweet box container. 
+The .tweetBox > form class sets the display property to flex and the flex-direction property to column for the form element inside the tweet box container. 
+The .tweetBox_input class sets the padding and display properties for the tweet input container. 
+The .tweetBox_input > input class sets the flex property to 1, margin-left property to 20px, font-size property to 20px, and border property to none for the input element inside the tweet input container. The .tweetBox_imageInput class sets the border and padding properties for the image input element inside the tweet box container. The .tweetBox_tweetButton class sets the background-color, border, color, font-weight, text-transform, border-radius, width, height, margin-top, margin-left, and margin-bottom properties for the tweet button element inside the tweet box container.
+
+*/
+
 .tweetBox {
   padding-bottom: 10px;
   border-bottom: 1px solid var(--twitter-background);
