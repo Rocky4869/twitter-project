@@ -1,3 +1,24 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modification
+
+Documentation by ChatGPT (modified):
+
+TheBox component is a React component that allows users to create and post tweets It imports several dependencies including React, Material-UI components, Firebase, and an emoji picker library.
+
+The component takes two props: uid and onPostSubmit. 
+uid is the user ID of the currently logged-in user, and onPostSubmit is a callback function that is called after a tweet is successfully posted.
+
+The component uses several state variables to manage the tweet message, image, and other related data. 
+It also fetches user data from Firebase using the uid prop and sets it to the userData state variable.
+
+The component includes several helper functions to check if a file is an image or video, handle opening the emoji picker and image input, and handle image selection and preview.
+
+The sendTweet function is called when the user clicks the "Tweet" button. It uploads the selected image to Firebase storage, generates a unique post ID, and adds the tweet data to the Firebase Firestore database. 
+It then calls the onPostSubmit callback function if it exists, and resets the state variables related to the tweet message and image.
+
+The component also includes a preview of the selected image or video, and an emoji picker that appears when the user clicks the emoji button.
+
+*/
 import React, { useState, useEffect } from "react";
 import "./css/TweetBox.css";
 import { Avatar, Button, TextField } from "@material-ui/core";
