@@ -1,3 +1,30 @@
+/*
+The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone
+
+Documentation by ChatGPT (modified):
+
+The Post.css file contains CSS styles for a social media post and its comments. 
+The .post class defines the styles for the post container, including a flex display, alignment of items to the top, a bottom border, padding, and margin. 
+The .post_body class defines the styles for the post body, including flex, padding, and a border radius for images. 
+The .post_footer class defines the styles for the post footer, including a flex display, space between items, and margin. 
+The .post_headerDescription class defines the styles for the post header description, including a margin bottom and font size. 
+The .post_avatar class defines the styles for the post avatar, including padding and a flex display. 
+The .post_headerText > h3 class defines the styles for the post header text, including font size and margin bottom. 
+The .post_badge class defines the styles for the post badge, including font size and color. 
+The .post_headerSpecial class defines the styles for the post header special, including font weight, font size, and color. 
+The img class defines the styles for images within the post, including width and max width. 
+The .comment_form .tweetBox_input class defines the styles for the comment input box, including a flex display, padding, background color, and border radius. 
+The .comment_form .tweetBox_input > input class defines the styles for the comment input field, including flex, font size, border, display, padding, and margin. 
+The .comment_form .tweetBox_input > Avatar class defines the styles for the comment avatar, including padding and a flex display. 
+The .post_footer .sidebarOption > h2 class defines the styles for the post footer sidebar option, including font weight, font size, and margin right. 
+The .post_comment > .post_comment_text class defines the styles for the comment text, including flex, width, font size, border, display, padding, and margin left. 
+The .comment_form .tweetBox_additional class defines the styles for additional comment input fields, including a flex display, padding, background color, border radius, and width. 
+The .comment_form .tweetBox_additional > input class defines the styles for the additional comment input field, including flex, font size, border, display, padding, and margin right. 
+The .comment_form .tweetBox_input > .tweetBox_tweetButton class defines the styles for the comment submit button, including a flex display and padding. 
+The .post_id class defines the styles for the post ID, including a flex display and float to the right.
+
+*/
+
 .post {
   display: flex;
   align-items: flex-start;
@@ -84,12 +111,6 @@ img {
   font-size: 15px !important;
   margin-right: 20px;
 }
-
-/* .post_comment {
-  display: flex;
-  background-color: rgb(206, 241, 247);
-  border-radius: 10px;
-} */
 
 .post_comment > .post_comment_text {
   flex: 1;
