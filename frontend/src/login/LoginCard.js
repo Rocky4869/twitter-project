@@ -1,3 +1,23 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The LoginCard component is a React functional component that renders a login form for users to enter their email or username and password to log in to the application. 
+It imports several dependencies including React, react-router-dom, @material-ui/core, firebase, and react-toastify.
+
+The component uses the useState hook to manage the state of the usernameOrEmail and password fields. 
+It also uses the useNavigate hook from react-router-dom to navigate to the home page after successful login.
+
+The handleSubmit function is called when the user clicks the login button. 
+It first checks if the entered value is an email or username and then queries the Firebase database to retrieve the user's email if the entered value is a username. 
+It then uses Firebase's signInWithEmailAndPassword method to authenticate the user with their email and password. 
+If the authentication is successful, the user is redirected to the home page. If there is an error, a toast message is displayed to the user.
+
+The LoginCard component also renders a header and footer component, LoginHeader and LoginFooter respectively, to provide a consistent layout across the application. 
+The login form is styled using CSS classes defined in the LoginCard.css file.
+
+*/
+
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@material-ui/core";
