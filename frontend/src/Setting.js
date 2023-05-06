@@ -1,3 +1,24 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modification
+
+Documentation by ChatGPT (modified):
+
+The Setting component is a React functional component that renders a settings page for a simplified Twitter application. 
+It imports the useState hook from React and several Material UI components, including Button, Switch, and icons such as PrivacyTipIcon, EmojiEmotionsIcon, NotificationsIcon, BusinessIcon, and NewspaperIcon. 
+It also imports two custom components, SideBarContainer and Widgets.
+
+The component defines several state variables using the useState hook, including isPublicChecked, isAllowAdsChecked, isAllowSharingChecked, isPushChecked, and isEmojiChecked. 
+These variables are used to control the state of the Switch components in the settings page.
+
+The Setting component renders a layout that includes a sidebar, a header, and a main content area. 
+The main content area contains a form with several settings options, including toggles for setting tweets to private, controlling ad preferences, allowing information sharing with business partners, enabling push notifications, and enabling emoji notifications.
+
+The component uses Material UI components to render the form elements, including icons and switches. 
+The state variables defined earlier are used to control the state of the switches, and their values are updated when the user interacts with them.
+
+Finally, the component renders a Widgets component at the bottom of the page, which displays additional content.
+*/
+
 import React, { useState } from "react";
 import { Button, Switch } from "@material-ui/core";
 import PrivacyTipIcon from "@mui/icons-material/PrivacyTip";
