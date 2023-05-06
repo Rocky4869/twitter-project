@@ -1,3 +1,26 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The RegistrationTab component is a React functional component that handles the registration form for new users. 
+It imports several dependencies including React, useState, Link, useNavigate, Button, db, firebase, LoginHeader, LoginFooter, and toast.
+
+The component defines several state variables including email, password, repeatpassword, and username using the useState hook. 
+It also defines a navigate variable using the useNavigate hook.
+
+The handleSubmit function is an asynchronous function that handles the form submission. 
+It first checks if the username contains "@" or whitespace and sets an error message if it does. 
+It then checks if the username already exists in the database and sets an error message if it does. 
+If the username is unique, it checks if the password and repeat password match and sets an error message if they don't. 
+It also checks if the password is at least 6 characters long and sets an error message if it isn't. 
+Finally, it checks if the email is in the correct format and sets an error message if it isn't. If all the checks pass, it creates a new user with the email and password using Firebase authentication. 
+It then generates a default user ID and creates a new user document in the Firestore database with the user's information. If there are any errors during this process, it sets an error message.
+
+The component returns a JSX template that displays the registration form. 
+It includes input fields for the username, email, password, and repeat password, as well as a Register button that triggers the handleSubmit function. 
+It also includes a link to the login page for users who already have an account. The component also includes the LoginHeader and LoginFooter components for consistent styling.
+*/
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@material-ui/core";
