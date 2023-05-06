@@ -1,3 +1,20 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The TwitterTrending.css file contains a CSS rule for the .twittertrending class. 
+This class is used to style a section of a webpage that displays Twitter trending topics.
+
+The background-color property sets the background color of the section to aliceblue, which is a light blue color.
+
+The border-radius property sets the rounded corners of the section to 20 pixels, giving it a more modern and visually appealing look.
+
+The margin-bottom property adds a 5-pixel margin at the bottom of the section, creating some space between it and the content below it.
+
+Overall, this CSS rule helps to create a clean and attractive design for the Twitter trending section on a webpage.
+
+*/
+
 .twittertrending {
   background-color: aliceblue;
   border-radius: 20px;
