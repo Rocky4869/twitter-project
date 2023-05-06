@@ -1,3 +1,26 @@
+/*
+The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with modifications
+
+Documentation by ChatGPT (modified):
+
+The SidebarOption.css file contains the styling rules for the sidebar options in a web application. 
+The .sidebarOption class is used to define the basic styling for the sidebar options. 
+It sets the display property to flex, aligns the items to the center, and sets the cursor to pointer.
+
+The .sidebarOption:hover class is used to define the styling when the user hovers over a sidebar option. 
+It sets the background color to a light blue shade, adds a border radius of 30px, changes the text color to the Twitter color, and adds a transition effect to the color change.
+
+The .sidebarOption > .MuiSvgIcon-root class is used to define the styling for the icon in the sidebar option. 
+It adds a padding of 20px to the icon.
+
+The .sidebarOption > h2 class is used to define the styling for the text in the sidebar option. 
+It sets the font weight to 800, font size to 20px, and adds a margin of 20px to the right.
+
+The .sidebarOption--active class is used to define the styling for the active sidebar option. 
+It changes the text color to the Twitter color.
+
+*/
+
 .sidebarOption {
   display: flex;
   align-items: center;
