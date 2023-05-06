@@ -1,3 +1,26 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The LoginHeader.css file contains styling rules for the header section of a login page. 
+The .container class is used to style the container element that wraps the header content.
+
+The display property is set to block, which means the container will take up the full width of its parent element. 
+The color property is set to white, which will be the text color of the header content. 
+The background-color property is set to #1da1f2, which will be the background color of the container.
+
+The padding property is used to add space around the content inside the container. 
+The font-style property is set to normal, the font-weight property is set to bold, and the font-size property is set to 48px, which will be the font size of the header text. 
+The line-height property is set to 56px, which will be the height of each line of text.
+
+The text-shadow property is used to add a shadow effect to the text. 
+The transition property is used to create a smooth transition effect when the background color of the container changes on hover.
+
+The :hover pseudo-class is used to apply the background-color property of #0d8ecf when the user hovers over the container element. 
+This creates a visual feedback effect for the user.
+
+*/
+
 .container {
   display: block;
   color: white;
