@@ -1,3 +1,24 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modification
+
+Documentation by ChatGPT (modified):
+
+The Feed.js file is a React component that renders a feed of posts and retweets. 
+It imports several other components, including TweetBox, Post, and Retweet, as well as some CSS styles and a Firebase database instance.
+
+The component uses several state variables, including posts, loggedInUserData, isAdmin, userData, and retweets. 
+It also defines several functions for fetching data from the Firebase database, including fetchLoggedInUserData, fetchUserData, checkAdmin, and fetchPosts.
+
+The component uses several useEffect hooks to fetch data from the database and update the state variables accordingly. 
+It also uses the Flipmove component from the react-flip-move library to animate the rendering of new posts and retweets.
+
+The component renders a header with the title "Simplified Twitter" or "Simplified Twitter - Admin" depending on whether the logged-in user is an admin. 
+It also renders a TweetBox component for creating new posts, and a list of Retweet and Post components for displaying existing retweets and posts, respectively.
+
+Overall, the Feed.js component provides a complete feed of posts and retweets for a Simplified Twitter application.
+
+*/
+
 import React, { useEffect, useState } from "react";
 import TweetBox from "./TweetBox";
 import Post from "./Post";
@@ -169,9 +190,6 @@ function Feed({ uid }) {
               likes={post.data.likes}
               createdAt={post.data.created_at}
               postId={post.data.postId}
-              // comment_avatar={post.data.comment_avatar}
-              // comment_text={post.data.comment_text}
-              // comment_account={post.data.comment_account}
             />
           ))}
         </Flipmove>

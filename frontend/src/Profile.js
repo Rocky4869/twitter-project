@@ -1,3 +1,31 @@
+/*
+Documentation by ChatGPT (modified):
+
+The Profile.js file contains the code for the user profile page of the social media. 
+It imports various components and libraries such as useParams, useNavigate, useEffect, useState, db, SideBarContainer, ArrowBackIcon, Avatar, Button, TextField, CalendarMonthIcon, firebase, Post, and Flipmove.
+
+The function Profile() is the main function that renders the user profile page. 
+It uses the useParams hook to get the user id from the URL, and the useNavigate hook to navigate to different pages. 
+It also uses various state variables such as userData, targetUserId, uid, loggedInUserData, isFollowing, and posts to store and update data.
+
+The fetchUserData() function fetches the data of the target user from the Firebase database using the user id. 
+The fetchLoggedInUserData() function fetches the data of the logged-in user from the Firebase database using the uid. 
+The fetchPosts() function fetches the posts of the target user from the Firebase database.
+
+The useEffect() hook is used to call the fetchUserData() function when the component mounts and the userid changes. 
+It also sets the uid state variable when the user logs in or logs out. Another useEffect() hook is used to call the fetchLoggedInUserData() function when the uid changes. 
+A third useEffect() hook is used to update the isFollowing state variable and fetch the posts when the loggedInUserData, userData, or targetUserId changes.
+
+The updateFollowing() function updates the following and followers lists in the Firebase database when the user follows or unfollows the target user. 
+The handleFollow() function calls the updateFollowing() function and toggles the isFollowing state variable.
+
+The return statement contains the JSX code for the user profile page. 
+It displays the user's avatar, username, introduction, joined date, following and followers count, and a follow button. 
+It also displays the user's posts using the Post component. The Flipmove component is used to animate the posts when they are added or removed. 
+Finally, the Widgets component is displayed on the right side of the page.
+*/
+
+
 import { useParams, useNavigate } from "react-router-dom";
 import Widgets from "./Widgets";
 import "./App.css";

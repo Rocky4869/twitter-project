@@ -1,3 +1,22 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modification
+
+Documentation by ChatGPT (modified):
+
+The Post.js file exports a functional component called Post that renders a single post on a social media platform. 
+It takes in several props including key, loggedInUserData, id, displayName, username, verified, text, avatar, image, likes, createdAt, and postId.
+
+The component uses Material UI components such as Avatar, Button, and TextField to render the post header, body, and footer. 
+It also uses icons from Material UI and MUI to display various features such as verified status, likes, and retweets.
+
+The component has state variables such as tweetMessage, tweetImage, comments, isLiked, and postLikes that are used to manage the state of the post and its interactions with the user.
+
+The component also has several helper functions such as getFileExtension, isImage, isVideo, sendTweet, handleLikeToggle, and sendRetweet that are used to perform various actions such as adding comments, toggling likes, and sending retweets.
+
+The component uses Firebase to fetch and update data related to the post and its interactions with the user. 
+It also renders a Comment component for each comment associated with the post.
+*/
+
 import React, { forwardRef, useEffect, useState } from "react";
 import "./css/Post.css";
 import { Avatar, Button, TextField } from "@material-ui/core";

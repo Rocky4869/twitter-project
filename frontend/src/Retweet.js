@@ -1,3 +1,15 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with modification
+
+Documentation by ChatGPT (modified):
+
+The Retweet.js file is a React component that displays a retweet with various information such as the user's avatar, display name, username, and whether they are verified. 
+It also displays the retweeted user's avatar, display name, username, and tweet text. 
+The component allows users to like the retweet and displays the number of likes. It also includes buttons for commenting, retweeting, and sharing the retweet. 
+The component is connected to a Firebase database to update the number of likes when a user likes or unlikes the retweet. 
+The component is exported as a default export and can be imported into other React components.
+*/
+
 import React from "react";
 import "./css/Retweet.css";
 import { forwardRef, useEffect, useState } from "react";

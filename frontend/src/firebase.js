@@ -1,3 +1,4 @@
+//import firebase from "firebase";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
@@ -17,31 +18,5 @@ firebase.initializeApp(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = firebase.firestore();
-
-//const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-//const db = firebaseApp.firestore();
-
 export default db;
 
-//export const app = initializeApp(firebaseConfig);
-
-//const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-//const db = getFirestore();
-//const storage = getStorage();
-
-//export default app;
-//export { db, storage };
-
-{
-  /*
-// Use this to initialize the firebase App
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-// Use these for db & auth
-const db = firebaseApp.firestore();
-const auth = firebase.auth();
-
-export default { auth, db };
-*/
-}

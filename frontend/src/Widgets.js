@@ -1,3 +1,24 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modification
+
+Documentation by ChatGPT (modified):
+
+The Widgets.js file contains the code for the widgets section of a Twitter clone application. 
+It imports various components from React, Material UI, and Firebase. The file exports a functional component called Widgets, which takes in two props: avatar and uid.
+
+The component renders a search bar that allows users to search for other users by their username or ID. 
+As the user types in the search bar, the component queries the Firebase database for matching usernames or IDs and displays the results in a dropdown menu. 
+Clicking on a search result navigates the user to that user's profile page.
+
+The component also displays two sections of Twitter posts: "You may also like" and "What's happening". 
+These sections display the most recent posts from the Firebase database and are limited to three posts each.
+
+The component uses various hooks, including useState, useEffect, useRef, and useNavigate, to manage state and handle user interactions. 
+The component also uses Material UI icons and components, such as SearchIcon, CancelIcon, TextField, and Avatar, to style the search bar and search results.
+
+Overall, the Widgets.js file provides the functionality for the widgets section of a Twitter clone application, allowing users to search for other users and view recent posts.
+*/
+
 import React from "react";
 import "./css/Widgets.css";
 import SearchIcon from "@material-ui/icons/Search";

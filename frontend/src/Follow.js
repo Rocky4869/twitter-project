@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Widgets from "./Widgets";
 import "./App.css";
 import { useEffect, useState } from "react";

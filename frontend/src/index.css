@@ -1,3 +1,20 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The index.cssfile contains styling rules for the HTML document'sbody and code` elements.
+
+The body element has a margin of 0, which removes any default margin that may be applied by the browser. 
+The font-family property specifies a list of font families to be used for the text content within the body element. 
+The first font family listed, -apple-system, is a system font used by Apple devices. 
+The remaining font families are fallback options in case the first font is not available on the user's device. The -webkit-font-smoothing and -moz-osx-font-smoothing properties are used to improve the readability of text on web pages by smoothing out jagged edges on fonts.
+
+The code element has a font-family property that specifies a list of font families to be used for the text content within the code element. 
+The first font family listed, source-code-pro, is a monospace font designed for coding. 
+The remaining font families are fallback options in case the first font is not available on the user's device.
+
+*/
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

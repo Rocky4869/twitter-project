@@ -1,3 +1,30 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modification
+
+Documentation by ChatGPT (modified):
+
+The Home.js file is a React component that represents the home page of the application. 
+It imports several dependencies, including useNavigate and Link from react-router-dom, Feed and Widgets components, SideBarContainer component, firebase and useEffect and useState hooks from React.
+
+The component defines several state variables, including uid, userData, and isAdmin. It also defines a navigate variable using the useNavigate hook.
+
+The fetchUserData function is an asynchronous function that fetches user data from the Firebase database using the uid state variable. 
+If the user data is found, it is set to the userData state variable. Otherwise, an error message is logged to the console.
+
+The checkAdmin function is an asynchronous function that checks if the user has an admin role in the Firebase database. If the user has an admin role, the isAdmin state variable is set to true.
+
+The component defines two useEffect hooks. The first useEffect hook fetches the uid of the current user using the firebase.auth().onAuthStateChanged method. 
+If the user is authenticated, the uid is set to the uid state variable. 
+If the user is not authenticated, the user is redirected to the login page using the navigate variable.
+
+The second useEffect hook calls the fetchUserData and checkAdmin functions.
+
+The return statement of the component renders the SideBarContainer, Feed, and Widgets components based on the isAdmin state variable. 
+If the user is not an admin, the app class is applied to the container div. If the user is an admin, the admin class is applied to the container div. 
+If the uid state variable is null, nothing is rendered.
+
+*/
+
 import { useNavigate, Link } from "react-router-dom";
 import Feed from "./Feed";
 import Widgets from "./Widgets";

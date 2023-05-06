@@ -1,3 +1,27 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modification
+
+Documentation by ChatGPT (modified):
+
+The MyProfile.js file contains the code for the user profile page. 
+It imports various components and libraries such as useParams, useNavigate, Widgets, and firebase. 
+The code fetches the user data and posts from the Firebase database and displays them on the page.
+
+The fetchPosts function fetches the posts tweeted by the logged-in user and sets the state of the posts. 
+The useEffect hook is used to call the fetchPosts function when the uid state changes.
+
+The fetchUserData function fetches the user data from the Firebase database and sets the state of the userData. 
+The useEffect hook is used to call the fetchUserData function when the component mounts.
+
+The handleReturn function is used to navigate back to the home page when the user clicks on the back arrow icon.
+
+The code renders the user profile page with the user's avatar, username, introduction, joined date, number of followers and following, and the user's tweets. 
+The Flipmove component is used to animate the posts when they are added or removed from the page.
+
+Overall, the MyProfile.js file contains the code for the user profile page and fetches the necessary data from the Firebase database to display on the page.
+
+*/
+
 import { useParams, useNavigate } from "react-router-dom";
 import Widgets from "./Widgets";
 import "./App.css";
@@ -216,9 +240,6 @@ function MyProfile() {
                     likes={post.data.likes}
                     createdAt={post.data.created_at}
                     postId={post.data.postId}
-                    // comment_avatar={post.data.comment_avatar}
-                    // comment_text={post.data.comment_text}
-                    // comment_account={post.data.comment_account}
                   />
                 ))}
               </Flipmove>
