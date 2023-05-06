@@ -38,9 +38,10 @@ function TweetBox({ uid, onPostSubmit }) {
   const [userData, setUserData] = useState(null);
 
   const fetchUserData = async () => {
+    // fetch user data
     try {
       const docRef = db.collection("users").doc(uid);
-      const docSnapshot = await docRef.get();
+      const docSnapshot = await docRef.get(); // get user data
       if (!docSnapshot.empty) {
         const userData = docSnapshot.data();
         setUserData(userData);
@@ -52,29 +53,32 @@ function TweetBox({ uid, onPostSubmit }) {
     }
   };
   useEffect(() => {
+    // fetch user data
     fetchUserData();
   }, []);
 
   const isImage = (file) => {
-    return file && /^image\/(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(file.type);
+    return file && /^image\/(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(file.type); // check if file is image
   };
 
   const isVideo = (file) => {
+    // check if file is video
     return (
       file && /^video\/(mp4|webm|ogg|mov|avi|wmv|flv|3gp)$/i.test(file.type)
     );
   };
 
   const sendTweet = async (e) => {
+    // send tweet
     e.preventDefault();
     const storageRef = firebase.storage().ref();
     let fileURL = "";
     if (selectedImage) {
       const uploadTask = storageRef
-        .child(`images/${selectedImage.name}`)
+        .child(`images/${selectedImage.name}`) // upload image to firebase storage
         .put(selectedImage);
-      // alert(selectedImage.name);
       await new Promise((resolve, reject) => {
+        // wait for image to upload
         uploadTask.on(
           "state_changed",
           null,
@@ -83,7 +87,7 @@ function TweetBox({ uid, onPostSubmit }) {
             reject(error);
           },
           async () => {
-            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL(); // get image url
             console.log("File available at", downloadURL);
             fileURL = downloadURL;
             resolve();
@@ -91,25 +95,26 @@ function TweetBox({ uid, onPostSubmit }) {
         );
       });
     }
-    const querySnapshot = await db.collection("posts").get();
+    const querySnapshot = await db.collection("posts").get(); // get all posts
     let postCount = querySnapshot.size;
     let defaultPostId;
     let isUnique = false;
     while (!isUnique) {
-      defaultPostId = "post" + (postCount + 1);
+      defaultPostId = "post" + (postCount + 1); // generate post id
 
       const existingUserSnapshot = await db
         .collection("posts")
-        .where("postId", "==", defaultPostId)
+        .where("postId", "==", defaultPostId) // check if post id is unique
         .get();
 
       if (existingUserSnapshot.empty) {
+        // if unique, exit loop
         isUnique = true;
       } else {
         postCount++;
       }
     }
-    const timestamp = firebase.firestore.Timestamp.now();
+    const timestamp = firebase.firestore.Timestamp.now(); // get current time
     await db.collection("posts").add({
       displayName: userData.username,
       displayId: userData.id,
@@ -132,26 +137,29 @@ function TweetBox({ uid, onPostSubmit }) {
   };
 
   const handleOpenEmoji = () => {
+    // open emoji picker
     setShowEmojiPicker(!showEmojiPicker);
   };
 
   const onEmojiClick = (emojiObject) => {
+    // add emoji to tweet message
     setTweetMessage(tweetMessage + emojiObject.emoji);
   };
 
   const handleOpenImage = () => {
+    // open file select
     const fileInput = document.getElementById("image-input");
     fileInput.click();
   };
 
   const handleImageSelect = (event) => {
+    // select image
     const file = event.target.files[0];
     setSelectedImage(file);
-    // alert(URL.createObjectURL(file));
-    // setTweetMessage(tweetMessage + file);
   };
 
   const closePreview = () => {
+    // close image preview
     setSelectedImage(null);
   };
 

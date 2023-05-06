@@ -17,7 +17,7 @@ The styling for the component is done using CSS and the Material UI library.
 
 */
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import "../css/ForgotPassword.css";
 import LoginHeader from "./LoginHeader";
@@ -34,18 +34,18 @@ function ForgotPassword() {
   const [successMessage, setSuccessMessage] = useState(null);
 
   const handleForgotPassword = (event) => {
+    // handle forgot password
     event.preventDefault();
-
     firebase
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => {
-        setSuccessMessage("Password reset email sent!");
+        setSuccessMessage("Password reset email sent!"); // if password reset email sent, set success message
         toast.success("Password reset email sent successfully!");
         setError(null);
       })
       .catch((error) => {
-        setError(error.message);
+        setError(error.message); // if error, set error message
         setSuccessMessage(null);
       });
   };

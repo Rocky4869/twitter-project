@@ -23,6 +23,7 @@ import SidebarOption from "./sidebar/SidebarOption";
 import db from "./firebase";
 
 const Retweet = forwardRef(
+  // forwardRef is used to access the DOM node
   (
     {
       id,
@@ -42,12 +43,13 @@ const Retweet = forwardRef(
     },
     ref
   ) => {
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(false); // like button status
 
     const likeRetweet = (e) => {
+      // like retweet
       e.preventDefault();
 
-      db.collection("retweets")
+      db.collection("retweets") // update the likes
         .doc(id)
         .update({
           new_likes: new_likes + 1,
@@ -56,6 +58,7 @@ const Retweet = forwardRef(
     };
 
     const unlikeRetweet = (e) => {
+      // unlike retweet
       e.preventDefault();
 
       db.collection("retweets")
@@ -69,17 +72,19 @@ const Retweet = forwardRef(
     let like_button_status;
 
     if (isLiked) {
+      // if the tweet is liked
       like_button_status = (
         <Button onClick={unlikeRetweet} type="submit">
           <SidebarOption active Icon={FavoriteBorderIcon} text={new_likes} />
         </Button>
       );
     } else {
-      like_button_status = (
-        <Button onClick={likeRetweet} type="submit">
-          <SidebarOption Icon={FavoriteBorderIcon} text={new_likes} />
-        </Button>
-      );
+      like_button_status = // if the tweet is not liked
+        (
+          <Button onClick={likeRetweet} type="submit">
+            <SidebarOption Icon={FavoriteBorderIcon} text={new_likes} />
+          </Button>
+        );
     }
 
     return (

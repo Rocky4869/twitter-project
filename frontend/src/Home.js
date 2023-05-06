@@ -41,6 +41,7 @@ function Home() {
   let navigate = useNavigate();
 
   const fetchUserData = async () => {
+    // fetch user data
     try {
       const docRef = db.collection("users").doc(uid);
       const docSnapshot = await docRef.get();
@@ -56,9 +57,10 @@ function Home() {
   };
 
   const checkAdmin = async () => {
+    // check if user is admin
     let role = "";
     try {
-      const userSnapshot = await db
+      const userSnapshot = await db // get user role
         .collection("users")
         .doc(uid)
         .get()
@@ -74,6 +76,7 @@ function Home() {
   };
 
   useEffect(() => {
+    // fetch user data and check if user is admin
     fetchUserData();
     checkAdmin();
   });
@@ -90,13 +93,13 @@ function Home() {
     });
 
     return () => {
-      unsubscribe();
+      unsubscribe(); // cleanup
     };
   }, []);
 
   return (
     <>
-      {!isAdmin ? (
+      {!isAdmin ? ( // if user is not admin
         <>
           {uid ? (
             <div className="app">

@@ -18,58 +18,58 @@ function RegistrationTab() {
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    // real signup
     e.preventDefault();
     if (username.includes("@") || username.includes(" ")) {
+      // if username contains @ or whitespace, set error message
       toast.error("Username cannot contain '@' or whitespace!");
       return;
     }
     try {
-      //check if username already used
-      const usernameSnapshot = await db
+      const usernameSnapshot = await db // check if username exists
         .collection("users")
-        .where("username", "==", username)
+        .where("username", "==", username) // query username from firestore
         .get();
 
       if (!usernameSnapshot.empty) {
+        // if username exists, set error message
         toast.error("Username already exists. Please choose another one.");
         return;
       }
     } catch (error) {
+      // if error, set error message
       console.error("Error checking for existing username:", error);
       return;
     }
     if (password !== repeatpassword) {
+      // if password and repeat password are not the same, set error message
       toast.error("Incorrect password!");
       setPassword("");
       setRepeatPassword("");
       return;
     }
     if (password.length < 6) {
-      toast.error("Password should be at least 6 characters!");
-      // Display an error message to the user
+      toast.error("Password should be at least 6 characters!"); // if password is less than 6 characters, set error message
       return;
     }
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      //regrex checking, if invalid
-      // document.querySelector("#new-email").classList.add("is-invalid");
+      // if email is not in correct format, set error message
       toast.error("Wrong format of Email!");
       return;
     }
     try {
       const userCredential = await firebase
         .auth()
-        .createUserWithEmailAndPassword(email, password);
+        .createUserWithEmailAndPassword(email, password); // create user with email and password
       const user = userCredential.user;
-      const querySnapshot = await db.collection("users").get();
+      const querySnapshot = await db.collection("users").get(); // query all users from firestore
       const userCount = querySnapshot.size;
-      // console.log(userCount);
-      // assign unique default id
       let defaultUserId;
       let isUnique = false;
       while (!isUnique) {
-        defaultUserId = "user" + (userCount + 1);
+        defaultUserId = "user" + (userCount + 1); // generate default user id
 
-        const existingUserSnapshot = await db
+        const existingUserSnapshot = await db // check if default user id exists
           .collection("users")
           .where("userid", "==", defaultUserId)
           .get();
@@ -81,10 +81,9 @@ function RegistrationTab() {
         }
       }
 
-      // console.log(defaultUserId);
-      // Save the username to Firestore
-      const timestamp = firebase.firestore.Timestamp.now();
+      const timestamp = firebase.firestore.Timestamp.now(); // get current timestamp
       await db.collection("users").doc(user.uid).set({
+        // create user document in firestore
         email,
         username,
         id: defaultUserId,
@@ -97,15 +96,15 @@ function RegistrationTab() {
         role: "user,",
       });
 
-      // console.log("User signed up:", user);
       toast.success("You have successfully signed up!");
 
-      navigate("/");
+      navigate("/"); // redirect to home page
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
+        // if email is already in use, set error message
         toast.error("The email address is already in use by another account!");
       } else {
-        toast.error("Error signing up!");
+        toast.error("Error signing up!"); // if error, set error message
         console.error("Error signing up:", error);
       }
     }

@@ -21,7 +21,6 @@ Overall, the Widgets.js file provides the functionality for the widgets section 
 
 import React from "react";
 import "./css/Widgets.css";
-import { TwitterTimelineEmbed, TwitterTweetEmbed } from "react-twitter-embed";
 import SearchIcon from "@material-ui/icons/Search";
 import db from "./firebase";
 import { useEffect, useState, useRef, forwardRef } from "react";
@@ -44,6 +43,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
   let navigate = useNavigate();
 
   useEffect(() => {
+    // fetch posts
     db.collection("posts").onSnapshot((snapshot) =>
       setWidgetsFollow(
         snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
@@ -51,7 +51,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
     );
   }, []);
 
-  const [widgetsTrending, setWidgetsTrending] = useState([]);
+  const [widgetsTrending, setWidgetsTrending] = useState([]); //trending
   useEffect(() => {
     db.collection("posts").onSnapshot((snapshot) =>
       setWidgetsTrending(
@@ -61,6 +61,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
   }, []);
 
   useEffect(() => {
+    //trending
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setUid(user.uid);
@@ -71,16 +72,17 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
     });
 
     return () => {
-      unsubscribe();
+      unsubscribe(); // cleanup
     };
   }, []);
 
   useEffect(() => {
     if (searchInput.trim() === "") {
+      //trim() removes whitespace from both ends of a string
       setSearchResults([]);
       return;
     }
-    const searchInputNext =
+    const searchInputNext = // searchInputNext is the next character after searchInput
       searchInput.slice(0, -1) +
       String.fromCharCode(searchInput.charCodeAt(searchInput.length - 1) + 1);
     const collectionRef = db.collection("users");
@@ -97,6 +99,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
         const docs = [];
 
         nameSnapshot.forEach((doc) => {
+          //nameSnapshot is the snapshot of the queryByName
           // console.log('Document ID:', doc.id);
           // console.log('Document data:', doc.data());
           // console.log('Document data:', doc.data().id);
@@ -104,6 +107,7 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
         });
 
         idSnapshot.forEach((doc) => {
+          //idSnapshot is the snapshot of the queryById
           if (!docs.some((item) => item.id === doc.id)) {
             // console.log('Document ID:', doc.id);
             // console.log('Document data:', doc.data());
@@ -132,23 +136,26 @@ const Widgets = forwardRef(({ avatar, uid }, ref) => {
   }, [searchInput]);
 
   useEffect(() => {
+    //dropdown
     const handleClickOutside = (event) => {
       if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
         setDropdownVisible(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside); //mousedown is a mouse event
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside); //cleanup
     };
   }, []);
 
   const handleClearButton = () => {
+    //clear button
     setSearchInput("");
   };
 
   const handleItemClick = (userid) => {
+    //item click
     setDropdownVisible(false);
     setSearchInput("");
     navigate(`/${userid}`);

@@ -21,7 +21,7 @@ import { Avatar } from "@material-ui/core";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import "./css/TwitterFollow.css";
 
-function TwitterFollow({ displayName, username, verified, avatar }) {
+function TwitterFollow({ displayName, username, verified, avatar }) { 
   return (
     <div>
       <div className="twitterfollow">

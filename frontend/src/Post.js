@@ -31,6 +31,7 @@ import Comment from "./Comment";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import firebase from "firebase/app";
 const Post = forwardRef(
+  // forwardRef is used to access the ref of the component
   (
     {
       key,
@@ -57,23 +58,28 @@ const Post = forwardRef(
     const [postLikes, setPostLikes] = useState(likes);
 
     const getFileExtension = (url) => {
+      // get file extension from url
       const splitUrl = url.split("?")[0];
       return "." + splitUrl.substring(splitUrl.lastIndexOf(".") + 1);
     };
     const isImage = (url) => {
+      // check if url is image
       const ext = getFileExtension(url);
       return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(ext);
     };
     const isVideo = (url) => {
+      // check if url is video
       const ext = getFileExtension(url);
       return /\.(mp4|webm|ogg|mov|avi|wmv|flv|3gp)$/i.test(ext);
     };
     const sendTweet = (e) => {
+      // send tweet
       e.preventDefault();
 
       console.log("send  Tweet");
       console.log(postId);
       if (loggedInUserData && postId) {
+        // check if user is logged in and post id is present
         const timestamp = firebase.firestore.Timestamp.now();
         db.collection("posts")
           .where("postId", "==", postId)
@@ -82,6 +88,7 @@ const Post = forwardRef(
             if (!querySnapshot.empty) {
               const postIdt = querySnapshot.docs[0].id;
               db.collection("posts").doc(postIdt).collection("comments").add({
+                // add comment to post
                 displayName: loggedInUserData.username,
                 username: loggedInUserData.id,
                 verified: false,
@@ -98,6 +105,7 @@ const Post = forwardRef(
     };
 
     useEffect(() => {
+      // fetch comments
       console.log(postId);
       if (postId) {
         // Query the `posts` collection to find the post with the matching `postId`
@@ -134,8 +142,9 @@ const Post = forwardRef(
     }, [postId]);
 
     const handleLikeToggle = async () => {
+      // handle like toggle
       if (loggedInUserData && postId) {
-        const postQuery = db.collection("posts").where("postId", "==", postId);
+        const postQuery = db.collection("posts").where("postId", "==", postId); // query the post
         const userQuery = db
           .collection("users")
           .where("id", "==", loggedInUserData.id);
@@ -144,6 +153,7 @@ const Post = forwardRef(
         const userSnapshot = await userQuery.get();
 
         if (!postSnapshot.empty && !userSnapshot.empty) {
+          // check if post and user exists
           const post = postSnapshot.docs[0].data();
           const user = userSnapshot.docs[0].data();
           const liked = user.postLiked.includes(postId);
@@ -158,17 +168,19 @@ const Post = forwardRef(
               ? user.postLiked.filter((id) => id !== postId)
               : [...user.postLiked, postId],
           });
-          setPostLikes(liked ? post.likes - 1 : post.likes + 1);
+          setPostLikes(liked ? post.likes - 1 : post.likes + 1); // update post likes
           setIsLiked(!liked);
         }
       }
     };
 
     const sendRetweet = (e) => {
+      // send retweet
       e.preventDefault();
       alert("Retweet");
 
       db.collection("retweets").add({
+        // add retweet to db
         displayName: "Cha Eun Woo",
         username: "eunwo.o_c",
         verified: true,

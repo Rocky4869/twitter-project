@@ -1,18 +1,3 @@
-/*
-Documentation by ChatGPT (modified):
-
-This is a React component called "Follow". It imports various modules such as "useParams", "useNavigate", "useEffect", and "useState". 
-It also imports other components such as "Widgets" and "SideBarContainer".
-
-The component fetches user data from Firebase and displays a list of users that the current user is following. 
-It also allows the user to navigate to the profile page of each user in the list.
-
-The component has a "handleReturn" function that navigates the user back to the home page. 
-It also has a "fetchFollowingData" function that fetches the data of the users that the current user is following.
-
-The component renders a sidebar, a header, and a list of users. If the user is not following any users, a message is displayed indicating that the user is not following anyone.
-*/
-
 import { useParams, useNavigate } from "react-router-dom";
 import Widgets from "./Widgets";
 import "./App.css";
@@ -29,9 +14,10 @@ function Follow() {
   const [followingData, setFollowingData] = useState([]);
   let navigate = useNavigate();
   useEffect(() => {
+    // fetch user data
     const fetchUserData = async (uid) => {
       try {
-        const docRef = db.collection("users").doc(uid);
+        const docRef = db.collection("users").doc(uid); // get user data
         const docSnapshot = await docRef.get();
         if (docSnapshot.exists) {
           const userData = docSnapshot.data();
@@ -44,9 +30,10 @@ function Follow() {
       }
     };
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      // check if user is logged in
       if (user) {
         setUid(user.uid);
-        fetchUserData(user.uid);
+        fetchUserData(user.uid); // fetch user data
       } else {
         setUid(null);
         setUserData(null); // Clear the user data when the user is logged out
@@ -54,16 +41,18 @@ function Follow() {
       }
     });
     return () => {
-      unsubscribe();
+      unsubscribe(); // Detach the listener when the component unmounts
     };
   }, []);
 
   const handleReturn = () => {
+    // return to home page
     navigate("/home");
   };
 
   const fetchFollowingData = async () => {
     const userPromises = userData.Following.map(async (followedUserId) => {
+      // fetch following data
       const userDoc = await db.collection("users").doc(followedUserId).get();
       return {
         id: userDoc.id,
@@ -71,14 +60,16 @@ function Follow() {
       };
     });
 
-    const allFollowingUsersData = await Promise.all(userPromises);
+    const allFollowingUsersData = await Promise.all(userPromises); // set following data
     setFollowingData(allFollowingUsersData);
     console.log(allFollowingUsersData);
   };
 
   useEffect(() => {
+    // fetch following data
     if (userData) {
       if (userData.Following && userData.Following.length > 0) {
+        // check if user is following anyone
         fetchFollowingData();
       } else {
         setFollowingData([]);
@@ -88,7 +79,7 @@ function Follow() {
 
   return (
     <div>
-      {uid && userData ? (
+      {uid && userData ? ( // check if user is logged in
         <div className="app">
           <SideBarContainer />
           <div>

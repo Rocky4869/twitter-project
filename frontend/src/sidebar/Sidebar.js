@@ -19,22 +19,24 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
   const activePage = location.pathname;
 
   const fetchUserData = async () => {
+    // fetch user data from firestore
     try {
-      const docRef = db.collection("users").doc(uid);
+      const docRef = db.collection("users").doc(uid); // query user data from firestore
       const docSnapshot = await docRef.get();
       if (!docSnapshot.empty) {
-        const userData = docSnapshot.data();
+        const userData = docSnapshot.data(); // get user data
         setUserData(userData);
         // console.debug(userData);
       } else {
-        console.log("User not found");
+        console.log("User not found"); // if user not found, set error message
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("Error fetching user data:", error); // if error, set error message
     }
   };
 
   const checkAdmin = async () => {
+    // check if user is admin
     let role = "";
     try {
       const userSnapshot = await db
@@ -42,9 +44,10 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
         .doc(uid)
         .get()
         .then((doc) => {
-          console.log((role = doc.data().role));
+          console.log((role = doc.data().role)); // get user role
         });
       if (role === "admin") {
+        // if user is admin, set isAdmin to true
         setIsAdmin(true);
       }
     } catch (error) {
@@ -53,16 +56,15 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
   };
 
   useEffect(() => {
+    // fetch user data and check if user is admin
     fetchUserData();
     checkAdmin();
   }, []);
 
   return (
     <div className="sidebar">
-      {/* Twitter icon */}
       <TwitterIcon className="sidebar_twitterIcon" />
 
-      {/* SidebarOption */}
       <Link to="/home" className="link">
         <SidebarOption
           active={activePage === "/home"}
@@ -77,7 +79,6 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
           text="Following"
         />
       </Link>
-      {/* <SidebarOption Icon={MailOutlineIcon} text="Messages" /> */}
 
       <Link to={"/profile"} className="link">
         <SidebarOption
@@ -105,7 +106,6 @@ function Sidebar({ onTweetButtonClick, onLogoutButtonClick, uid }) {
         </Link>
       )}
 
-      {/* Button -> Tweet */}
       <Button
         variant="outlined"
         className="sidebar__tweet"

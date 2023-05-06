@@ -17,12 +17,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function LogoutDialog({ open, onClose, history }) {
+  // history is not used
   let navigate = useNavigate();
 
   const handeleLogout = async () => {
+    // handle logout
     onClose();
     try {
-      await firebase.auth().signOut();
+      await firebase.auth().signOut(); // sign out
       toast.success("Log out successfully!");
       navigate("/");
     } catch (error) {
