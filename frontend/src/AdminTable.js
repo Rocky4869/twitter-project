@@ -1,3 +1,27 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+TheTable.js file contains the code for a table component that displays user data fetched from a Firestore database. 
+The component is built using React and Material-UI.
+
+The component defines a table with three columns: ID, Username, and Email Address. The table is populated with data fetched from the Firestore database using the useEffect hook. 
+The getUsers function retrieves the data and sets it to the users state variable.
+
+The table also includes functionality to add, update, and delete users. 
+The handleAddopen function opens a dialog box for adding a new user. 
+The handleAdd function adds the new user to the Firestore database. 
+The handleRowClick function opens a dialog box for updating or deleting a user. 
+The handleDelete function deletes the selected user from the Firestore database.
+
+The table also includes pagination and filtering functionality using the DataGrid and GridToolbar components from Material-UI. 
+The pageSize state variable controls the number of rows displayed per page. 
+The onPageSizeChange function updates the pageSize state variable when the user changes the page size. 
+The componentsProps property of the DataGrid component is used to customize the GridToolbar component.
+
+Overall, the AdminTable.js file provides a flexible and customizable table component for displaying and managing user data from a Firestore database.
+*/
+
 import React, { useEffect, useMemo, useState } from "react";
 import db from "./firebase";
 import { DataGrid, gridClasses, GridToolbar } from "@mui/x-data-grid";
