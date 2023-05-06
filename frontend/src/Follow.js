@@ -1,3 +1,26 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The Follow.js file contains a React component that displays a list of users that the current user is following. 
+It imports the useParams and useNavigate hooks from the react-router-dom library, the Widgets component, and the CSS files for the App and Follow components. 
+It also imports the useEffect and useState hooks from the React library, the db and firebase modules, the SideBarContainer component, and the ArrowBackIcon component from the Material-UI library.
+
+The Follow component fetches the user data and sets it to the state using the useState hook. 
+It also fetches the following data and sets it to the state using the useState hook. 
+The component uses the useEffect hook to fetch the user data and detach the listener when the component unmounts.
+It also uses the useEffect hook to fetch the following data when the user data changes.
+
+The component renders a div that contains the SideBarContainer component and a div that contains the list of users that the current user is following. 
+The list of users is displayed in a div with the class name "feed". The component also renders the ArrowBackIcon component, which allows the user to return to the home page. 
+The list of users is displayed in a div with the class name "listItem". The component uses the navigate function from the useNavigate hook to navigate to the user's profile page when the user clicks on a user in the list.
+
+The Follow component checks if the user is logged in and displays a loading message if the user is not logged in. 
+If the user is logged in, the component displays the list of users that the current user is following. 
+If the current user is not following any users, the component displays a message indicating that the user is not following any users.
+
+*/
+
 import { useParams, useNavigate } from "react-router-dom";
 import Widgets from "./Widgets";
 import "./App.css";
