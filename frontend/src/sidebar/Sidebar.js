@@ -3,6 +3,23 @@ The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/tw
 
 Documentation by ChatGPT (modified):
 
+The Sidebar.js file contains the code for the sidebar component of a Twitter-like web application. 
+The component is built using React and Material-UI icons. 
+The component receives three props: onTweetButtonClick, onLogoutButtonClick, and uid.
+
+The component fetches user data from Firestore using the uid prop and sets it to the state variable userData. 
+It also checks if the user is an admin by querying the user's role from Firestore and setting the state variable isAdmin accordingly.
+
+The component renders a Twitter icon and four SidebarOption components for Home, Following, Profile, and Setting pages. 
+If the user is an admin, it also renders a SidebarOption component for the Admin page.
+
+The component also renders two Button components for Tweet and Logout actions. 
+The onTweetButtonClick and onLogoutButtonClick props are passed to these buttons to handle their respective actions.
+
+The component uses the useLocation hook from react-router-dom to determine the active page and passes this information to the SidebarOption components to highlight the active page.
+
+Overall, the Sidebar component provides a navigation menu and actions for the Twitter-like web application.
+
 */
 
 import React, { useEffect, useState } from "react";
