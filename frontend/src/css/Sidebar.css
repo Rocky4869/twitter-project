@@ -1,3 +1,26 @@
+/*
+The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with modifications
+
+Documentation by ChatGPT (modified):
+
+The Sidebar.css file contains CSS rules for styling the sidebar section of a web page. 
+Here is a breakdown of the different rules:
+
+.sidebar: This rule sets the width of the sidebar to 30% of its container, with a minimum width of 250px.
+It also adds a margin of 20px at the top and padding of 20px on the left and right sides.
+
+.sidebar_twitterIcon: This rule styles the Twitter icon in the sidebar. 
+It sets the color to the Twitter brand color, font size to 30px, and adds a margin of 20px on the left and bottom.
+
+.sidebar__tweet: This rule styles the tweet button in the sidebar. 
+It sets the background color to the Twitter brand color, removes the border, sets the font color to white, sets the font weight to 900, and adds a border radius of 30px. 
+It also sets the height to 50px and adds a margin of 80px at the top.
+
+.link: This rule styles links in the sidebar. 
+It removes the underline and sets the color to inherit, which means it will inherit the color of its parent element.
+
+*/
+
 .sidebar {
   flex: 0.3;
   min-width: 250px;
