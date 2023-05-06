@@ -1,3 +1,29 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+The LoginFooter.css file contains styling rules for the footer section of a login page. The .footer class is used to style the footer container. 
+It has a display property set to flex, which allows the child elements to be aligned horizontally. 
+The justify-content property centers the child elements within the container. 
+Padding properties are used to add space around the child elements. The flex-direction property is set to row to ensure that the child elements are arranged in a row. 
+The align-items property centers the child elements vertically. The background-color property sets the background color of the footer to #1da1f2.
+
+The .nav class is used to style the navigation links within the footer. 
+It has a display property set to flex, which allows the child elements to be aligned horizontally. 
+The flex-wrap property is set to wrap to ensure that the child elements wrap to the next line if they exceed the width of the container. 
+The justify-content property centers the child elements within the container. 
+The gap property adds space between the child elements. 
+The margin-top and margin-bottom properties add space above and below the navigation links.
+
+The .footer a:hover class is used to style the navigation links when they are hovered over. 
+It adds an underline to the text.
+
+The .text-white class is used to set the color of the text to white.
+
+The .no-underline class is used to remove the underline from the text.
+
+*/
+
 .footer {
   display: flex;
   justify-content: center;
