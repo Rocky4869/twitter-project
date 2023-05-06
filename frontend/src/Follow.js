@@ -1,3 +1,18 @@
+/*
+Documentation by ChatGPT (modified):
+
+This is a React component called "Follow". It imports various modules such as "useParams", "useNavigate", "useEffect", and "useState". 
+It also imports other components such as "Widgets" and "SideBarContainer".
+
+The component fetches user data from Firebase and displays a list of users that the current user is following. 
+It also allows the user to navigate to the profile page of each user in the list.
+
+The component has a "handleReturn" function that navigates the user back to the home page. 
+It also has a "fetchFollowingData" function that fetches the data of the users that the current user is following.
+
+The component renders a sidebar, a header, and a list of users. If the user is not following any users, a message is displayed indicating that the user is not following anyone.
+*/
+
 import { useParams, useNavigate } from "react-router-dom";
 import Widgets from "./Widgets";
 import "./App.css";
