@@ -1,3 +1,57 @@
+/*
+The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modifications
+
+Documentation by ChatGPT (modified):
+
+The Retweet.css file contains CSS rules for styling a retweet component in a Twitter-like interface. 
+The .retweet class is used to style the main container of the retweet component. 
+It has a flex display and aligns its items to the top. 
+It also has a bottom border and padding at the bottom.
+
+The .retweet_body class is used to style the body of the retweet component. 
+It has a flex property of 1, which means it takes up all the available space. 
+It has padding, a background color, and a border radius. It also has a fixed width of 550px.
+
+The .retweet_body img class is used to style the image in the retweet component. 
+It has a border radius, padding, and a fixed width of 500px. 
+It also has a flex display.
+
+The .retweet_footer class is used to style the footer of the retweet component. 
+It has a flex display and justifies its content to space-between. 
+It also has a margin at the top.
+
+The .retweet_headerDescription class is used to style the description in the header of the retweet component. 
+It has a margin at the left and bottom, and a font size of 15px.
+
+The .retweet_avator class is used to style the avatar in the retweet component. 
+It has padding and a flex display.
+
+The .retweet_inner .retweet_avator class is used to style the avatar in the inner retweet component. 
+It has padding and a flex display.
+
+The .retweet_headerText > h3 class is used to style the header text in the retweet component. 
+It has a margin at the left and bottom, and a font size of 15px.
+
+The .retweet_inner .retweet_headerText class is used to style the header text in the inner retweet component. 
+It has a flex display.
+
+The .retweet_badge class is used to style the badge in the retweet component. 
+It has a font size of 14px and a color that matches the Twitter color.
+
+The .retweet_headerSpecial class is used to style the special header text in the retweet component. 
+It has a font weight of 600, a font size of 12px, and a gray color.
+
+The .retweet_avatar class is used to style the avatar in the retweet component. 
+It has padding and a flex display.
+
+The .retweet_footer .sidebarOption > h2 class is used to style the sidebar option in the footer of the retweet component. 
+It has a font weight of 800, a font size of 15px, and a margin at the right.
+
+The .retweet_id class is used to style the ID in the retweet component. 
+It has a flex display and floats to the right.
+
+*/
+
 .retweet {
     display: flex;
     align-items: flex-start;
