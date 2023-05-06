@@ -1,3 +1,23 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with great modification
+
+Documentation by ChatGPT (modified):
+
+The SideBarContainer component is a functional component that renders a Sidebar component, a CreateTweetDialog component, and a LogoutDialog component. 
+It receives a uid prop, which is used to fetch posts from Firestore.
+
+The component uses the useState hook to manage the state of openTweet, openLogout, and posts. The handleOpenTweet, handleOpenLogout, handleCloseTweet, and handleCloseLogout functions are used to open and close the tweet and logout dialogs.
+
+The handleTweet function is called when a user submits a tweet. Currently, it only logs the tweet text to the console.
+
+The fetchPosts function is an asynchronous function that fetches posts from Firestore. 
+It uses the useEffect hook to fetch posts when the uid prop changes. 
+The fetched posts are stored in the posts state.
+
+The component returns the Sidebar component, which receives the handleOpenTweet, handleOpenLogout, and uid props. 
+It also returns the CreateTweetDialog component, which receives the open, onClose, onTweet, uid, and onPostSubmit props. Finally, it returns the LogoutDialog component, which receives the open and onClose props.
+*/
+
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import CreateTweetDialog from "./CreateTweetDialog";
