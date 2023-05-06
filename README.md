@@ -1,62 +1,61 @@
 # Simplified Twitter
 
-![mongoDB](https://img.shields.io/github/package-json/dependency-version/kelvinchim-comsci/csci3100-project/mongodb)
-![mongoose](https://img.shields.io/github/package-json/dependency-version/kelvinchim-comsci/csci3100-project/mongoose)
-![react](https://img.shields.io/github/package-json/dependency-version/kelvinchim-comsci/csci3100-project/react)
-![node](https://img.shields.io/node/v/npm)
-
 This is the project of CSCI3100 Group E4 in the 2022-2023 2nd semester: Simplified Twitter.
 
 Link to the web: https://rocky4869.github.io/twitter-project/
 
-## Overview
-Twitter is a microblogging and social networking site where users broadcast short posts known as “tweets”. A Tweet is any message posted to Twitter which contains a variety of formats such as photos, videos, links and text. The messages are posted to the users’ profile, sent to followers, and can be searched on Twitter search. The simplified twitter project allows registered users to post, share, like/dislike and reply to tweets with short messages, while non-registered users can only read tweets. Users can also search for other users and follow someone to subscribe to their Twitter updates. It is a powerful and beneficial system that connects people and business to cultivate a brand community and to provide real-time trends.
+## Demo
+<img width="1104" alt="Screenshot 2023-05-06 at 4 07 42 PM" src="https://user-images.githubusercontent.com/101194662/236612922-75457ad9-8123-4c24-a0e4-0cb287b55a24.png">
 
-## System Features
-### User Operations: 
-1. Signup
+## Overview ☁
+Twitter is a microblogging and social networking site where users broadcast short posts known as “tweets”. It is a powerful and beneficial system that connects people and business to cultivate a brand community and to provide real-time trends.
 
-2. Login & Logout
+## Features ✨
+- Authentication with Firebase Authentication
+- Users can add tweets, like, retweet, and comment
+- Users can add images, emojis and videos to tweet
+- Users can follow and unfollow other users
+- Users can see their followers and the following list
+- Users can see all users and the trending list
+- Admin can add, delete and view all users
+- Realtime update likes, retweets
+- Realtime trending data from Twitter API
+- All images and videos uploads are stored on Firebase Cloud Storage
 
-3. Forgot/reset password
+## Tech 🛠
+- [JavaScript](https://www.javascript.com)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Material UI](https://mui.com)
+- [Firebase](https://firebase.google.com)
 
-4. Search for users
-
-5. Follow other users
-
-6. Like/dislike a tweet
-
-7. Comment a tweet
-
-8. Retweet a tweet
-
-9. Post a tweet
-
-10. Show other users’ tweets
-
-
-### Admin Interactions:
-1. Login & Logout
-
-2. Add/delete a user
-
-3. View all users 
-
-
-### Advanced Features:
-1. Privacy Control
-
-2. User Recommendation
-
-3. Tweet Recommendation
-
-4. Video tweets
-
-## Demo account
+## Demo account 👦🏻
 ```javascript
 username: test123@gmail.com
 password: 12345678
 ```
+
+## Development 💻
+
+Here are the steps to run the project locally.
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/ccrsxx/twitter-clone.git
+   ```
+
+2. Install dependencies
+
+   ```bash
+   cd frontend
+   npm i
+   ```
+
+3. Run the project
+
+   ```bash
+   npm run start
+   ```
 
 ## Groupmates / Collaborators
 Ngai Tsz Hin 1155172069
