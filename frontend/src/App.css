@@ -2,6 +2,7 @@
 The CSS have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone
 
 Documentation by ChatGPT (modified):
+
 This CSS code defines custom variables for Twitter colors using the body element. 
 It then defines two classes for different sections of a webpage: admin and app. 
 The admin class sets a pink background color and uses flexbox for layout with 100% viewport height and horizontal centering through margin settings. 
