@@ -1,3 +1,15 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with modification
+
+Documentation by ChatGPT (modified):
+
+This is a Node.js module that exports an Express Router object called authRouter. This router contains two routes that handle user authentication actions.
+
+The first route is a POST route that takes in a username, email, and password in the request body and creates a new user with the provided information. If any of the required parameters are missing, a 400 Bad Request status code is returned. If a user with the same username or email already exists in the database, a 404 Not Found status code is returned. If the user is created successfully, a success message is returned.
+
+The second route is a POST route that takes in a username, email, and password in the request body and checks if the provided credentials match an existing user in the database. If the username provided does not match any existing user, a 404 Not Found status code is returned. If the password provided does not match the hashed password stored in the database, a 401 Unauthorized status code is returned. If the credentials are valid, the user information including the username, email, and isAdmin fields are returned in the response.
+*/
+
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { User } = require("../models/User.js");

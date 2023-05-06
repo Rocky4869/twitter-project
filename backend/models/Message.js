@@ -1,3 +1,12 @@
+/*
+ * Mongoose schema for messages.
+ * @typedef {Object} MessageSchema
+ * @property {string} content - The content of the message.
+ * @property {Date} last_modified - The date the message was last modified.
+ * @property {Types.ObjectId} send_user - The ID of the user who sent the message.
+ * @property {Types.ObjectId} receive_user - The ID of the user who received the message.
+ */
+
 const { model, Schema, Types } = require("mongoose");
 
 const messageSchema = new Schema({

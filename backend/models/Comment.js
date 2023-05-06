@@ -1,3 +1,12 @@
+/*
+ * Mongoose schema for comments.
+ * @typedef {Object} CommentSchema
+ * @property {string} content - The content of the comment.
+ * @property {Date} last_modified - The date the comment was last modified.
+ * @property {Types.ObjectId} user - The user who posted the comment.
+ * @property {Types.ObjectId} tweetId - The ID of the tweet the comment is posted on.
+ */
+
 const { model, Schema, Types } = require("mongoose");
 
 const commentSchema = new Schema({

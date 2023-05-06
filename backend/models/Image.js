@@ -1,3 +1,10 @@
+/*
+ * Mongoose schema for images.
+ * @typedef {Object} ImageSchema
+ * @property {string} content - The content of the image.
+ * @property {Types.ObjectId} tweet - The ID of the tweet the image is posted on.
+ */
+
 const { model, Schema, Types } = require("mongoose");
 
 const imageSchema = new Schema({

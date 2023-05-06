@@ -1,3 +1,15 @@
+/*
+The program have referenced Rafeh Qazi's https://github.com/CleverProgrammers/twitter-clone with modification
+
+Documentation by ChatGPT (modified):
+
+This is a Node.js module that exports an Express Router object called tweetRouter. This router contains two routes that handle tweet-related actions.
+
+The first route is a GET route that takes in a username in the URL parameter and returns a list of all tweets made by the user with the provided username. If no user with the provided username is found, a 404 Not Found status code is returned. The tweets are returned in descending order based on the last_modified field in the Tweet model. The tweet information includes the tweet content, last_modified timestamp, user username, comments, images, videos, likes, dislikes, and retweets counts.
+
+The second route is a POST route that takes in a username and a tweetId in the request body and allows the user with the provided username to like the tweet with the provided tweetId. If no user with the provided username is found, a 404 Not Found status code is returned. If the tweet with the provided tweetId cannot be found, a 404 Not Found status code is returned. If the user has already disliked the tweet, the dislike is removed before the like is added.
+*/
+
 const express = require("express");
 const { Comment } = require("../models/Comment.js");
 const { User } = require("../models/User.js");

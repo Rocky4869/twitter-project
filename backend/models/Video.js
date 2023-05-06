@@ -1,3 +1,10 @@
+/*
+ * Mongoose schema for videos.
+ * @typedef {Object} VideoSchema
+ * @property {string} content - The content of the video.
+ * @property {Types.ObjectId} tweet - The ID of the tweet the video is posted on.
+ */
+
 const { model, Schema, Types } = require("mongoose");
 
 const videoSchema = new Schema({
