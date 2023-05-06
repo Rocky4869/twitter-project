@@ -1,3 +1,21 @@
+/*
+
+Documentation by ChatGPT (modified):
+
+This a React component that renders a dialog box for creating a new tweet. 
+It imports various Material UI components such as Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Box, Grid, IconButton, and Avatar. 
+It also imports other dependencies such as firebase, emoji-picker-react, and firebase/firestore.
+
+The component takes in several props such as open, onClose, avatar, uid, and onPostSubmit. 
+It uses the useState and useEffect hooks to manage the state of the tweet message, tweet image, selected image, showEmojiPicker, and userData. 
+It also defines several helper functions such as isImage, isVideo, sendTweet, handleOpenEmoji, onEmojiClick, handleOpenImage, handleImageSelect, and closePreview.
+
+The component renders a dialog box with a title, an avatar, a text field for entering the tweet message, and buttons for adding emojis and images. 
+It also renders an emoji picker and an image preview if the user selects an image. Finally, renders a submit button for sending the tweet. 
+When the user clicks the submit button, the calls the sendTweet function to add the tweet to the firestore database.
+
+*/
+
 import React, { useState, useEffect, forwardRef } from "react";
 import { Button, TextField } from "@material-ui/core";
 import {
